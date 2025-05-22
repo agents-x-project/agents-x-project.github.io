@@ -1,0 +1,10 @@
+{
+    "case1": {
+        "show_name": "Read Handwriting",
+        "traj_path": "assets/test_message_gpt.json"
+    },
+    "case2": {
+        "show_name": "Solve Problems",
+        "traj_path": "assets/test_message_gpt.json"
+    }
+}
