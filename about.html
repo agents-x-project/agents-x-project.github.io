@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Agents-X</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* About page specific styles */
+        .team-section {
+            margin: 60px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            background-color: var(--light-gray);
+        }
+        
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .team-role {
+            font-size: 16px;
+            color: var(--secondary-text-color);
+            margin-bottom: 12px;
+        }
+        
+        .team-bio {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .mission-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+            margin: 60px 0;
+        }
+        
+        .mission-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .mission-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .mission-text {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        
+        .contact-section {
+            max-width: 600px;
+            margin: 80px auto;
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        
+        .contact-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .contact-detail {
+            font-size: 16px;
+            color: var(--secondary-text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Left sidebar navigation -->
+        <aside class="sidebar-nav">
+            <div class="logo">
+                <a href="/">
+                    <svg width="32" height="32" viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                        <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="currentColor"/>
+                        <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                    </svg>
+                    <span>Agents-X</span>
+                </a>
+            </div>
+            
+            <!-- Section navigation -->
+            <nav class="side-nav">
+                <h3>Sections</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="about.html" class="sidebar-link">About Us</a>
+                <a href="blog.html" class="sidebar-link">More Research</a>
+            </div>
+        </aside>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <main>
+                <section class="hero">
+                    <div class="container">
+                        <h1>About Agents-X</h1>
+                        <p class="subtitle">
+                            We are a team of researchers and engineers dedicated to advancing artificial intelligence 
+                            that benefits humanity through innovative approaches to visual and multimodal learning.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="team" class="team-section">
+                    <div class="container">
+                        <h2>Our Team</h2>
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <div class="team-photo">
+                                    <img src="https://via.placeholder.com/300x300" alt="Team member photo">
+                                </div>
+                                <h3 class="team-name">Alex Chen</h3>
+                                <p class="team-role">Founder & Lead Researcher</p>
+                                <p class="team-bio">
+                                    Alex has been working on vision models for over a decade, with a focus on 
+                                    multimodal learning and visual reasoning.
+                                </p>
+                            </div>
+                            <div class="team-member">
+                                <div class="team-photo">
+                                    <img src="https://via.placeholder.com/300x300" alt="Team member photo">
+                                </div>
+                                <h3 class="team-name">Sarah Johnson</h3>
+                                <p class="team-role">AI Research Scientist</p>
+                                <p class="team-bio">
+                                    Sarah specializes in developing new training methodologies for large-scale vision models.
+                                </p>
+                            </div>
+                            <div class="team-member">
+                                <div class="team-photo">
+                                    <img src="https://via.placeholder.com/300x300" alt="Team member photo">
+                                </div>
+                                <h3 class="team-name">Michael Lee</h3>
+                                <p class="team-role">Software Engineer</p>
+                                <p class="team-bio">
+                                    Michael leads our engineering efforts to make our models efficient and accessible.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="mission" class="mission-section">
+                    <div class="container">
+                        <div class="mission-content">
+                            <h2 class="mission-title">Our Mission</h2>
+                            <p class="mission-text">
+                                At Agents-X, we believe that visual understanding is fundamental to the next generation 
+                                of AI systems. Our mission is to develop artificial intelligence that can truly understand 
+                                the visual world around us, enabling new applications that benefit humanity in fields 
+                                ranging from education and healthcare to scientific discovery and creative expression.
+                            </p>
+                            <p class="mission-text">
+                                We are committed to conducting our research responsibly, with a focus on safety, 
+                                transparency, and the ethical implications of our work. We believe that advanced AI 
+                                should be developed in a way that respects human autonomy and promotes human flourishing.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="contact-section">
+                    <div class="container">
+                        <h2>Contact Us</h2>
+                        <p>
+                            We're always open to collaboration and discussions about our research. 
+                            Feel free to reach out through any of the channels below.
+                        </p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h3 class="contact-title">Email</h3>
+                                <p class="contact-detail">info@agents-x.org</p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h3 class="contact-title">Location</h3>
+                                <p class="contact-detail">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-links">
+                            <div class="footer-social">
+                                <a href="https://github.com/Agents-X" class="social-icon" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="小红书">
+                                    <i class="fab fa-weibo"></i>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            <a href="#contact" class="footer-link">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2023 Agents-X. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
