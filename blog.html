@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Blog specific styles */
+        :root {
+            --primary-color-dark: #1d75a5;
+        }
+        
         .blog-header {
             padding: 60px 0 40px;
             text-align: center;
@@ -95,6 +99,121 @@
             margin-left: 4px;
         }
         
+        /* 项目链接按钮样式 */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .project-link i {
+            margin-right: 8px;
+        }
+        
+        .project-link.github {
+            background-color: #24292e;
+            color: white;
+        }
+        
+        .project-link.github:hover {
+            background-color: #1a1e22;
+        }
+        
+        .project-link.huggingface {
+            background-color: #ee9a1b;
+            color: #ffffff;
+        }
+        
+        .project-link.huggingface:hover {
+            background-color: #ce8f32;
+        }
+        
+        .project-link.arxiv {
+            background-color: #b31b1b;
+            color: white;
+        }
+        
+        .project-link.arxiv:hover {
+            background-color: #9c1717;
+        }
+        
+        /* CTA按钮样式 */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            margin-top: 8px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-color-dark);
+            color: white;
+        }
+        
+        .cta-button span {
+            margin-left: 8px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            border-top: 1px solid #eaeaea;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #666;
+            transition: color 0.2s, transform 0.2s;
+            font-size: 16px;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
         .pagination {
             display: flex;
             justify-content: center;
@@ -132,7 +251,7 @@
         <!-- Left sidebar navigation -->
         <aside class="sidebar-nav">
             <div class="logo">
-                <a href="/">
+                <a href="index.html">
                     <svg width="32" height="32" viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
                         <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="currentColor"/>
@@ -156,8 +275,9 @@
             </nav>
             
             <div class="sidebar-footer">
+                <a href="index.html" class="sidebar-link">Home</a>
                 <a href="about.html" class="sidebar-link">About Us</a>
-                <a href="blog.html" class="sidebar-link">More Research</a>
+                <a href="blog.html" class="sidebar-link">Blog</a>
             </div>
         </aside>
 
@@ -186,8 +306,8 @@
                                         Our visual models represent a significant breakthrough in visual perception
                                         by reasoning with images in their chain of thought.
                                     </p>
-                                    <a href="index.html" class="blog-card-link">
-                                        Read more <span>→</span>
+                                    <a href="python-visual-primitive.html" class="cta-button" style="margin-bottom: 16px;">
+                                        Read paper <span>→</span>
                                     </a>
                                 </div>
                             </article>
@@ -198,24 +318,24 @@
 
             <footer>
                 <div class="container">
-                    <div class="footer-content">
-                        <div class="footer-links">
-                            <div class="footer-social">
-                                <a href="https://github.com/Agents-X" class="social-icon" aria-label="GitHub">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="social-icon" aria-label="小红书">
-                                    <i class="fab fa-weibo"></i>
-                                </a>
-                                <a href="#" class="social-icon" aria-label="Twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
-                            <a href="about.html#contact" class="footer-link">Contact Us</a>
+                    <div class="footer-row">
+                        <div class="copyright">
+                            <p>&copy; 2023 Agents-X. All rights reserved.</p>
                         </div>
-                    </div>
-                    <div class="footer-bottom">
-                        <p>&copy; 2023 Agents-X. All rights reserved.</p>
+                        <div class="footer-social">
+                            <a href="https://github.com/Agents-X" class="social-icon" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="小红书">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="about.html#contact" class="social-icon" aria-label="Contact">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </footer>

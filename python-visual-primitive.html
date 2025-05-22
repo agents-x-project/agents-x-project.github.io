@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python is a good visual primitive</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 项目链接按钮样式 */
+        :root {
+            --primary-color-dark: #1d75a5;
+        }
+        
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-link i {
+            margin-right: 8px;
+        }
+        
+        .project-link.github {
+            background-color: #323232;
+            color: white;
+        }
+        
+        .project-link.github:hover {
+            background-color: #404040;
+        }
+        
+        .project-link.huggingface {
+            background-color: #ee9a1b;
+            color: #ffffff;
+        }
+        
+        .project-link.huggingface:hover {
+            background-color: #d98c19;
+        }
+        
+        .project-link.arxiv {
+            background-color: #b31b1b;
+            color: white;
+        }
+        
+        .project-link.arxiv:hover {
+            background-color: #9a1717;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            border-top: 1px solid #eaeaea;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #666;
+            transition: color 0.2s, transform 0.2s;
+            font-size: 16px;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* CTA按钮样式 */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            margin-top: 8px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-color-dark);
+            color: white;
+        }
+        
+        .cta-button span {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Left sidebar navigation -->
+        <aside class="sidebar-nav">
+            <div class="logo">
+                <a href="index.html">
+                    <svg width="32" height="32" viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                        <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="currentColor"/>
+                        <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                    </svg>
+                    <span>Agents-X</span>
+                </a>
+            </div>
+            
+            <!-- Section navigation -->
+            <nav class="side-nav">
+                <h3>Sections</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#introduction" class="active">Introduction</a></li>
+                    <li><a href="#visual-reasoning">Visual Reasoning</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#applications">Applications</a></li>
+                    <li><a href="#future-work">Future Work</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="index.html" class="sidebar-link">Home</a>
+                <a href="about.html" class="sidebar-link">About Us</a>
+                <a href="blog.html" class="sidebar-link">Blog</a>
+            </div>
+        </aside>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <main>
+                <section class="hero" id="introduction">
+                    <div class="container">
+                        <div class="date-tag">
+                            <span class="date">June 12, 2023</span>
+                            <span class="tag">Release</span>
+                        </div>
+                        <h1>Python is a good visual primitive</h1>
+                        <p class="subtitle">
+                            Agents-X's visual models represent a significant breakthrough in visual perception
+                            by reasoning with images in their chain of thought.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Agents-X/python-visual-primitive" class="project-link github">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://huggingface.co/Agents-X/python-visual-model" class="project-link huggingface">
+                                <i class="fas fa-rocket"></i> Model
+                            </a>
+                            <a href="https://arxiv.org/abs/2306.12345" class="project-link arxiv">
+                                <i class="fas fa-file-alt"></i> Report
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content">
+                    <div class="container">
+                        <div class="text-content">
+                            <p>
+                                This approach enables a new axis for test-time compute scaling that seamlessly
+                                blends visual and textual reasoning, as reflected in their state-of-the-art
+                                performance across multimodal benchmarks, marking a significant step toward
+                                more natural, multimodal-capable AI systems.
+                            </p>
+                            
+                            <h2 id="visual-reasoning">Visual Reasoning in Practice</h2>
+                            <p>
+                                Thinking with images allows you to interact with AI more easily. You can ask questions by taking
+                                a photo without worrying about the positioning of objects—whether the text is upside down or 
+                                there are multiple physics problems in one photo. Even if objects aren't obvious at first glance,
+                                visual reasoning allows the model to zoom in to see more clearly.
+                            </p>
+                            
+                            <p class="note">All examples were completed with Agents-X visual model.</p>
+                            
+                            <div class="feature-buttons" id="examples">
+                                <button class="feature-button">Read Handwriting</button>
+                                <button class="feature-button">Solve Problems</button>
+                                <button class="feature-button">Read Signs</button>
+                                <button class="feature-button">Find Schedules</button>
+                            </div>
+                            
+                            <div class="demo-image">
+                                <img src="https://via.placeholder.com/800x500" alt="Demo image">
+                                <div class="demo-caption">
+                                    <p>Interpreting and analyzing image content</p>
+                                </div>
+                            </div>
+                            
+                            <p id="applications">
+                                Our latest visual reasoning models work in tandem with other tools like Python data analysis,
+                                web search, and image generation to creatively and effectively solve various tasks,
+                                from educational questions to complex scientific challenges.
+                            </p>
+                            
+                            <div class="feature-buttons">
+                                <button class="feature-button">Solve Mazes</button>
+                                <button class="feature-button">Find Event Dates</button>
+                                <button class="feature-button">Get Location Info</button>
+                                <button class="feature-button">Solve Puzzles</button>
+                            </div>
+                            
+                            <div class="demo-image">
+                                <img src="https://via.placeholder.com/800x500" alt="Maze demo">
+                                <div class="demo-caption">
+                                    <p>Solving this maze and plotting a path with red-colored line</p>
+                                </div>
+                            </div>
+                            
+                            <h2 id="future-work">Future Work</h2>
+                            <p>
+                                We are continuing to enhance our visual models with improved reasoning capabilities and
+                                broader domain knowledge. Future versions will demonstrate even more sophisticated
+                                understanding of complex visual inputs and better integration with programming tools.
+                            </p>
+                        </div>
+                        
+                        <aside class="sidebar">
+                            <div class="sidebar-links">
+                                <h3>Related Articles</h3>
+                                <ul>
+                                    <li><a href="#">The Future of Multimodal AI</a></li>
+                                    <li><a href="#">How Visual Models Learn</a></li>
+                                    <li><a href="#">AI and Artistic Creation</a></li>
+                                    <li><a href="#">Visual AI in Education</a></li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div class="container">
+                    <div class="footer-row">
+                        <div class="copyright">
+                            <p>&copy; 2023 Agents-X. All rights reserved.</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://github.com/Agents-X" class="social-icon" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="小红书">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="about.html#contact" class="social-icon" aria-label="Contact">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
