@@ -1,10 +1,14 @@
 {
     "case1": {
-        "show_name": "Read Handwriting",
+        "show_name": "Read A Sign",
         "traj_path": "assets/test_message_gpt.json"
     },
     "case2": {
-        "show_name": "Solve Problems",
+        "show_name": "Solve Math Problems",
+        "traj_path": "assets/test_message_gpt.json"
+    },
+    "case3": {
+        "show_name": "Find Differences",
         "traj_path": "assets/test_message_gpt.json"
     }
 }

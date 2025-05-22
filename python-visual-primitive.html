@@ -129,6 +129,63 @@
         .cta-button span {
             margin-left: 8px;
         }
+        
+        /* Main content width adjustment */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .text-content {
+            max-width: 68%;
+            padding-right: 30px;
+            flex: 1;
+        }
+        
+        .main-content {
+            width: 100%;
+            padding: 0;
+        }
+        
+        .reasoning-process {
+            width: 100%;
+            margin: 30px 0;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            background: #fcfcfc;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            width: 28%;
+            min-width: 240px;
+        }
+        
+        @media (max-width: 1024px) {
+            .text-content {
+                max-width: 100%;
+                padding-right: 0;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-top: 30px;
+            }
+        }
+        
+        .hero .container {
+            display: block;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .hero h1 {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -216,10 +273,7 @@
                             <p class="note">All examples were completed with Agents-X visual model.</p>
                             
                             <div class="feature-buttons" id="examples">
-                                <button class="feature-button active" data-case="case1">Read Handwriting</button>
-                                <button class="feature-button" data-case="case2">Solve Problems</button>
-                                <button class="feature-button">Read Signs</button>
-                                <button class="feature-button">Find Schedules</button>
+                                <!-- Feature buttons will be dynamically added here -->
                             </div>
                             
                             <div class="reasoning-process">
@@ -237,7 +291,7 @@
                                 from educational questions to complex scientific challenges.
                             </p>
                             
-                            <div class="feature-buttons">
+                            <!-- <div class="feature-buttons">
                                 <button class="feature-button">Solve Mazes</button>
                                 <button class="feature-button">Find Event Dates</button>
                                 <button class="feature-button">Get Location Info</button>
@@ -249,7 +303,7 @@
                                 <div class="demo-caption">
                                     <p>Solving this maze and plotting a path with red-colored line</p>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <h2 id="future-work">Future Work</h2>
                             <p>
@@ -303,22 +357,60 @@
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize with the default case
-            loadTrajectoryCase('case1');
-            
-            // Set up event listeners for feature buttons
-            const featureButtons = document.querySelectorAll('.feature-button[data-case]');
-            featureButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    featureButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    // Load the trajectory case
-                    loadTrajectoryCase(this.getAttribute('data-case'));
-                });
-            });
+            // Load case data and create buttons
+            loadCaseButtons();
         });
+        
+        async function loadCaseButtons() {
+            const buttonsContainer = document.querySelector('.feature-buttons');
+            
+            try {
+                // Load the case metadata
+                const casesResponse = await fetch('assets/trajectory_cases.json');
+                
+                if (!casesResponse.ok) {
+                    throw new Error(`Failed to load cases data: ${casesResponse.status}`);
+                }
+                
+                const casesData = await casesResponse.json();
+                
+                // Clear the container
+                buttonsContainer.innerHTML = '';
+                
+                // Create a button for each case
+                const caseIds = Object.keys(casesData);
+                
+                caseIds.forEach((caseId, index) => {
+                    const caseInfo = casesData[caseId];
+                    const button = document.createElement('button');
+                    button.className = 'feature-button' + (index === 0 ? ' active' : '');
+                    button.setAttribute('data-case', caseId);
+                    button.textContent = caseInfo.show_name;
+                    
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.feature-button').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        // Load the trajectory case
+                        loadTrajectoryCase(this.getAttribute('data-case'));
+                    });
+                    
+                    buttonsContainer.appendChild(button);
+                });
+                
+                // Load the first case by default
+                if (caseIds.length > 0) {
+                    loadTrajectoryCase(caseIds[0]);
+                }
+                
+            } catch (error) {
+                console.error('Error loading case buttons:', error);
+                buttonsContainer.innerHTML = `<div class="button-error">Failed to load example cases</div>`;
+            }
+        }
 
         async function loadTrajectoryCase(caseId) {
             const container = document.getElementById('reasoning-container');
@@ -590,6 +682,7 @@
             max-height: 600px;
             overflow-y: auto;
             padding: 16px;
+            width: 100%;
         }
         
         .reasoning-loading {
@@ -634,6 +727,8 @@
             margin-bottom: 16px;
             padding: 12px;
             border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .reasoning-user {
@@ -669,6 +764,8 @@
             background-color: #2b2b2b;
             color: #f8f8f2;
             overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.4;
         }
         
         .reasoning-interpreter-output {
@@ -733,6 +830,38 @@
             color: #1d75a5;
             margin-bottom: 8px;
             font-size: 1.05em;
+        }
+        
+        .button-error {
+            color: #d32f2f;
+            padding: 10px;
+            text-align: center;
+            border: 1px dashed #ffcdd2;
+            background-color: #ffebee;
+            border-radius: 4px;
+        }
+
+        /* Additional responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .text-content, 
+            .sidebar {
+                max-width: 100%;
+                width: 100%;
+                padding-right: 0;
+            }
+            
+            .reasoning-container {
+                max-height: 500px;
+            }
+            
+            .reasoning-code pre {
+                font-size: 13px;
+                padding: 8px;
+            }
         }
     </style>
     

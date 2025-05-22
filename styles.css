@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -144,6 +144,11 @@ img {
     text-align: center;
 }
 
+.hero .container {
+    display: block;
+    max-width: 1000px;
+}
+
 .date-tag {
     display: flex;
     align-items: center;
@@ -205,13 +210,17 @@ img {
 }
 
 .content .container {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 48px;
 }
 
 .text-content {
     font-size: 18px;
+    max-width: 68%;
+    flex: 1;
+    min-width: 0; /* Ensure text can shrink if needed */
 }
 
 .text-content p {
@@ -278,7 +287,8 @@ img {
 
 /* Sidebar */
 .sidebar {
-    padding-top: 12px;
+    width: 28%;
+    min-width: 240px;
 }
 
 .sidebar-links {
@@ -373,6 +383,21 @@ footer {
 }
 
 /* Responsive styles */
+@media (max-width: 1024px) {
+    .content .container {
+        flex-direction: column;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .site-wrapper {
         flex-direction: column;
@@ -392,10 +417,6 @@ footer {
     
     .hero h1 {
         font-size: 36px;
-    }
-    
-    .content .container {
-        grid-template-columns: 1fr;
     }
     
     .footer-content {
