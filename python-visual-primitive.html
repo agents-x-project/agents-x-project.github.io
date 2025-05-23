@@ -93,11 +93,16 @@
             line-height: 1.2;
         }
         
-        .article-subtitle {
-            font-size: 18px;
+        .article-abstract {
+            font-size: 16px;
             color: var(--secondary-text-color);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto 30px;
+            text-align: left;
+            background-color: #e9f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            font-style: italic;
         }
         
         .project-links {
@@ -380,6 +385,53 @@
             font-size: 14px;
             color: #666;
         }
+
+        /* code style */
+        .bibtex-block {
+            background: #f7f7fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px 18px 12px 18px;
+            margin: 32px 0 32px 0;
+            position: relative;
+        }
+        .bibtex-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .bibtex-pre {
+            font-size: 14px;
+            color: #333;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            overflow-x: auto;
+            word-break: normal;
+        }
+        .bibtex-copy-btn {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #ededed;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .bibtex-copy-btn:hover {
+            background: #e0e0e0;
+            color: #222;
+        }
         
         @media (max-width: 768px) {
             .article-title {
@@ -419,9 +471,8 @@
                     <span class="tag">Published</span>
                 </div>
                 <h1 class="article-title">Python is a good visual primitive</h1>
-                <p class="article-subtitle">
-                    Agents-X's visual models represent a significant breakthrough in visual perception
-                    by reasoning with images in their chain of thought.
+                <p class="article-abstract">
+                    This study investigates the effectiveness of Python code as a visual primitive for image manipulation and reasoning. We demonstrate that GPT-4.1 can be directly prompted to generate code for image modifications, offering a novel approach to addressing complex Visual Question Answering (VQA) challenges. Our findings reveal GPT-4.1's remarkable capability to perform human-like image editing operations, particularly in single-image VQA scenarios. These operations encompass precise cropping, the addition of visual elements (including geometric shapes and textual annotations), and sophisticated image stylization through parameterized processing functions. Furthermore, in multi-image VQA contexts, the model demonstrates advanced reasoning capabilities, successfully generating code for complex operations such as subtracting two images in visual comparison tasks. We evaluate the pipeline in various vqa benchmarks and show its strong zero-shot performance.
                 </p>
                 <div class="project-links">
                     <a href="https://github.com/Agents-X/python-visual-primitive" class="project-link github">
@@ -435,15 +486,15 @@
                     </a>
                 </div>
                 
-                <!-- 添加作者栏 -->
+                <!-- authors -->
                 <div class="authors-section">
                     <div class="authors-meta">
                         <div class="authors-title" style="text-align:left;">AUTHORS</div>
                         <div class="authors-list" style="text-align:left;">
                             <span class="author">Shitian Zhao<sup>*‡</sup></span>, 
                             <span class="author">Qilong Wu<sup>*</sup></span>, 
-                            <span class="author">Ming Li<sup>*</sup></span>, 
                             <span class="author">Haoquan Zhang<sup>*</sup></span>, 
+                            <span class="author">Ming Li<sup>*</sup></span>, 
                             <span class="author">Shaoheng Lin<sup>*</sup></span>, 
                             <span class="author">Kaipeng Zhang</span>, 
                             <span class="author">Chen Wei</span>
@@ -459,13 +510,15 @@
             
             <nav class="section-nav">
                 <a href="#introduction" class="section-link active">Introduction</a>
-                <a href="#visual-reasoning" class="section-link">Visual Reasoning</a>
-                <a href="#examples" class="section-link">Examples</a>
-                <a href="#applications" class="section-link">Applications</a>
-                <a href="#future-work" class="section-link">Future Work</a>
+                <a href="#method" class="section-link">Method</a>
+                <a href="#results" class="section-link">Results</a>
+                <a href="#conclusion" class="section-link">Conclusion</a>
+                <a href="#bibtex" class="section-link">Bibtex</a>
+                <a href="#references" class="section-link">References</a>
             </nav>
 
             <div class="article-content">
+                <h2 id="introduction">Introduction</h2>
                 <p>
                     This approach enables a new axis for test-time compute scaling that seamlessly
                     blends visual and textual reasoning, as reflected in their state-of-the-art
@@ -473,7 +526,7 @@
                     more natural, multimodal-capable AI systems.
                 </p>
                 
-                <h2 id="visual-reasoning">Visual Reasoning in Practice</h2>
+                <h2 id="method">Method</h2>
                 <p>
                     Thinking with images allows you to interact with AI more easily. You can ask questions by taking
                     a photo without worrying about the positioning of objects—whether the text is upside down or 
@@ -496,17 +549,34 @@
                     </div>
                 </div>
                 
-                <p id="applications">
+                <p id="results">
                     Our latest visual reasoning models work in tandem with other tools like Python data analysis,
                     web search, and image generation to creatively and effectively solve various tasks,
                     from educational questions to complex scientific challenges.
                 </p>
                 
-                <h2 id="future-work">Future Work</h2>
+                <h2 id="conclusion">Conclusion</h2>
                 <p>
                     We are continuing to enhance our visual models with improved reasoning capabilities and
                     broader domain knowledge. Future versions will demonstrate even more sophisticated
                     understanding of complex visual inputs and better integration with programming tools.
+                </p>
+
+                <h2 id="bibtex">Bibtex</h2>
+                <div class="bibtex-block">
+                    <!-- <div class="bibtex-title">BibTeX Citation</div> -->
+                    <pre class="bibtex-pre">@article{zhao2025pythonprimitive,
+  title={Python is a good visual primitive},
+  author={Zhao, Shitian and Wu, Qilong and Zhang, Haoquan and Li, Ming and Lin, Shaoheng and Zhang, Kaipeng and Wei, Chen},
+  url={https://agents-x.space/python-visual-primitive.html},
+  year={2025},
+}</pre>
+                    <!-- <button class="bibtex-copy-btn" onclick="copyBibtex()">Copy</button> -->
+                </div>
+
+                <h2 id="references">References</h2>
+                <p>
+                    [1] 
                 </p>
             </div>
         </article>
