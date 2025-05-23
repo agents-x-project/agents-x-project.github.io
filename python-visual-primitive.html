@@ -3,36 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python is a good visual primitive</title>
+    <title>Python is a good visual primitive - Agents-X</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 项目链接按钮样式 */
+        /* 页面特定样式 */
         :root {
             --primary-color-dark: #1d75a5;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 40px;
+        }
+        
+        .home-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .home-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .home-link svg {
+            width: 32px;
+            height: 18px;
+            margin-right: 8px;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .date-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .date {
+            font-size: 14px;
+            color: var(--secondary-text-color);
+        }
+        
+        .tag {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .article-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 18px;
+            color: var(--secondary-text-color);
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
         
         .project-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 10px;
             justify-content: center;
+            margin-bottom: 40px;
         }
         
         .project-link {
             display: inline-flex;
             align-items: center;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 4px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .project-link i {
@@ -40,21 +124,21 @@
         }
         
         .project-link.github {
-            background-color: #323232;
+            background-color: #24292e;
             color: white;
         }
         
         .project-link.github:hover {
-            background-color: #404040;
+            background-color: #1a1e22;
         }
         
         .project-link.huggingface {
             background-color: #ee9a1b;
-            color: #ffffff;
+            color: white;
         }
         
         .project-link.huggingface:hover {
-            background-color: #d98c19;
+            background-color: #ce8f32;
         }
         
         .project-link.arxiv {
@@ -63,303 +147,439 @@
         }
         
         .project-link.arxiv:hover {
-            background-color: #9a1717;
+            background-color: #9c1717;
+        }
+        
+        .article-content {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+        
+        .article-content p {
+            margin-bottom: 24px;
+        }
+        
+        .article-section {
+            margin: 60px 0;
+        }
+        
+        .article-content h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 40px 0 24px;
+            scroll-margin-top: 80px;
+        }
+        
+        .note {
+            font-style: italic;
+            color: var(--secondary-text-color);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+            scroll-margin-top: 80px;
+        }
+        
+        .feature-button {
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .feature-button:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .feature-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .reasoning-process {
+            margin: 30px 0;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .reasoning-container {
+            min-height: 200px;
+        }
+        
+        .reasoning-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Navigation links for sections */
+        .section-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 15px 0;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .section-link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+        
+        .section-link:hover, 
+        .section-link.active {
+            color: var(--primary-color);
+        }
+        
+        /* 作者栏左右分栏布局 */
+        .authors-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            background: #f3f3f3;
+            border-radius: 10px;
+            padding: 24px 24px 24px 24px;
+            margin: 20px 0 40px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .authors-meta {
+            flex: 2;
+        }
+        .authors-title, .affiliations-title, .published-title {
+            color: #a0a0a0;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .authors-list {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        .author {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        .author sup {
+            font-size: 12px;
+            color: #a4a4a4;
+            font-weight: 600;
+        }
+        .author-note {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            font-style: normal;
+            text-align: left;
+        }
+        .authors-right {
+            flex: 1;
+            min-width: 180px;
+            text-align: left;
+        }
+        .affiliations-list {
+            font-size: 16px;
+            color: #111;
+            margin-bottom: 16px;
+        }
+        .published-date {
+            font-size: 16px;
+            color: #111;
+        }
+        @media (max-width: 768px) {
+            .authors-section {
+                flex-direction: column;
+                gap: 10px;
+                text-align: left;
+            }
+            .authors-right {
+                text-align: left;
+                min-width: 0;
+            }
         }
         
         /* 页脚样式 */
         footer {
             border-top: 1px solid #eaeaea;
-            padding: 20px 0;
-            margin-top: 40px;
+            padding: 30px 0;
+            margin-top: 60px;
+            text-align: center;
         }
         
-        .footer-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .copyright p {
-            margin: 0;
-            color: #666;
-            font-size: 14px;
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .footer-social {
             display: flex;
-            gap: 16px;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
         }
         
         .social-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             color: #666;
             transition: color 0.2s, transform 0.2s;
-            font-size: 16px;
+            font-size: 18px;
+            background-color: #f5f5f5;
         }
         
         .social-icon:hover {
             color: var(--primary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            background-color: #eeeeee;
         }
         
-        /* CTA按钮样式 */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 4px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: background-color 0.2s;
-            margin-top: 8px;
+        .copyright {
+            font-size: 14px;
+            color: #666;
         }
         
-        .cta-button:hover {
-            background-color: var(--primary-color-dark);
-            color: white;
-        }
-        
-        .cta-button span {
-            margin-left: 8px;
-        }
-        
-        /* Main content width adjustment */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        .text-content {
-            max-width: 68%;
-            padding-right: 30px;
-            flex: 1;
-        }
-        
-        .main-content {
-            width: 100%;
-            padding: 0;
-        }
-        
-        .reasoning-process {
-            width: 100%;
-            margin: 30px 0;
-            border: 1px solid #e6e6e6;
-            border-radius: 8px;
-            background: #fcfcfc;
-            overflow: hidden;
-        }
-        
-        .sidebar {
-            width: 28%;
-            min-width: 240px;
-        }
-        
-        @media (max-width: 1024px) {
-            .text-content {
-                max-width: 100%;
-                padding-right: 0;
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 32px;
             }
             
-            .sidebar {
-                width: 100%;
-                margin-top: 30px;
+            .feature-buttons {
+                justify-content: center;
             }
-        }
-        
-        .hero .container {
-            display: block;
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .hero h1 {
-            margin-top: 20px;
+            
+            .authors-list {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="site-wrapper">
-        <!-- Left sidebar navigation -->
-        <aside class="sidebar-nav">
-            <div class="logo">
-                <a href="index.html">
-                    <svg width="32" height="32" viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
-                        <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="currentColor"/>
-                        <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
-                    </svg>
-                    <span>Agents-X</span>
-                </a>
+    <header class="header-nav">
+        <div class="container" style="justify-content: flex-start; display: flex;">
+            <a href="index.html" class="home-link">
+                <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                    <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
+                    <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header" id="introduction">
+                <div class="date-tag">
+                    <span class="date">June 12, 2023</span>
+                    <span class="tag">Published</span>
+                </div>
+                <h1 class="article-title">Python is a good visual primitive</h1>
+                <p class="article-subtitle">
+                    Agents-X's visual models represent a significant breakthrough in visual perception
+                    by reasoning with images in their chain of thought.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/Agents-X/python-visual-primitive" class="project-link github">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="https://huggingface.co/Agents-X/python-visual-model" class="project-link huggingface">
+                        <i class="fas fa-rocket"></i> Model
+                    </a>
+                    <a href="https://arxiv.org/abs/2306.12345" class="project-link arxiv">
+                        <i class="fas fa-file-alt"></i> Report
+                    </a>
+                </div>
+                
+                <!-- 添加作者栏 -->
+                <div class="authors-section">
+                    <div class="authors-meta">
+                        <div class="authors-title" style="text-align:left;">AUTHORS</div>
+                        <div class="authors-list" style="text-align:left;">
+                            <span class="author">Shitian Zhao<sup>*‡</sup></span>, 
+                            <span class="author">Qilong Wu<sup>*</sup></span>, 
+                            <span class="author">Ming Li<sup>*</sup></span>, 
+                            <span class="author">Haoquan Zhang<sup>*</sup></span>, 
+                            <span class="author">Shaoheng Lin<sup>*</sup></span>, 
+                            <span class="author">Kaipeng Zhang</span>, 
+                            <span class="author">Chen Wei</span>
+                        </div>
+                        <div class="author-note">‡ Project Lead;&nbsp;&nbsp;* Equal Contributing</div>
+                    </div>
+                    <div class="authors-right">
+                        <div class="affiliations-title">AFFILIATIONS</div>
+                        <div class="affiliations-list">Shanghai AI Lab, <br>Rice University</div>
+                    </div>
+                </div>
             </div>
             
-            <!-- Section navigation -->
-            <nav class="side-nav">
-                <h3>Sections</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="#introduction" class="active">Introduction</a></li>
-                    <li><a href="#visual-reasoning">Visual Reasoning</a></li>
-                    <li><a href="#examples">Examples</a></li>
-                    <li><a href="#applications">Applications</a></li>
-                    <li><a href="#future-work">Future Work</a></li>
-                </ul>
+            <nav class="section-nav">
+                <a href="#introduction" class="section-link active">Introduction</a>
+                <a href="#visual-reasoning" class="section-link">Visual Reasoning</a>
+                <a href="#examples" class="section-link">Examples</a>
+                <a href="#applications" class="section-link">Applications</a>
+                <a href="#future-work" class="section-link">Future Work</a>
             </nav>
-            
-            <div class="sidebar-footer">
-                <a href="index.html" class="sidebar-link">Home</a>
-                <a href="about.html" class="sidebar-link">About Us</a>
-                <a href="blog.html" class="sidebar-link">Blog</a>
-            </div>
-        </aside>
 
-        <!-- Main content area -->
-        <div class="main-content">
-            <main>
-                <section class="hero" id="introduction">
-                    <div class="container">
-                        <div class="date-tag">
-                            <span class="date">June 12, 2023</span>
-                            <span class="tag">Release</span>
-                        </div>
-                        <h1>Python is a good visual primitive</h1>
-                        <p class="subtitle">
-                            Agents-X's visual models represent a significant breakthrough in visual perception
-                            by reasoning with images in their chain of thought.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/Agents-X/python-visual-primitive" class="project-link github">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="https://huggingface.co/Agents-X/python-visual-model" class="project-link huggingface">
-                                <i class="fas fa-rocket"></i> Model
-                            </a>
-                            <a href="https://arxiv.org/abs/2306.12345" class="project-link arxiv">
-                                <i class="fas fa-file-alt"></i> Report
-                            </a>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="content">
-                    <div class="container">
-                        <div class="text-content">
-                            <p>
-                                This approach enables a new axis for test-time compute scaling that seamlessly
-                                blends visual and textual reasoning, as reflected in their state-of-the-art
-                                performance across multimodal benchmarks, marking a significant step toward
-                                more natural, multimodal-capable AI systems.
-                            </p>
-                            
-                            <h2 id="visual-reasoning">Visual Reasoning in Practice</h2>
-                            <p>
-                                Thinking with images allows you to interact with AI more easily. You can ask questions by taking
-                                a photo without worrying about the positioning of objects—whether the text is upside down or 
-                                there are multiple physics problems in one photo. Even if objects aren't obvious at first glance,
-                                visual reasoning allows the model to zoom in to see more clearly.
-                            </p>
-                            
-                            <p class="note">All examples were completed with Agents-X visual model.</p>
-                            
-                            <div class="feature-buttons" id="examples">
-                                <!-- Feature buttons will be dynamically added here -->
-                            </div>
-                            
-                            <div class="reasoning-process">
-                                <div id="reasoning-container" class="reasoning-container">
-                                    <div class="reasoning-loading">
-                                        <div class="loading-spinner"></div>
-                                        <p>Loading visual reasoning process...</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <p id="applications">
-                                Our latest visual reasoning models work in tandem with other tools like Python data analysis,
-                                web search, and image generation to creatively and effectively solve various tasks,
-                                from educational questions to complex scientific challenges.
-                            </p>
-                            
-                            <!-- <div class="feature-buttons">
-                                <button class="feature-button">Solve Mazes</button>
-                                <button class="feature-button">Find Event Dates</button>
-                                <button class="feature-button">Get Location Info</button>
-                                <button class="feature-button">Solve Puzzles</button>
-                            </div>
-                            
-                            <div class="demo-image">
-                                <img src="https://via.placeholder.com/800x500" alt="Maze demo">
-                                <div class="demo-caption">
-                                    <p>Solving this maze and plotting a path with red-colored line</p>
-                                </div>
-                            </div> -->
-                            
-                            <h2 id="future-work">Future Work</h2>
-                            <p>
-                                We are continuing to enhance our visual models with improved reasoning capabilities and
-                                broader domain knowledge. Future versions will demonstrate even more sophisticated
-                                understanding of complex visual inputs and better integration with programming tools.
-                            </p>
-                        </div>
-                        
-                        <aside class="sidebar">
-                            <div class="sidebar-links">
-                                <h3>Related Articles</h3>
-                                <ul>
-                                    <li><a href="#">The Future of Multimodal AI</a></li>
-                                    <li><a href="#">How Visual Models Learn</a></li>
-                                    <li><a href="#">AI and Artistic Creation</a></li>
-                                    <li><a href="#">Visual AI in Education</a></li>
-                                </ul>
-                            </div>
-                        </aside>
-                    </div>
-                </section>
-            </main>
-
-            <footer>
-                <div class="container">
-                    <div class="footer-row">
-                        <div class="copyright">
-                            <p>&copy; 2023 Agents-X. All rights reserved.</p>
-                        </div>
-                        <div class="footer-social">
-                            <a href="https://github.com/Agents-X" class="social-icon" aria-label="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="social-icon" aria-label="小红书">
-                                <i class="fab fa-weibo"></i>
-                            </a>
-                            <a href="#" class="social-icon" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="about.html#contact" class="social-icon" aria-label="Contact">
-                                <i class="fas fa-envelope"></i>
-                            </a>
+            <div class="article-content">
+                <p>
+                    This approach enables a new axis for test-time compute scaling that seamlessly
+                    blends visual and textual reasoning, as reflected in their state-of-the-art
+                    performance across multimodal benchmarks, marking a significant step toward
+                    more natural, multimodal-capable AI systems.
+                </p>
+                
+                <h2 id="visual-reasoning">Visual Reasoning in Practice</h2>
+                <p>
+                    Thinking with images allows you to interact with AI more easily. You can ask questions by taking
+                    a photo without worrying about the positioning of objects—whether the text is upside down or 
+                    there are multiple physics problems in one photo. Even if objects aren't obvious at first glance,
+                    visual reasoning allows the model to zoom in to see more clearly.
+                </p>
+                
+                <p class="note">All examples were completed with Agents-X visual model.</p>
+                
+                <div class="feature-buttons" id="examples">
+                    <!-- Feature buttons will be dynamically added here -->
+                </div>
+                
+                <div class="reasoning-process">
+                    <div id="reasoning-container" class="reasoning-container">
+                        <div class="reasoning-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading visual reasoning process...</p>
                         </div>
                     </div>
                 </div>
-            </footer>
+                
+                <p id="applications">
+                    Our latest visual reasoning models work in tandem with other tools like Python data analysis,
+                    web search, and image generation to creatively and effectively solve various tasks,
+                    from educational questions to complex scientific challenges.
+                </p>
+                
+                <h2 id="future-work">Future Work</h2>
+                <p>
+                    We are continuing to enhance our visual models with improved reasoning capabilities and
+                    broader domain knowledge. Future versions will demonstrate even more sophisticated
+                    understanding of complex visual inputs and better integration with programming tools.
+                </p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Agents-X. All rights reserved.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize section highlighting
+            initSectionHighlight();
             // Load case data and create buttons
             loadCaseButtons();
         });
+        
+        function initSectionHighlight() {
+            const sectionLinks = document.querySelectorAll('.section-nav .section-link');
+            const sections = document.querySelectorAll('h1[id], h2[id], .feature-buttons[id]');
+            
+            // Highlight the current section on scroll
+            function highlightSection() {
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (sectionId && 
+                        scrollPosition >= sectionTop && 
+                        scrollPosition < sectionTop + sectionHeight) {
+                        
+                        sectionLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', highlightSection);
+            highlightSection(); // Run once on initial load
+            
+            // Smooth scrolling for section links
+            sectionLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active state
+                        sectionLinks.forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+        }
         
         async function loadCaseButtons() {
             const buttonsContainer = document.querySelector('.feature-buttons');
@@ -408,21 +628,23 @@
                 
             } catch (error) {
                 console.error('Error loading case buttons:', error);
-                buttonsContainer.innerHTML = `<div class="button-error">Failed to load example cases</div>`;
+                buttonsContainer.innerHTML = '<p>Error loading examples. Please try again later.</p>';
             }
         }
-
+        
         async function loadTrajectoryCase(caseId) {
             const container = document.getElementById('reasoning-container');
-            container.innerHTML = `
-                <div class="reasoning-loading">
-                    <div class="loading-spinner"></div>
-                    <p>Loading visual reasoning process...</p>
-                </div>
-            `;
             
             try {
-                // First, load the case metadata
+                // Show loading state
+                container.innerHTML = `
+                    <div class="reasoning-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading case ${caseId}...</p>
+                    </div>
+                `;
+                
+                // Load the case metadata
                 const casesResponse = await fetch('assets/trajectory_cases.json');
                 
                 if (!casesResponse.ok) {
@@ -430,443 +652,42 @@
                 }
                 
                 const casesData = await casesResponse.json();
+                const caseInfo = casesData[caseId];
                 
-                if (!casesData[caseId]) {
-                    throw new Error(`Case ${caseId} not found in trajectory data`);
+                if (!caseInfo) {
+                    throw new Error(`Case ${caseId} not found`);
                 }
                 
-                // Then load the trajectory data
-                const trajectoryPath = casesData[caseId].traj_path;
-                const trajectoryResponse = await fetch(trajectoryPath);
+                // Load the trajectory data
+                const trajResponse = await fetch(caseInfo.traj_path);
                 
-                if (!trajectoryResponse.ok) {
-                    throw new Error(`Failed to load trajectory at ${trajectoryPath}: ${trajectoryResponse.status}`);
+                if (!trajResponse.ok) {
+                    throw new Error(`Failed to load trajectory data: ${trajResponse.status}`);
                 }
                 
-                const trajectoryData = await trajectoryResponse.json();
+                const trajData = await trajResponse.json();
                 
-                // Render the trajectory
-                renderTrajectory(trajectoryData, container);
-            } catch (error) {
-                console.error('Error loading trajectory:', error);
+                // Render the trajectory (this is a simplified example)
+                // In a real application, you'd have more sophisticated rendering logic
                 container.innerHTML = `
-                    <div class="reasoning-error">
-                        <div class="error-icon">⚠️</div>
-                        <p>Error loading the reasoning process: ${error.message}</p>
-                        <p>Please check the browser console for more details.</p>
+                    <div class="case-content">
+                        <h3>${caseInfo.show_name}</h3>
+                        <p>Trajectory data loaded successfully.</p>
+                        <pre>${JSON.stringify(trajData.slice(0, 2), null, 2)}</pre>
+                        <p>...</p>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Error loading trajectory case:', error);
+                container.innerHTML = `
+                    <div class="case-error">
+                        <p>Error loading case: ${error.message}</p>
+                        <button onclick="loadTrajectoryCase('${caseId}')">Try Again</button>
                     </div>
                 `;
             }
         }
-
-        function renderTrajectory(trajectoryData, container) {
-            container.innerHTML = '';
-            
-            trajectoryData.forEach((message, index) => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `reasoning-message reasoning-${message.role}`;
-                
-                // Process message content
-                if (message.content) {
-                    // Check if this is the first user message with question 
-                    if (message.role === 'user' && index === 0) {
-                        // Extract the user question more explicitly
-                        const userQuestion = message.content.find(c => 
-                            c.type === 'text' && c.text.includes('*user question:*')
-                        );
-                        
-                        if (userQuestion) {
-                            const questionDiv = document.createElement('div');
-                            questionDiv.className = 'user-question';
-                            
-                            // Extract just the user question part
-                            const questionText = userQuestion.text;
-                            const questionMatch = questionText.match(/\*user question:\*([\s\S]*?)(?:$|Remember to place the final)/);
-                            
-                            if (questionMatch && questionMatch[1]) {
-                                questionDiv.innerHTML = `<strong>Question:</strong> ${questionMatch[1].trim()}`;
-                                messageDiv.appendChild(questionDiv);
-                            }
-                        }
-                    }
-                    
-                    message.content.forEach(content => {
-                        if (content.type === 'text') {
-                            // Check if this is a code block
-                            if (content.text.includes('<code>')) {
-                                const codeRegex = /<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g;
-                                let match;
-                                let lastIndex = 0;
-                                
-                                while ((match = codeRegex.exec(content.text)) !== null) {
-                                    // Add text before the code block
-                                    const beforeText = content.text.substring(lastIndex, match.index);
-                                    if (beforeText.trim()) {
-                                        const textDiv = document.createElement('div');
-                                        textDiv.className = 'reasoning-text';
-                                        textDiv.textContent = beforeText.trim();
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                    
-                                    // Add the code block
-                                    const codeDiv = document.createElement('div');
-                                    codeDiv.className = 'reasoning-code';
-                                    const pre = document.createElement('pre');
-                                    const code = document.createElement('code');
-                                    code.className = 'language-python';
-                                    code.textContent = match[1];
-                                    pre.appendChild(code);
-                                    codeDiv.appendChild(pre);
-                                    messageDiv.appendChild(codeDiv);
-                                    
-                                    lastIndex = match.index + match[0].length;
-                                }
-                                
-                                // Add remaining text after the last code block
-                                const afterText = content.text.substring(lastIndex);
-                                if (afterText.trim()) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = afterText.trim();
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Check if this is interpreter output
-                            else if (content.text.includes('<interpreter>')) {
-                                const interpreterRegex = /<interpreter>([\s\S]*?)<\/interpreter>/g;
-                                let match;
-                                let lastIndex = 0;
-                                
-                                while ((match = interpreterRegex.exec(content.text)) !== null) {
-                                    // Add text before the interpreter output
-                                    const beforeText = content.text.substring(lastIndex, match.index);
-                                    if (beforeText.trim()) {
-                                        const textDiv = document.createElement('div');
-                                        textDiv.className = 'reasoning-text';
-                                        textDiv.textContent = beforeText.trim();
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                    
-                                    // Add the interpreter output
-                                    const outputDiv = document.createElement('div');
-                                    outputDiv.className = 'reasoning-interpreter-output';
-                                    outputDiv.textContent = match[1];
-                                    messageDiv.appendChild(outputDiv);
-                                    
-                                    lastIndex = match.index + match[0].length;
-                                }
-                                
-                                // Add remaining text after the last interpreter output
-                                const afterText = content.text.substring(lastIndex);
-                                if (afterText.trim()) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = afterText.trim();
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Check if this is a final answer
-                            else if (content.text.includes('<answer>')) {
-                                const answerRegex = /<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g;
-                                let match;
-                                
-                                if ((match = answerRegex.exec(content.text)) !== null) {
-                                    const answerDiv = document.createElement('div');
-                                    answerDiv.className = 'reasoning-answer';
-                                    answerDiv.innerHTML = `<div class="answer-box">Final Answer: ${match[1]}</div>`;
-                                    messageDiv.appendChild(answerDiv);
-                                }
-                                
-                                // Add any text outside the answer box
-                                const textParts = content.text.replace(answerRegex, '').trim();
-                                if (textParts) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = textParts;
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Regular text
-                            else {
-                                const textDiv = document.createElement('div');
-                                textDiv.className = 'reasoning-text';
-                                
-                                // Check if this is user question
-                                if (message.role === 'user') {
-                                    // Extract actual question from the user message
-                                    // Look for either user question tag or just display all content
-                                    if (content.text.includes('*user question:*')) {
-                                        const questionParts = content.text.split('*user question:*');
-                                        const question = questionParts[1] ? questionParts[1].trim() : content.text;
-                                        textDiv.innerHTML = `<strong>Question:</strong> ${question}`;
-                                    } else if (content.text.includes('<image_clue_')) {
-                                        // Skip image clue markers as we'll show the actual images
-                                        if (!content.text.trim().match(/^<image_clue_\d+>$/) && 
-                                            !content.text.trim().match(/^<\/image_clue_\d+>$/)) {
-                                            // Also strip any image clue tags from the text
-                                            const cleanText = content.text
-                                                .replace(/<image_clue_\d+>/g, '')
-                                                .replace(/<\/image_clue_\d+>/g, '')
-                                                .trim();
-                                            
-                                            if (cleanText) {
-                                                textDiv.textContent = cleanText;
-                                                messageDiv.appendChild(textDiv);
-                                            }
-                                        }
-                                    } else {
-                                        textDiv.textContent = content.text;
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                } else {
-                                    textDiv.textContent = content.text;
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                        }
-                        // Handle image content
-                        else if (content.type === 'image_url' && content.image_url) {
-                            const imageWrap = document.createElement('div');
-                            imageWrap.className = 'reasoning-image-wrap';
-                            
-                            const img = document.createElement('img');
-                            // Handle both full URL and data URL formats
-                            img.src = content.image_url.url;
-                            img.className = 'reasoning-image';
-                            img.alt = 'Visual reasoning image';
-                            
-                            // Add loading handling
-                            img.onerror = function() {
-                                this.onerror = null;
-                                this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
-                            };
-                            
-                            // Add click to enlarge
-                            img.onclick = function() {
-                                if (this.classList.contains('enlarged')) {
-                                    this.classList.remove('enlarged');
-                                } else {
-                                    this.classList.add('enlarged');
-                                }
-                            };
-                            
-                            imageWrap.appendChild(img);
-                            messageDiv.appendChild(imageWrap);
-                        }
-                    });
-                }
-                
-                container.appendChild(messageDiv);
-            });
-            
-            // Highlight code blocks
-            if (window.hljs) {
-                document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
-                });
-            }
-        }
     </script>
-
-    <style>
-        /* Reasoning process styling */
-        .reasoning-process {
-            margin: 30px 0;
-            border: 1px solid #e6e6e6;
-            border-radius: 8px;
-            background: #fcfcfc;
-            overflow: hidden;
-        }
-        
-        .reasoning-container {
-            max-height: 600px;
-            overflow-y: auto;
-            padding: 16px;
-            width: 100%;
-        }
-        
-        .reasoning-loading {
-            padding: 30px;
-            text-align: center;
-            color: #888;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 15px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .reasoning-error {
-            padding: 20px;
-            text-align: center;
-            color: #d32f2f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .error-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .reasoning-message {
-            margin-bottom: 16px;
-            padding: 12px;
-            border-radius: 6px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .reasoning-user {
-            background-color: #f1f5f9;
-        }
-        
-        .reasoning-user strong {
-            display: block;
-            margin-bottom: 10px;
-            color: #1d75a5;
-            font-size: 1.1em;
-        }
-        
-        .reasoning-assistant {
-            background-color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-        
-        .reasoning-text {
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        
-        .reasoning-code {
-            margin: 12px 0;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .reasoning-code pre {
-            margin: 0;
-            padding: 12px;
-            background-color: #2b2b2b;
-            color: #f8f8f2;
-            overflow-x: auto;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-        
-        .reasoning-interpreter-output {
-            margin: 12px 0;
-            padding: 12px;
-            background-color: #f7f7f9;
-            border-left: 4px solid #8a8a8a;
-            font-family: monospace;
-            white-space: pre-wrap;
-        }
-        
-        .reasoning-image-wrap {
-            margin: 12px 0;
-            text-align: center;
-        }
-        
-        .reasoning-image {
-            max-width: 100%;
-            max-height: 400px;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .reasoning-image.enlarged {
-            max-height: none;
-            max-width: 90%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 10;
-            position: relative;
-        }
-        
-        .reasoning-answer {
-            margin-top: 16px;
-        }
-        
-        .answer-box {
-            padding: 12px 16px;
-            background-color: #e8f5e9;
-            border: 1px solid #c8e6c9;
-            border-radius: 6px;
-            color: #388e3c;
-            font-weight: 600;
-        }
-        
-        .feature-button.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .user-question {
-            background-color: #e8f5fe;
-            border-left: 4px solid #1d75a5;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-        
-        .user-question strong {
-            display: block;
-            color: #1d75a5;
-            margin-bottom: 8px;
-            font-size: 1.05em;
-        }
-        
-        .button-error {
-            color: #d32f2f;
-            padding: 10px;
-            text-align: center;
-            border: 1px dashed #ffcdd2;
-            background-color: #ffebee;
-            border-radius: 4px;
-        }
-
-        /* Additional responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .text-content, 
-            .sidebar {
-                max-width: 100%;
-                width: 100%;
-                padding-right: 0;
-            }
-            
-            .reasoning-container {
-                max-height: 500px;
-            }
-            
-            .reasoning-code pre {
-                font-size: 13px;
-                padding: 8px;
-            }
-        }
-    </style>
-    
-    <!-- Add highlight.js for code syntax highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </body>
 </html> 
