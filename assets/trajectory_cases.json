@@ -1,6 +1,6 @@
 {
     "case1": {
-        "show_name": "Read A Sign",
+        "show_name": "Following single-colored paths",
         "traj_path": "assets/test_message_gpt.json"
     },
     "case2": {
