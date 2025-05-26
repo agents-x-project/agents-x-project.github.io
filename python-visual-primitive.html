@@ -473,6 +473,132 @@
                 padding-left: 0;
             }
         }
+        
+        /* Reasoning process styling */
+        .reasoning-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 16px;
+            width: 100%;
+        }
+        
+        .reasoning-error {
+            padding: 20px;
+            text-align: center;
+            color: #d32f2f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .error-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .reasoning-message {
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .reasoning-user {
+            background-color: #f1f5f9;
+        }
+        
+        .reasoning-user strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #1d75a5;
+            font-size: 1.1em;
+        }
+        
+        .reasoning-assistant {
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        
+        .reasoning-text {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .reasoning-code {
+            margin: 12px 0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .reasoning-code pre {
+            margin: 0;
+            padding: 12px;
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .reasoning-interpreter-output {
+            margin: 12px 0;
+            padding: 12px;
+            background-color: #f7f7f9;
+            border-left: 4px solid #8a8a8a;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .reasoning-image-wrap {
+            margin: 12px 0;
+            text-align: center;
+        }
+        
+        .reasoning-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reasoning-image.enlarged {
+            max-height: none;
+            max-width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .reasoning-answer {
+            margin-top: 16px;
+        }
+        
+        .answer-box {
+            padding: 12px 16px;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            color: #388e3c;
+            font-weight: 600;
+        }
+        
+        .user-question {
+            background-color: #e8f5fe;
+            border-left: 4px solid #1d75a5;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .user-question strong {
+            display: block;
+            color: #1d75a5;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
     </style>
 </head>
 <body>
@@ -730,17 +856,15 @@
         
         async function loadTrajectoryCase(caseId) {
             const container = document.getElementById('reasoning-container');
+            container.innerHTML = `
+                <div class="reasoning-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading visual reasoning process...</p>
+                </div>
+            `;
             
             try {
-                // Show loading state
-                container.innerHTML = `
-                    <div class="reasoning-loading">
-                        <div class="loading-spinner"></div>
-                        <p>Loading case ${caseId}...</p>
-                    </div>
-                `;
-                
-                // Load the case metadata
+                // First, load the case metadata
                 const casesResponse = await fetch('assets/trajectory_cases.json');
                 
                 if (!casesResponse.ok) {
@@ -748,42 +872,246 @@
                 }
                 
                 const casesData = await casesResponse.json();
-                const caseInfo = casesData[caseId];
                 
-                if (!caseInfo) {
-                    throw new Error(`Case ${caseId} not found`);
+                if (!casesData[caseId]) {
+                    throw new Error(`Case ${caseId} not found in trajectory data`);
                 }
                 
-                // Load the trajectory data
-                const trajResponse = await fetch(caseInfo.traj_path);
+                // Then load the trajectory data
+                const trajectoryPath = casesData[caseId].traj_path;
+                const trajectoryResponse = await fetch(trajectoryPath);
                 
-                if (!trajResponse.ok) {
-                    throw new Error(`Failed to load trajectory data: ${trajResponse.status}`);
+                if (!trajectoryResponse.ok) {
+                    throw new Error(`Failed to load trajectory at ${trajectoryPath}: ${trajectoryResponse.status}`);
                 }
                 
-                const trajData = await trajResponse.json();
+                const trajectoryData = await trajectoryResponse.json();
                 
-                // Render the trajectory (this is a simplified example)
-                // In a real application, you'd have more sophisticated rendering logic
-                container.innerHTML = `
-                    <div class="case-content">
-                        <h3>${caseInfo.show_name}</h3>
-                        <p>Trajectory data loaded successfully.</p>
-                        <pre>${JSON.stringify(trajData.slice(0, 2), null, 2)}</pre>
-                        <p>...</p>
-                    </div>
-                `;
-                
+                // Render the trajectory
+                renderTrajectory(trajectoryData, container);
             } catch (error) {
-                console.error('Error loading trajectory case:', error);
+                console.error('Error loading trajectory:', error);
                 container.innerHTML = `
-                    <div class="case-error">
-                        <p>Error loading case: ${error.message}</p>
-                        <button onclick="loadTrajectoryCase('${caseId}')">Try Again</button>
+                    <div class="reasoning-error">
+                        <div class="error-icon">⚠️</div>
+                        <p>Error loading the reasoning process: ${error.message}</p>
+                        <p>Please check the browser console for more details.</p>
                     </div>
                 `;
             }
         }
+
+        function renderTrajectory(trajectoryData, container) {
+            container.innerHTML = '';
+            
+            trajectoryData.forEach((message, index) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `reasoning-message reasoning-${message.role}`;
+                
+                // Process message content
+                if (message.content) {
+                    // Check if this is the first user message with question 
+                    if (message.role === 'user' && index === 0) {
+                        // Extract the user question more explicitly
+                        const userQuestion = message.content.find(c => 
+                            c.type === 'text' && c.text.includes('*user question:*')
+                        );
+                        
+                        if (userQuestion) {
+                            const questionDiv = document.createElement('div');
+                            questionDiv.className = 'user-question';
+                            
+                            // Extract just the user question part
+                            const questionText = userQuestion.text;
+                            const questionMatch = questionText.match(/\*user question:\*([\s\S]*?)(?:$|Remember to place the final)/);
+                            
+                            if (questionMatch && questionMatch[1]) {
+                                questionDiv.innerHTML = `<strong>Question:</strong> ${questionMatch[1].trim()}`;
+                                messageDiv.appendChild(questionDiv);
+                            }
+                        }
+                    }
+                    
+                    message.content.forEach(content => {
+                        if (content.type === 'text') {
+                            // Check if this is a code block
+                            if (content.text.includes('<code>')) {
+                                const codeRegex = /<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g;
+                                let match;
+                                let lastIndex = 0;
+                                
+                                while ((match = codeRegex.exec(content.text)) !== null) {
+                                    // Add text before the code block
+                                    const beforeText = content.text.substring(lastIndex, match.index);
+                                    if (beforeText.trim()) {
+                                        const textDiv = document.createElement('div');
+                                        textDiv.className = 'reasoning-text';
+                                        textDiv.textContent = beforeText.trim();
+                                        messageDiv.appendChild(textDiv);
+                                    }
+                                    
+                                    // Add the code block
+                                    const codeDiv = document.createElement('div');
+                                    codeDiv.className = 'reasoning-code';
+                                    const pre = document.createElement('pre');
+                                    const code = document.createElement('code');
+                                    code.className = 'language-python';
+                                    code.textContent = match[1];
+                                    pre.appendChild(code);
+                                    codeDiv.appendChild(pre);
+                                    messageDiv.appendChild(codeDiv);
+                                    
+                                    lastIndex = match.index + match[0].length;
+                                }
+                                
+                                // Add remaining text after the last code block
+                                const afterText = content.text.substring(lastIndex);
+                                if (afterText.trim()) {
+                                    const textDiv = document.createElement('div');
+                                    textDiv.className = 'reasoning-text';
+                                    textDiv.textContent = afterText.trim();
+                                    messageDiv.appendChild(textDiv);
+                                }
+                            }
+                            // Check if this is interpreter output
+                            else if (content.text.includes('<interpreter>')) {
+                                const interpreterRegex = /<interpreter>([\s\S]*?)<\/interpreter>/g;
+                                let match;
+                                let lastIndex = 0;
+                                
+                                while ((match = interpreterRegex.exec(content.text)) !== null) {
+                                    // Add text before the interpreter output
+                                    const beforeText = content.text.substring(lastIndex, match.index);
+                                    if (beforeText.trim()) {
+                                        const textDiv = document.createElement('div');
+                                        textDiv.className = 'reasoning-text';
+                                        textDiv.textContent = beforeText.trim();
+                                        messageDiv.appendChild(textDiv);
+                                    }
+                                    
+                                    // Add the interpreter output
+                                    const outputDiv = document.createElement('div');
+                                    outputDiv.className = 'reasoning-interpreter-output';
+                                    outputDiv.textContent = match[1];
+                                    messageDiv.appendChild(outputDiv);
+                                    
+                                    lastIndex = match.index + match[0].length;
+                                }
+                                
+                                // Add remaining text after the last interpreter output
+                                const afterText = content.text.substring(lastIndex);
+                                if (afterText.trim()) {
+                                    const textDiv = document.createElement('div');
+                                    textDiv.className = 'reasoning-text';
+                                    textDiv.textContent = afterText.trim();
+                                    messageDiv.appendChild(textDiv);
+                                }
+                            }
+                            // Check if this is a final answer
+                            else if (content.text.includes('<answer>')) {
+                                const answerRegex = /<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g;
+                                let match;
+                                
+                                if ((match = answerRegex.exec(content.text)) !== null) {
+                                    const answerDiv = document.createElement('div');
+                                    answerDiv.className = 'reasoning-answer';
+                                    answerDiv.innerHTML = `<div class="answer-box">Final Answer: ${match[1]}</div>`;
+                                    messageDiv.appendChild(answerDiv);
+                                }
+                                
+                                // Add any text outside the answer box
+                                const textParts = content.text.replace(answerRegex, '').trim();
+                                if (textParts) {
+                                    const textDiv = document.createElement('div');
+                                    textDiv.className = 'reasoning-text';
+                                    textDiv.textContent = textParts;
+                                    messageDiv.appendChild(textDiv);
+                                }
+                            }
+                            // Regular text
+                            else {
+                                const textDiv = document.createElement('div');
+                                textDiv.className = 'reasoning-text';
+                                
+                                // Check if this is user question
+                                if (message.role === 'user') {
+                                    // Extract actual question from the user message
+                                    // Look for either user question tag or just display all content
+                                    if (content.text.includes('*user question:*')) {
+                                        const questionParts = content.text.split('*user question:*');
+                                        const question = questionParts[1] ? questionParts[1].trim() : content.text;
+                                        textDiv.innerHTML = `<strong>Question:</strong> ${question}`;
+                                    } else if (content.text.includes('<image_clue_')) {
+                                        // Skip image clue markers as we'll show the actual images
+                                        if (!content.text.trim().match(/^<image_clue_\d+>$/) && 
+                                            !content.text.trim().match(/^<\/image_clue_\d+>$/)) {
+                                            // Also strip any image clue tags from the text
+                                            const cleanText = content.text
+                                                .replace(/<image_clue_\d+>/g, '')
+                                                .replace(/<\/image_clue_\d+>/g, '')
+                                                .trim();
+                                            
+                                            if (cleanText) {
+                                                textDiv.textContent = cleanText;
+                                                messageDiv.appendChild(textDiv);
+                                            }
+                                        }
+                                    } else {
+                                        textDiv.textContent = content.text;
+                                        messageDiv.appendChild(textDiv);
+                                    }
+                                } else {
+                                    textDiv.textContent = content.text;
+                                    messageDiv.appendChild(textDiv);
+                                }
+                            }
+                        }
+                        // Handle image content
+                        else if (content.type === 'image_url' && content.image_url) {
+                            const imageWrap = document.createElement('div');
+                            imageWrap.className = 'reasoning-image-wrap';
+                            
+                            const img = document.createElement('img');
+                            // Handle both full URL and data URL formats
+                            img.src = content.image_url.url;
+                            img.className = 'reasoning-image';
+                            img.alt = 'Visual reasoning image';
+                            
+                            // Add loading handling
+                            img.onerror = function() {
+                                this.onerror = null;
+                                this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
+                            };
+                            
+                            // Add click to enlarge
+                            img.onclick = function() {
+                                if (this.classList.contains('enlarged')) {
+                                    this.classList.remove('enlarged');
+                                } else {
+                                    this.classList.add('enlarged');
+                                }
+                            };
+                            
+                            imageWrap.appendChild(img);
+                            messageDiv.appendChild(imageWrap);
+                        }
+                    });
+                }
+                
+                container.appendChild(messageDiv);
+            });
+            
+            // Highlight code blocks
+            if (window.hljs) {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            }
+        }
     </script>
+    
+    <!-- Add highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </body>
 </html> 
