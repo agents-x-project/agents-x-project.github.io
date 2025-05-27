@@ -491,7 +491,7 @@
 
     <main class="article-container">
         <article>
-            <div class="article-header" id="introduction">
+            <div class="article-header">
                 <div class="date-tag">
                     <span class="date">May 24, 2025</span>
                     <span class="tag">Published</span>
@@ -533,6 +533,84 @@
                     </div>
                 </div>
             </div>
+
+            <div>
+                <canvas id="VstarBench"></canvas>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <h3 style="text-align: center; margin-bottom: 20px;">Evaluation on V* Bench</h3>
+            <script>
+            const ctx = document.getElementById('VstarBench');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: [
+                    'gpt-4o', 
+                    'gpt-4.1', 
+                    'gpt-4.1+tool (auto)', 
+                    'gpt-4.1+tool (high)', 
+                    'gpt-4.1+tool+imginfo',
+                    'o3'
+                ],
+                datasets: [{
+                    label: 'Acc - %',
+                    data: [
+                    55.5,    // gemini 2.5-pro-exp-03-25
+                    55.0,   // gpt-4.1
+                    70.2,   // gpt-4.1+tool (auto)
+                    69.6,   // gpt-4.1+tool (high)
+                    74.4,   // gpt-4.1+tool+imginfo
+                    95.5    // o3
+                    ],
+                    backgroundColor: [
+                    '#222',      // black
+                    '#888',      // gray
+                    '#ffb6b6',   // light red
+                    '#ff8c8c',   // medium red
+                    '#ff6b6b',   // red
+                    '#ff4d4d'    // dark red
+                    ],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                // indexAxis 默认为 'x'，即纵向柱状图
+                scales: {
+                    y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Accuracy (%)'
+                    }
+                    },
+                    x: {
+                    ticks: {
+                        font: {
+                        size: 14
+                        }
+                    }
+                    }
+                },
+                plugins: {
+                    legend: {
+                    display: false
+                    },
+                    tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                        // 显示百分号
+                        return context.parsed.y + '%';
+                        }
+                    }
+                    }
+                }
+                }
+            });
+            </script>
             
             <nav class="section-nav">
                 <a href="#introduction" class="section-link active">Introduction</a>
