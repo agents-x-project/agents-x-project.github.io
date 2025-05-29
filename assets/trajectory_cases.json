@@ -1,16 +1,20 @@
 {
     "cases": [
         {
-        "show_name": "Following single-colored paths",
+        "show_name": "Following Single-colored Paths",
         "file_dir": "assets/Following-single-colored-paths"
         },
         {
-        "show_name": "Solve Math Problems",
-        "file_dir": "assets/Solve-Math-Problems"
+        "show_name": "Overlapping Shapes",
+        "file_dir": "assets/Counting-shapes"
         },
         {
-        "show_name": "Find Differences",
-        "file_dir": "assets/Find-Differences"
+        "show_name": "Nested Squares",
+        "file_dir": "assets/Nested-squares"
+        },
+        {
+        "show_name": "Line Intersections",
+        "file_dir": "assets/Line-intersections"
         }
     ]
 }
