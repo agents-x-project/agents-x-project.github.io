@@ -1,14 +1,16 @@
 {
-    "case1": {
+    "cases": [
+        {
         "show_name": "Following single-colored paths",
-        "traj_path": "assets/test_message_gpt.json"
-    },
-    "case2": {
+        "file_dir": "assets/Following-single-colored-paths"
+        },
+        {
         "show_name": "Solve Math Problems",
-        "traj_path": "assets/test_message_gpt.json"
-    },
-    "case3": {
+        "file_dir": "assets/Solve-Math-Problems"
+        },
+        {
         "show_name": "Find Differences",
-        "traj_path": "assets/test_message_gpt.json"
-    }
+        "file_dir": "assets/Find-Differences"
+        }
+    ]
 }

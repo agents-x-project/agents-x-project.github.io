@@ -599,6 +599,35 @@
             margin-bottom: 8px;
             font-size: 1.05em;
         }
+
+        /* 对话气泡样式 */
+        .bubble {
+            max-width: 80%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 16px;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            word-break: break-word;
+        }
+        .bubble-gpt {
+            background: #ffffff;
+            color: #222;
+            align-self: flex-start;
+            border-top-left-radius: 6px;
+            margin-right: auto;
+        }
+        .bubble-human {
+            background: #f3f9ff;
+            color: #1a3a5d;
+            align-self: flex-end;
+            border-top-right-radius: 6px;
+            margin-left: auto;
+        }
+        .reasoning-message {
+            display: flex;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -816,6 +845,7 @@
         <div class="container">
             <div class="copyright">
                 <p>&copy; 2025 Agents-X. All rights reserved.</p>
+                <p>Webpage designed by <a href="https://haoquanzhang.github.io" style="text-decoration: underline;">Haoquan Zhang</a> and <a href="https://github.com/sh-Lin" style="text-decoration: underline;">Shaoheng Lin</a></p>
             </div>
         </div>
     </footer>
@@ -827,6 +857,7 @@
             initSectionHighlight();
             // Load case data and create buttons
             loadCaseButtons();
+            insertCasesFromConfig('assets/trajectory_cases.json', '.feature-buttons');
         });
         
         function initSectionHighlight() {
@@ -934,41 +965,22 @@
         
         async function loadTrajectoryCase(caseId) {
             const container = document.getElementById('reasoning-container');
-            container.innerHTML = `
-                <div class="reasoning-loading">
-                    <div class="loading-spinner"></div>
+                container.innerHTML = `
+                    <div class="reasoning-loading">
+                        <div class="loading-spinner"></div>
                     <p>Loading visual reasoning process...</p>
-                </div>
-            `;
-            
+                    </div>
+                `;
             try {
-                // First, load the case metadata
-                const casesResponse = await fetch('assets/trajectory_cases.json');
-                
-                if (!casesResponse.ok) {
-                    throw new Error(`Failed to load cases data: ${casesResponse.status}`);
+                // 只支持新格式，直接读取指定路径
+                const response = await fetch('assets/Following-single-colored-paths/conversations.json');
+                if (!response.ok) {
+                    throw new Error(`Failed to load conversations: ${response.status}`);
                 }
-                
-                const casesData = await casesResponse.json();
-                
-                if (!casesData[caseId]) {
-                    throw new Error(`Case ${caseId} not found in trajectory data`);
-                }
-                
-                // Then load the trajectory data
-                const trajectoryPath = casesData[caseId].traj_path;
-                const trajectoryResponse = await fetch(trajectoryPath);
-                
-                if (!trajectoryResponse.ok) {
-                    throw new Error(`Failed to load trajectory at ${trajectoryPath}: ${trajectoryResponse.status}`);
-                }
-                
-                const trajectoryData = await trajectoryResponse.json();
-                
-                // Render the trajectory
-                renderTrajectory(trajectoryData, container);
+                const conversation = await response.json();
+                renderConversation(conversation, container);
             } catch (error) {
-                console.error('Error loading trajectory:', error);
+                console.error('Error loading conversation:', error);
                 container.innerHTML = `
                     <div class="reasoning-error">
                         <div class="error-icon">⚠️</div>
@@ -979,210 +991,200 @@
             }
         }
 
-        function renderTrajectory(trajectoryData, container) {
+        function renderConversation(conversation, container) {
             container.innerHTML = '';
-            
-            trajectoryData.forEach((message, index) => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `reasoning-message reasoning-${message.role}`;
-                
-                // Process message content
-                if (message.content) {
-                    // Check if this is the first user message with question 
-                    if (message.role === 'user' && index === 0) {
-                        // Extract the user question more explicitly
-                        const userQuestion = message.content.find(c => 
-                            c.type === 'text' && c.text.includes('*user question:*')
-                        );
-                        
-                        if (userQuestion) {
-                            const questionDiv = document.createElement('div');
-                            questionDiv.className = 'user-question';
-                            
-                            // Extract just the user question part
-                            const questionText = userQuestion.text;
-                            const questionMatch = questionText.match(/\*user question:\*([\s\S]*?)(?:$|Remember to place the final)/);
-                            
-                            if (questionMatch && questionMatch[1]) {
-                                questionDiv.innerHTML = `<strong>Question:</strong> ${questionMatch[1].trim()}`;
-                                messageDiv.appendChild(questionDiv);
-                            }
-                        }
+            conversation.forEach((msg, idx) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `reasoning-message reasoning-${msg.from}`;
+                let value = msg.value;
+
+                // 1. 先提取所有代码块，临时用占位符替换（统一用[[CODEBLOCK0]]格式）
+                const codeBlocks = [];
+                value = value.replace(/<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g, (match, code) => {
+                    codeBlocks.push(code);
+                    return `[[CODEBLOCK${codeBlocks.length - 1}]]`;
+                });
+
+                // 2. 提取图片为占位符
+                const imageBlocks = [];
+                value = value.replace(/<image_clue_(\d+)>.*?<\/image_clue_\d+>/gs, (match, p1) => {
+                    imageBlocks.push(p1);
+                    return `[[IMAGEBLOCK${imageBlocks.length - 1}]]`;
+                });
+
+                // 3. 渲染interpreter输出 <interpreter>...</interpreter>
+                value = value.replace(/<interpreter>([\s\S]*?)<\/interpreter>/g, (match, output) => {
+                    if (output.includes('reasoning-image-wrap')) {
+                        return `<div class="reasoning-interpreter-output">${output}</div>`;
+                    } else {
+                        return `<div class="reasoning-interpreter-output">${escapeHtml(output)}</div>`;
                     }
-                    
-                    message.content.forEach(content => {
-                        if (content.type === 'text') {
-                            // Check if this is a code block
-                            if (content.text.includes('<code>')) {
-                                const codeRegex = /<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g;
-                                let match;
-                                let lastIndex = 0;
-                                
-                                while ((match = codeRegex.exec(content.text)) !== null) {
-                                    // Add text before the code block
-                                    const beforeText = content.text.substring(lastIndex, match.index);
-                                    if (beforeText.trim()) {
-                                        const textDiv = document.createElement('div');
-                                        textDiv.className = 'reasoning-text';
-                                        textDiv.textContent = beforeText.trim();
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                    
-                                    // Add the code block
-                                    const codeDiv = document.createElement('div');
-                                    codeDiv.className = 'reasoning-code';
-                                    const pre = document.createElement('pre');
-                                    const code = document.createElement('code');
-                                    code.className = 'language-python';
-                                    code.textContent = match[1];
-                                    pre.appendChild(code);
-                                    codeDiv.appendChild(pre);
-                                    messageDiv.appendChild(codeDiv);
-                                    
-                                    lastIndex = match.index + match[0].length;
-                                }
-                                
-                                // Add remaining text after the last code block
-                                const afterText = content.text.substring(lastIndex);
-                                if (afterText.trim()) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = afterText.trim();
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Check if this is interpreter output
-                            else if (content.text.includes('<interpreter>')) {
-                                const interpreterRegex = /<interpreter>([\s\S]*?)<\/interpreter>/g;
-                                let match;
-                                let lastIndex = 0;
-                                
-                                while ((match = interpreterRegex.exec(content.text)) !== null) {
-                                    // Add text before the interpreter output
-                                    const beforeText = content.text.substring(lastIndex, match.index);
-                                    if (beforeText.trim()) {
-                                        const textDiv = document.createElement('div');
-                                        textDiv.className = 'reasoning-text';
-                                        textDiv.textContent = beforeText.trim();
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                    
-                                    // Add the interpreter output
-                                    const outputDiv = document.createElement('div');
-                                    outputDiv.className = 'reasoning-interpreter-output';
-                                    outputDiv.textContent = match[1];
-                                    messageDiv.appendChild(outputDiv);
-                                    
-                                    lastIndex = match.index + match[0].length;
-                                }
-                                
-                                // Add remaining text after the last interpreter output
-                                const afterText = content.text.substring(lastIndex);
-                                if (afterText.trim()) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = afterText.trim();
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Check if this is a final answer
-                            else if (content.text.includes('<answer>')) {
-                                const answerRegex = /<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g;
-                                let match;
-                                
-                                if ((match = answerRegex.exec(content.text)) !== null) {
-                                    const answerDiv = document.createElement('div');
-                                    answerDiv.className = 'reasoning-answer';
-                                    answerDiv.innerHTML = `<div class="answer-box">Final Answer: ${match[1]}</div>`;
-                                    messageDiv.appendChild(answerDiv);
-                                }
-                                
-                                // Add any text outside the answer box
-                                const textParts = content.text.replace(answerRegex, '').trim();
-                                if (textParts) {
-                                    const textDiv = document.createElement('div');
-                                    textDiv.className = 'reasoning-text';
-                                    textDiv.textContent = textParts;
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                            // Regular text
-                            else {
-                                const textDiv = document.createElement('div');
-                                textDiv.className = 'reasoning-text';
-                                
-                                // Check if this is user question
-                                if (message.role === 'user') {
-                                    // Extract actual question from the user message
-                                    // Look for either user question tag or just display all content
-                                    if (content.text.includes('*user question:*')) {
-                                        const questionParts = content.text.split('*user question:*');
-                                        const question = questionParts[1] ? questionParts[1].trim() : content.text;
-                                        textDiv.innerHTML = `<strong>Question:</strong> ${question}`;
-                                    } else if (content.text.includes('<image_clue_')) {
-                                        // Skip image clue markers as we'll show the actual images
-                                        if (!content.text.trim().match(/^<image_clue_\d+>$/) && 
-                                            !content.text.trim().match(/^<\/image_clue_\d+>$/)) {
-                                            // Also strip any image clue tags from the text
-                                            const cleanText = content.text
-                                                .replace(/<image_clue_\d+>/g, '')
-                                                .replace(/<\/image_clue_\d+>/g, '')
-                                                .trim();
-                                            
-                                            if (cleanText) {
-                                                textDiv.textContent = cleanText;
-                                                messageDiv.appendChild(textDiv);
-                                            }
-                                        }
-                                    } else {
-                                        textDiv.textContent = content.text;
-                                        messageDiv.appendChild(textDiv);
-                                    }
-                                } else {
-                                    textDiv.textContent = content.text;
-                                    messageDiv.appendChild(textDiv);
-                                }
-                            }
-                        }
-                        // Handle image content
-                        else if (content.type === 'image_url' && content.image_url) {
-                            const imageWrap = document.createElement('div');
-                            imageWrap.className = 'reasoning-image-wrap';
-                            
-                            const img = document.createElement('img');
-                            // Handle both full URL and data URL formats
-                            img.src = content.image_url.url;
-                            img.className = 'reasoning-image';
-                            img.alt = 'Visual reasoning image';
-                            
-                            // Add loading handling
-                            img.onerror = function() {
-                                this.onerror = null;
-                                this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
-                            };
-                            
-                            // Add click to enlarge
-                            img.onclick = function() {
-                                if (this.classList.contains('enlarged')) {
-                                    this.classList.remove('enlarged');
-                                } else {
-                                    this.classList.add('enlarged');
-                                }
-                            };
-                            
-                            imageWrap.appendChild(img);
-                            messageDiv.appendChild(imageWrap);
-                        }
-                    });
-                }
-                
-                container.appendChild(messageDiv);
+                });
+
+                // 4. 渲染最终答案 <answer>...</answer>
+                value = value.replace(/<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g, (match, answer) => {
+                    return `<div class="reasoning-answer"><div class="answer-box">Final Answer: ${escapeHtml(answer)}</div></div>`;
+                });
+
+                // 5. 只对普通文本做换行和markdown处理
+                value = value.replace(/\n/g, '<br>');
+                value = value.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                value = value.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                value = value.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+                value = value.replace(/_([^_]+)_/g, '<em>$1</em>');
+
+                // 6. 还原图片
+                value = value.replace(/\[\[IMAGEBLOCK(\d+)\]\]/g, (match, idx) => {
+                    const img = document.createElement('img');
+                    img.src = `assets/Following-single-colored-paths/images/image_${imageBlocks[idx]}.png`;
+                    img.className = 'reasoning-image';
+                    img.alt = `image_${imageBlocks[idx]}`;
+                    img.onerror = function() {
+                        this.onerror = null;
+                        this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
+                    };
+                    const wrap = document.createElement('div');
+                    wrap.className = 'reasoning-image-wrap';
+                    wrap.appendChild(img);
+                    // 直接返回HTML字符串
+                    return wrap.outerHTML;
+                });
+
+                // 7. 还原代码块
+                value = value.replace(/\[\[CODEBLOCK(\d+)\]\]/g, (match, idx) => {
+                    return `<div class="reasoning-code"><pre><code class="language-python">${escapeHtml(codeBlocks[idx])}</code></pre></div>`;
+                });
+
+                // 对话气泡样式
+                const bubbleClass = msg.from === 'human' ? 'bubble-human' : 'bubble-gpt';
+                msgDiv.innerHTML = `<div class="bubble ${bubbleClass}">${value}</div>`;
+                container.appendChild(msgDiv);
             });
-            
-            // Highlight code blocks
+            // 代码高亮
             if (window.hljs) {
-                document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
+                container.querySelectorAll('pre code').forEach((block) => {
+                    window.hljs.highlightBlock(block);
+                });
+            }
+        }
+
+        // HTML转义
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;')
+                      .replace(/'/g, '&#39;');
+        }
+
+        // 新增：动态加载case配置并生成按钮
+        async function insertCasesFromConfig(configPath, containerSelector) {
+            const container = document.querySelector(containerSelector);
+            container.innerHTML = '<div style="padding:10px;">Loading cases...</div>';
+            try {
+                const response = await fetch(configPath);
+                if (!response.ok) throw new Error('Failed to load case config');
+                const config = await response.json();
+                container.innerHTML = '';
+                config.cases.forEach((caseItem, idx) => {
+                    const btn = document.createElement('button');
+                    btn.textContent = caseItem.show_name;
+                    btn.className = 'feature-button' + (idx === 0 ? ' active' : '');
+                    btn.onclick = () => {
+                        document.querySelectorAll('.feature-button').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        loadConversationCase(caseItem.file_dir);
+                    };
+                    container.appendChild(btn);
+                });
+                // 默认加载第一个
+                if (config.cases.length > 0) {
+                    loadConversationCase(config.cases[0].file_dir);
+                }
+            } catch (e) {
+                container.innerHTML = `<p style='color:red;'>加载案例配置失败: ${e.message}</p>`;
+            }
+        }
+
+        // 加载并渲染指定case目录下的conversations.json
+        async function loadConversationCase(fileDir) {
+            const container = document.getElementById('reasoning-container');
+            container.innerHTML = `<div class="reasoning-loading"><div class="loading-spinner"></div><p>Loading...</p></div>`;
+            try {
+                const response = await fetch(`${fileDir}/conversations.json`);
+                if (!response.ok) throw new Error('Failed to load conversation');
+                const conversation = await response.json();
+                renderConversation(conversation, container, fileDir);
+            } catch (e) {
+                container.innerHTML = `<div class="reasoning-error">加载失败: ${e.message}</div>`;
+            }
+        }
+
+        // 修改renderConversation，支持fileDir参数用于图片路径
+        function renderConversation(conversation, container, fileDir) {
+            container.innerHTML = '';
+            conversation.forEach((msg, idx) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `reasoning-message reasoning-${msg.from}`;
+                let value = msg.value;
+                // 1. 先提取所有代码块，临时用占位符替换（统一用[[CODEBLOCK0]]格式）
+                const codeBlocks = [];
+                value = value.replace(/<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g, (match, code) => {
+                    codeBlocks.push(code);
+                    return `[[CODEBLOCK${codeBlocks.length - 1}]]`;
+                });
+                // 2. 提取图片为占位符
+                const imageBlocks = [];
+                value = value.replace(/<image_clue_(\d+)>.*?<\/image_clue_\d+>/gs, (match, p1) => {
+                    imageBlocks.push(p1);
+                    return `[[IMAGEBLOCK${imageBlocks.length - 1}]]`;
+                });
+                // 3. 渲染interpreter输出 <interpreter>...</interpreter>
+                value = value.replace(/<interpreter>([\s\S]*?)<\/interpreter>/g, (match, output) => {
+                    if (output.includes('reasoning-image-wrap')) {
+                        return `<div class=\"reasoning-interpreter-output\">${output}</div>`;
+                    } else {
+                        return `<div class=\"reasoning-interpreter-output\">${escapeHtml(output)}</div>`;
+                    }
+                });
+                // 4. 渲染最终答案 <answer>...</answer>
+                value = value.replace(/<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g, (match, answer) => {
+                    return `<div class=\"reasoning-answer\"><div class=\"answer-box\">Final Answer: ${escapeHtml(answer)}</div></div>`;
+                });
+                // 5. 只对普通文本做换行和markdown处理
+                value = value.replace(/\n/g, '<br>');
+                value = value.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                value = value.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                value = value.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+                value = value.replace(/_([^_]+)_/g, '<em>$1</em>');
+                // 6. 还原图片（用fileDir拼接路径）
+                value = value.replace(/\[\[IMAGEBLOCK(\d+)\]\]/g, (match, idx) => {
+                    const img = document.createElement('img');
+                    img.src = `${fileDir}/images/image_${imageBlocks[idx]}.png`;
+                    img.className = 'reasoning-image';
+                    img.alt = `image_${imageBlocks[idx]}`;
+                    img.onerror = function() {
+                        this.onerror = null;
+                        this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
+                    };
+                    const wrap = document.createElement('div');
+                    wrap.className = 'reasoning-image-wrap';
+                    wrap.appendChild(img);
+                    return wrap.outerHTML;
+                });
+                // 7. 还原代码块
+                value = value.replace(/\[\[CODEBLOCK(\d+)\]\]/g, (match, idx) => {
+                    return `<div class=\"reasoning-code\"><pre><code class=\"language-python\">${escapeHtml(codeBlocks[idx])}</code></pre></div>`;
+                });
+                // 对话气泡样式
+                const bubbleClass = msg.from === 'human' ? 'bubble-human' : 'bubble-gpt';
+                msgDiv.innerHTML = `<div class=\"bubble ${bubbleClass}\">${value}</div>`;
+                container.appendChild(msgDiv);
+            });
+            // 代码高亮
+            if (window.hljs) {
+                container.querySelectorAll('pre code').forEach((block) => {
+                    window.hljs.highlightBlock(block);
                 });
             }
         }
