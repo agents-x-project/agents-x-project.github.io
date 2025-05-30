@@ -44,5 +44,11 @@
             "show_name": "Place Holder Case",
             "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
         }
+    ],
+    "More": [
+        {
+            "show_name": "Find Difference",
+            "file_dir": "assets/More/Find-difference"
+        }
     ]
 }
