@@ -277,6 +277,17 @@
             border-radius: 5px;
         }
         
+        /* Subsection navigation styling */
+        .section-link[href^="#visual-puzzle"],
+        .section-link[href^="#geography"],
+        .section-link[href^="#medical"],
+        .section-link[href^="#science"],
+        .section-link[href^="#information"] {
+            font-size: 12px;
+            padding-left: 20px;
+            color: #888;
+        }
+        
         /* 作者栏左右分栏布局 */
         .authors-section {
             display: flex;
@@ -652,6 +663,28 @@
             padding: 8px;
             background-color: #fafafa;
         }
+        
+        /* Category sections styling */
+        .category-section {
+            margin: 50px 0;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 40px;
+        }
+        
+        .category-section:last-child {
+            border-bottom: none;
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-color-dark);
+        }
+        
+        .category-buttons {
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
@@ -795,6 +828,11 @@
                 <a href="#introduction" class="section-link active">Introduction</a>
                 <a href="#method" class="section-link">Method</a>
                 <a href="#results" class="section-link">Results</a>
+                <a href="#visual-puzzle" class="section-link">→ Visual-Puzzle</a>
+                <a href="#geography" class="section-link">→ Geography</a>
+                <a href="#medical" class="section-link">→ Medical</a>
+                <a href="#science" class="section-link">→ Science</a>
+                <a href="#information" class="section-link">→ Information</a>
                 <a href="#conclusion" class="section-link">Conclusion</a>
                 <a href="#bibtex" class="section-link">Bibtex</a>
                 <a href="#references" class="section-link">References</a>
@@ -819,24 +857,15 @@
                 
                 <p class="note">All examples were completed with Agents-X visual model.</p>
                 
-                <div class="feature-buttons" id="examples">
-                    <!-- Feature buttons will be dynamically added here -->
-                </div>
-                
-                <div class="reasoning-process">
-                    <div id="reasoning-container" class="reasoning-container">
-                        <div class="reasoning-loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading visual reasoning process...</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <p id="results">
+                <h2 id="results">Results</h2>
+                <p>
                     Our latest visual reasoning models work in tandem with other tools like Python data analysis,
                     web search, and image generation to creatively and effectively solve various tasks,
                     from educational questions to complex scientific challenges.
                 </p>
+                
+                <!-- Dynamic category sections will be inserted here -->
+                <div id="category-sections"></div>
                 
                 <h2 id="conclusion">Conclusion</h2>
                 <p>
@@ -881,7 +910,6 @@
             initSectionHighlight();
             // Load case data and create buttons
             loadCaseButtons();
-            insertCasesFromConfig('assets/trajectory_cases.json', '.feature-buttons');
         });
         
         function initSectionHighlight() {
@@ -937,8 +965,6 @@
         }
         
         async function loadCaseButtons() {
-            const buttonsContainer = document.querySelector('.feature-buttons');
-            
             try {
                 // Load the case metadata
                 const casesResponse = await fetch('assets/trajectory_cases.json');
@@ -949,60 +975,85 @@
                 
                 const casesData = await casesResponse.json();
                 
-                // Clear the container
-                buttonsContainer.innerHTML = '';
+                // Get the category sections container
+                const categorySectionsContainer = document.getElementById('category-sections');
+                categorySectionsContainer.innerHTML = '';
                 
-                // Create a button for each case
-                const caseIds = Object.keys(casesData);
+                // Create sections for each category
+                const categories = Object.keys(casesData);
                 
-                caseIds.forEach((caseId, index) => {
-                    const caseInfo = casesData[caseId];
-                    const button = document.createElement('button');
-                    button.className = 'feature-button' + (index === 0 ? ' active' : '');
-                    button.setAttribute('data-case', caseId);
-                    button.textContent = caseInfo.show_name;
+                categories.forEach((categoryName, categoryIndex) => {
+                    const categorySection = document.createElement('div');
+                    categorySection.className = 'category-section';
+                    categorySection.innerHTML = `
+                        <h3 id="${categoryName.toLowerCase()}" class="category-title">${categoryName}</h3>
+                        <div class="feature-buttons category-buttons" id="buttons-${categoryName}"></div>
+                        <div class="reasoning-process">
+                            <div id="reasoning-container-${categoryName}" class="reasoning-container">
+                                <div class="reasoning-loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Select a case to view the reasoning process...</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                     
-                    button.addEventListener('click', function() {
-                        // Remove active class from all buttons
-                        document.querySelectorAll('.feature-button').forEach(btn => {
-                            btn.classList.remove('active');
+                    categorySectionsContainer.appendChild(categorySection);
+                    
+                    // Create buttons for this category
+                    const buttonsContainer = document.getElementById(`buttons-${categoryName}`);
+                    const cases = casesData[categoryName];
+                    
+                    cases.forEach((caseInfo, caseIndex) => {
+                        const button = document.createElement('button');
+                        button.className = 'feature-button' + (caseIndex === 0 ? ' active' : '');
+                        button.setAttribute('data-file-dir', caseInfo.file_dir);
+                        button.setAttribute('data-category', categoryName);
+                        button.textContent = caseInfo.show_name;
+                        
+                        button.addEventListener('click', function() {
+                            // Remove active class from all buttons in this category
+                            buttonsContainer.querySelectorAll('.feature-button').forEach(btn => {
+                                btn.classList.remove('active');
+                            });
+                            // Add active class to clicked button
+                            this.classList.add('active');
+                            // Load the trajectory case
+                            loadTrajectoryCase(this.getAttribute('data-file-dir'), this.getAttribute('data-category'));
                         });
-                        // Add active class to clicked button
-                        this.classList.add('active');
-                        // Load the trajectory case
-                        loadTrajectoryCase(this.getAttribute('data-case'));
+                        
+                        buttonsContainer.appendChild(button);
                     });
                     
-                    buttonsContainer.appendChild(button);
+                    // 自动加载第一个案例
+                    if (cases.length > 0) {
+                        loadTrajectoryCase(cases[0].file_dir, categoryName);
+                    }
                 });
-                
-                // Load the first case by default
-                if (caseIds.length > 0) {
-                    loadTrajectoryCase(caseIds[0]);
-                }
                 
             } catch (error) {
                 console.error('Error loading case buttons:', error);
-                buttonsContainer.innerHTML = '<p>Error loading examples. Please try again later.</p>';
+                const categorySectionsContainer = document.getElementById('category-sections');
+                categorySectionsContainer.innerHTML = '<p>Error loading examples. Please try again later.</p>';
             }
         }
         
-        async function loadTrajectoryCase(caseId) {
-            const container = document.getElementById('reasoning-container');
-                container.innerHTML = `
-                    <div class="reasoning-loading">
-                        <div class="loading-spinner"></div>
-                    <p>Loading visual reasoning process...</p>
-                    </div>
-                `;
+        async function loadTrajectoryCase(fileDir, category) {
+            const container = document.getElementById(`reasoning-container-${category}`);
+            container.innerHTML = `
+                <div class="reasoning-loading">
+                    <div class="loading-spinner"></div>
+                <p>Loading visual reasoning process...</p>
+                </div>
+            `;
             try {
-                // 只支持新格式，直接读取指定路径
-                const response = await fetch('assets/Following-single-colored-paths/conversations.json');
+                // Load conversation from the specified directory
+                const response = await fetch(`${fileDir}/conversations.json`);
                 if (!response.ok) {
                     throw new Error(`Failed to load conversations: ${response.status}`);
                 }
                 const conversation = await response.json();
-                renderConversation(conversation, container);
+                renderConversation(conversation, container, fileDir);
             } catch (error) {
                 console.error('Error loading conversation:', error);
                 container.innerHTML = `
@@ -1015,136 +1066,6 @@
             }
         }
 
-        function renderConversation(conversation, container) {
-            container.innerHTML = '';
-            conversation.forEach((msg, idx) => {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `reasoning-message reasoning-${msg.from}`;
-                let value = msg.value;
-
-                // 1. 先提取所有代码块，临时用占位符替换（统一用[[CODEBLOCK0]]格式）
-                const codeBlocks = [];
-                value = value.replace(/<code>\n```python\n([\s\S]*?)\n```\n<\/code>/g, (match, code) => {
-                    codeBlocks.push(code);
-                    return `[[CODEBLOCK${codeBlocks.length - 1}]]`;
-                });
-
-                // 2. 提取图片为占位符
-                const imageBlocks = [];
-                value = value.replace(/<image_clue_(\d+)>.*?<\/image_clue_\d+>/gs, (match, p1) => {
-                    imageBlocks.push(p1);
-                    return `[[IMAGEBLOCK${imageBlocks.length - 1}]]`;
-                });
-
-                // 3. 渲染interpreter输出 <interpreter>...</interpreter>
-                value = value.replace(/<interpreter>([\s\S]*?)<\/interpreter>/g, (match, output) => {
-                    if (output.includes('reasoning-image-wrap')) {
-                        return `<div class="tag-indicator">&lt;interpreter&gt;</div><div class="reasoning-interpreter-output">${output}</div><div class="tag-indicator">&lt;/interpreter&gt;</div>`;
-                    } else {
-                        return `<div class="tag-indicator">&lt;interpreter&gt;</div><div class="reasoning-interpreter-output">${escapeHtml(output)}</div><div class="tag-indicator">&lt;/interpreter&gt;</div>`;
-                    }
-                });
-
-                // 4. 渲染最终答案 <answer>...</answer>
-                value = value.replace(/<answer>\n\\boxed{([\s\S]*?)}\n<\/answer>/g, (match, answer) => {
-                    return `<div class="tag-indicator">&lt;answer&gt;</div><div class="reasoning-answer"><div class="answer-box">Final Answer: \\boxed{${escapeHtml(answer)}}</div></div><div class="tag-indicator">&lt;/answer&gt;</div>`;
-                });
-
-                // 5. 只对普通文本做换行和markdown处理
-                value = value.replace(/\n/g, '<br>');
-                value = value.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                value = value.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-                value = value.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-                value = value.replace(/_([^_]+)_/g, '<em>$1</em>');
-
-                // 6. 还原图片
-                value = value.replace(/\[\[IMAGEBLOCK(\d+)\]\]/g, (match, idx) => {
-                    const img = document.createElement('img');
-                    img.src = `assets/Following-single-colored-paths/images/image_${imageBlocks[idx]}.png`;
-                    img.className = 'reasoning-image';
-                    img.alt = `image_${imageBlocks[idx]}`;
-                    img.onerror = function() {
-                        this.onerror = null;
-                        this.src = 'https://via.placeholder.com/600x400?text=Image+Load+Failed';
-                    };
-                    const wrap = document.createElement('div');
-                    wrap.className = 'reasoning-image-wrap';
-                    wrap.appendChild(img);
-                    // 添加标识符并返回HTML字符串
-                    return `<div class="tag-indicator">&lt;image_clue_${imageBlocks[idx]}&gt;</div>${wrap.outerHTML}<div class="tag-indicator">&lt;/image_clue_${imageBlocks[idx]}&gt;</div>`;
-                });
-
-                // 7. 还原代码块
-                value = value.replace(/\[\[CODEBLOCK(\d+)\]\]/g, (match, idx) => {
-                    return `<div class="tag-indicator">&lt;code&gt;</div><div class="reasoning-code"><pre><code class="language-python">${escapeHtml(codeBlocks[idx])}</code></pre></div><div class="tag-indicator">&lt;/code&gt;</div>`;
-                });
-
-                // 对话气泡样式
-                const bubbleClass = msg.from === 'human' ? 'bubble-human' : 'bubble-gpt';
-                msgDiv.innerHTML = `<div class="bubble ${bubbleClass}">${value}</div>`;
-                container.appendChild(msgDiv);
-            });
-            // 代码高亮
-            if (window.hljs) {
-                container.querySelectorAll('pre code').forEach((block) => {
-                    window.hljs.highlightBlock(block);
-                });
-            }
-        }
-
-        // HTML转义
-        function escapeHtml(str) {
-            return str.replace(/&/g, '&amp;')
-                      .replace(/</g, '&lt;')
-                      .replace(/>/g, '&gt;')
-                      .replace(/"/g, '&quot;')
-                      .replace(/'/g, '&#39;');
-        }
-
-        // 新增：动态加载case配置并生成按钮
-        async function insertCasesFromConfig(configPath, containerSelector) {
-            const container = document.querySelector(containerSelector);
-            container.innerHTML = '<div style="padding:10px;">Loading cases...</div>';
-            try {
-                const response = await fetch(configPath);
-                if (!response.ok) throw new Error('Failed to load case config');
-                const config = await response.json();
-                container.innerHTML = '';
-                config.cases.forEach((caseItem, idx) => {
-                    const btn = document.createElement('button');
-                    btn.textContent = caseItem.show_name;
-                    btn.className = 'feature-button' + (idx === 0 ? ' active' : '');
-                    btn.onclick = () => {
-                        document.querySelectorAll('.feature-button').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        loadConversationCase(caseItem.file_dir);
-                    };
-                    container.appendChild(btn);
-                });
-                // 默认加载第一个
-                if (config.cases.length > 0) {
-                    loadConversationCase(config.cases[0].file_dir);
-                }
-            } catch (e) {
-                container.innerHTML = `<p style='color:red;'>加载案例配置失败: ${e.message}</p>`;
-            }
-        }
-
-        // 加载并渲染指定case目录下的conversations.json
-        async function loadConversationCase(fileDir) {
-            const container = document.getElementById('reasoning-container');
-            container.innerHTML = `<div class="reasoning-loading"><div class="loading-spinner"></div><p>Loading...</p></div>`;
-            try {
-                const response = await fetch(`${fileDir}/conversations.json`);
-                if (!response.ok) throw new Error('Failed to load conversation');
-                const conversation = await response.json();
-                renderConversation(conversation, container, fileDir);
-            } catch (e) {
-                container.innerHTML = `<div class="reasoning-error">加载失败: ${e.message}</div>`;
-            }
-        }
-
-        // 修改renderConversation，支持fileDir参数用于图片路径
         function renderConversation(conversation, container, fileDir) {
             container.innerHTML = '';
             conversation.forEach((msg, idx) => {
@@ -1220,6 +1141,15 @@
                     window.hljs.highlightBlock(block);
                 });
             }
+        }
+
+        // HTML转义
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;')
+                      .replace(/'/g, '&#39;');
         }
     </script>
     

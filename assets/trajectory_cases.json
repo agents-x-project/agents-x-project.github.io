@@ -1,20 +1,48 @@
 {
-    "cases": [
+    "Visual-Puzzle": [
         {
-        "show_name": "Following Single-colored Paths",
-        "file_dir": "assets/Following-single-colored-paths"
+            "show_name": "Following Single-colored Paths",
+            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
         },
         {
-        "show_name": "Overlapping Shapes",
-        "file_dir": "assets/Counting-shapes"
+            "show_name": "Overlapping Shapes",
+            "file_dir": "assets/Visual-Puzzle/Counting-shapes"
         },
         {
-        "show_name": "Nested Squares",
-        "file_dir": "assets/Nested-squares"
+            "show_name": "Nested Squares",
+            "file_dir": "assets/Visual-Puzzle/Nested-squares"
         },
         {
-        "show_name": "Line Intersections",
-        "file_dir": "assets/Line-intersections"
+            "show_name": "Line Intersections",
+            "file_dir": "assets/Visual-Puzzle/Line-intersections"
+        }
+    ],
+    "Geography": [
+        {
+            "show_name": "Place Holder Case",
+            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+        },
+        {
+            "show_name": "Estimate Area",
+            "file_dir": "assets/Geography/Estimate-area"
+        }
+    ],
+    "Medical": [
+        {
+            "show_name": "Place Holder Case",
+            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+        }
+    ],
+    "Science": [
+        {
+            "show_name": "Place Holder Case",
+            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+        }
+    ],
+    "Information": [
+        {
+            "show_name": "Place Holder Case",
+            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
         }
     ]
 }
