@@ -35,14 +35,62 @@
     ],
     "Science": [
         {
-            "show_name": "Place Holder Case",
-            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+            "show_name": "sample 1",
+            "file_dir": "assets/Science/export_20250530_103344"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Science/export_20250530_103620"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Science/export_20250530_105045"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Science/export_20250530_105447"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Science/export_20250530_105644"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Science/export_20250530_110101"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Science/export_20250530_131351"
         }
     ],
     "Information": [
         {
-            "show_name": "Place Holder Case",
-            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+            "show_name": "sample 1",
+            "file_dir": "assets/Information/export_20250530_112559"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Information/export_20250530_112713"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Information/export_20250530_112736"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Information/export_20250530_112829"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Information/export_20250530_113030"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Information/export_20250530_113118"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Information/export_20250530_113241"
         }
     ],
     "More": [
