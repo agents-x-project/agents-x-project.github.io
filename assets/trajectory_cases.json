@@ -15,6 +15,42 @@
         {
             "show_name": "Line Intersections",
             "file_dir": "assets/Visual-Puzzle/Line-intersections"
+        },
+        {
+            "show_name": "sample 1",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_012147"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_163058"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_163258"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_163454"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_164319"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_164740"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_165200"
+        },
+        {
+            "show_name": "sample 8",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_165341"
+        },
+        {
+            "show_name": "sample 9",
+            "file_dir": "assets/Visual-Puzzle/export_20250530_165450"
         }
     ],
     "Geography": [
@@ -25,12 +61,108 @@
         {
             "show_name": "Estimate Area",
             "file_dir": "assets/Geography/Estimate-area"
+        },
+        {
+            "show_name": "sample 1",
+            "file_dir": "assets/Geography/export_20250530_175831"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Geography/export_20250530_175845"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Geography/export_20250530_175852"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Geography/export_20250530_175858"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Geography/export_20250530_175902"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Geography/export_20250530_175921"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Geography/export_20250530_175936"
+        },
+        {
+            "show_name": "sample 8",
+            "file_dir": "assets/Geography/export_20250530_175956"
+        },
+        {
+            "show_name": "sample 9",
+            "file_dir": "assets/Geography/export_20250530_180006"
+        },
+        {
+            "show_name": "sample 10",
+            "file_dir": "assets/Geography/export_20250530_180146"
         }
     ],
     "Medical": [
         {
-            "show_name": "Place Holder Case",
-            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+            "show_name": "sample 1",
+            "file_dir": "assets/Medical/export_20250530_171234"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Medical/export_20250530_174038"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Medical/export_20250530_174146"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Medical/export_20250530_174231"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Medical/export_20250530_174412"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Medical/export_20250530_174544"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Medical/export_20250530_174822"
+        },
+        {
+            "show_name": "sample 8",
+            "file_dir": "assets/Medical/export_20250530_175003"
+        },
+        {
+            "show_name": "sample 9",
+            "file_dir": "assets/Medical/export_20250530_175043"
+        },
+        {
+            "show_name": "sample 10",
+            "file_dir": "assets/Medical/export_20250530_175124"
+        },
+        {
+            "show_name": "sample 11",
+            "file_dir": "assets/Medical/export_20250530_175153"
+        },
+        {
+            "show_name": "sample 12",
+            "file_dir": "assets/Medical/export_20250530_175248"
+        },
+        {
+            "show_name": "sample 13",
+            "file_dir": "assets/Medical/export_20250530_175335"
+        },
+        {
+            "show_name": "sample 14",
+            "file_dir": "assets/Medical/export_20250530_175452"
+        },
+        {
+            "show_name": "sample 15",
+            "file_dir": "assets/Medical/export_20250530_175526"
         }
     ],
     "Science": [
