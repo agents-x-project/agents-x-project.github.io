@@ -29,8 +29,52 @@
     ],
     "Medical": [
         {
-            "show_name": "Place Holder Case",
-            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
+            "show_name": "sample 1",
+            "file_dir": "assets/Medical/export_20250530_141817"
+        },
+        {
+            "show_name": "sample 2",
+            "file_dir": "assets/Medical/export_20250530_141937"
+        },
+        {
+            "show_name": "sample 3",
+            "file_dir": "assets/Medical/export_20250530_142031"
+        },
+        {
+            "show_name": "sample 4",
+            "file_dir": "assets/Medical/export_20250530_142113"
+        },
+        {
+            "show_name": "sample 5",
+            "file_dir": "assets/Medical/export_20250530_142158"
+        },
+        {
+            "show_name": "sample 6",
+            "file_dir": "assets/Medical/export_20250530_142250"
+        },
+        {
+            "show_name": "sample 7",
+            "file_dir": "assets/Medical/export_20250530_142329"
+        },
+        {
+            "show_name": "sample 8",
+            "file_dir": "assets/Medical/export_20250530_142553"
+        },
+        {
+            "show_name": "sample 9",
+            "file_dir": "assets/Medical/export_20250530_142658"
+        },
+        {
+            "show_name": "sample 10",
+            "file_dir": "assets/Medical/export_20250530_142743"
+        },
+        {
+            "show_name": "sample 11",
+            "file_dir": "assets/Medical/export_20250530_142815"
+        },
+        {
+            "show_name": "sample 12",
+            "file_dir": "assets/Medical/export_20250530_142857"
         }
     ],
     "Science": [
