@@ -97,10 +97,6 @@
     ],
     "Geography": [
         {
-            "show_name": "Place Holder Case",
-            "file_dir": "assets/Visual-Puzzle/Following-single-colored-paths"
-        },
-        {
             "show_name": "Estimate Area",
             "file_dir": "assets/Geography/Estimate-area"
         },
