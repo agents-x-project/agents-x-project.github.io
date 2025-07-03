@@ -861,6 +861,16 @@ footer {
     overflow-y: auto;
 }
 
+.demo-code-block::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #666;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
 .demo-controls {
     display: flex;
     justify-content: center;
