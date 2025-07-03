@@ -872,6 +872,13 @@ footer {
   letter-spacing: 3px;
 }
 
+.demo-code-content {
+  margin-top: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 40px;
+}
+
 .demo-controls {
     display: flex;
     justify-content: center;
