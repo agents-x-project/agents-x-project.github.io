@@ -11,104 +11,20 @@ const demoLeftSteps = [
     }
 ];
 
-// const demoRightSteps = [
-//     {
-//         title: "Turn 1",
-//         content: `
-//             Let's start by planning the steps necessary to answer the question: "Which Center Circle is Larger?"<br>
-//             <b>Step-by-step Plan:</b> 1. Identify and isolate the two center circles in the image. 2. Measure and compare their sizes. 3. Provide the final answer.<br>
-//             <div class="demo-code-block">
-//                 <div class="demo-code-content" data-typing="true"></div>
-//             </div>
-//             <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/spot.jpg" alt="Generated Mask" />
-//         `,
-//         codeContent: `# Display the image to visually locate the center circles
-// plt.imshow(image_clue_0)
-// plt.title("Original Image - Identify Center Circles")
-// plt.axis('on')
-// plt.show()`,
-//         hasImage: true
-//     },
-//     {
-//         title: "Turn 2",
-//         content: `
-//             From the displayed image, the two center circles are easily identifiable. Let's proceed to crop and display both center circles for further analysis.
-//             <div class="demo-code-block">
-//                 <div class="demo-code-content" data-typing="true"></div>
-//             </div>
-//             <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_image.jpg" alt="Generated Mask" />
-//         `,
-//         codeContent: `# Crop square regions around both center circles
-// left_crop = img_np[173:273, 93:193, :]
-// right_crop = img_np[110:350, 420:660, :]
-
-// # Show the crops
-// fig, axs = plt.subplots(1, 2, figsize=(8, 4))
-// axs[0].imshow(left_crop)
-// axs[0].set_title('Left Center Circle')
-// axs[1].imshow(right_crop)
-// axs[1].set_title('Right Center Circle')
-// plt.show()`,
-//         hasImage: true
-//     },
-//     {
-//         title: "Turn 3",
-//         content: `
-//             Now let's measure the actual size of each circle by counting the orange pixels:
-//             <div class="demo-code-block">
-//                 <div class="demo-code-content" data-typing="true"></div>
-//             </div>
-//             <div style="background: #f3f9ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
-//                 <b>Output:</b><br>
-//                 Left Center Circle Area: 3,591 pixels<br>
-//                 Right Center Circle Area: 34,999 pixels
-//             </div>
-//         `,
-//         codeContent: `# Mask and count orange area for both circles
-// left_mask = mask_orange(left_crop)
-// left_area = np.sum(left_mask)
-
-// right_mask = mask_orange(right_crop)
-// right_area = np.sum(right_mask)
-
-// print("Left Center Circle Area (pixels):", left_area)
-// print("Right Center Circle Area (pixels):", right_area)`,
-//         hasImage: false
-//     },
-//     {
-//         title: "Turn 4",
-//         content: `
-//             <div style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); color: #2c5f2d; padding: 20px; border-radius: 10px; margin-top: 15px;">
-//                 From the pixel count results:<br>
-//                 • Left Center Circle Area: 3,591 pixels<br>
-//                 • Right Center Circle Area: 34,999 pixels<br><br>
-//                 <b>Final Answer:</b> The right center circle is larger.
-//                 <span style="color: #27ae60; font-weight: 700; margin-left: 12px; display: inline-flex; align-items: center; gap: 5px;">✔ Correct</span>
-//             </div>
-//         `
-//     }
-// ];
-
-
-// Right column reasoning process with code content stored separately
 const demoRightSteps = [
-  {
-    title: "Turn 1",
-    content: `
-      Let's start by planning the steps necessary to answer the question: "Which Center Circle is Larger?"<br>
-      <b>Step-by-step Plan:</b> 1. Identify and isolate the two center circles in the image. 2. Measure and compare their sizes (e.g., radius, area, or bounding box). 3. Confirm visually and numerically which one is larger. 4. Provide the final answer in the required format.<br>
-      <b>Reflection:</b> The image shows two sets of circles, each with a center circle surrounded by other circles. The question is a classic example of the Ebbinghaus illusion, where the perceived size of the center circles may be affected by their surrounding circles. We need to measure the actual pixel size of each center circle to answer objectively.<br>
-      <b>Next Step:</b> Let's display the image and visually identify the approximate locations of the two center circles. This will help us plan how to crop or mask them for measurement.
-      <div class="code-block">
-        <div class="code-content" data-typing="true"></div>
-      </div>
-      <div class="code-execution" data-execution="1">
-        <div class="execution-spinner"></div>
-        <span class="execution-text">Executing code...</span>
-      </div>
-      <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/spot.jpg" alt="Generated Mask" />
-    `,
-    codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
+    {
+        title: "Turn 1",
+        content: `
+          Let's start by planning the steps necessary to answer the question: "Which Center Circle is Larger?"<br>
+          <b>Step-by-step Plan:</b> 1. Identify and isolate the two center circles in the image. 2. Measure and compare their sizes (e.g., radius, area, or bounding box). 3. Confirm visually and numerically which one is larger. 4. Provide the final answer in the required format.<br>
+          <b>Reflection:</b> The image shows two sets of circles, each with a center circle surrounded by other circles. The question is a classic example of the Ebbinghaus illusion, where the perceived size of the center circles may be affected by their surrounding circles. We need to measure the actual pixel size of each center circle to answer objectively.<br>
+          <b>Next Step:</b> Let's display the image and visually identify the approximate locations of the two center circles. This will help us plan how to crop or mask them for measurement.
+            <div class="demo-code-block">
+                <div class="demo-code-content" data-typing="true"></div>
+            </div>
+            <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/spot.jpg" alt="Generated Mask" />
+        `,
+        codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
 import matplotlib.pyplot as plt
 
 # Display the image to visually locate the center circles
@@ -116,24 +32,18 @@ plt.imshow(image_clue_0)
 plt.title("Original Image - Identify Center Circles")
 plt.axis('on')
 plt.show()`,
-        hasExecution: true,
-        // hasResult: true,
         hasImage: true
-      },
-      {
+    },
+    {
         title: "Turn 2",
         content: `
           From the displayed image, the two center circles are easily identifiable: - The left center circle is small and located around (x ≈ 140, y ≈ 220). - The right center circle is large and located around (x ≈ 540, y ≈ 230).<br>
           <b>Next Steps:</b> 1. Crop square regions around both center circles for analysis. 2. Use matplotlib to display these cropped regions to confirm the crops. 3. Analyze and compare the sizes (diameter/area) of the two center circles.<br>
           Let's proceed to crop and display both center circles for further analysis.
-          <div class="code-block">
-            <div class="code-content" data-typing="true"></div>
-          </div>
-          <div class="code-execution" data-execution="2">
-            <div class="execution-spinner"></div>
-            <span class="execution-text">Executing code...</span>
-          </div>
-          <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_image.jpg" alt="Generated Mask" />
+            <div class="demo-code-block">
+                <div class="demo-code-content" data-typing="true"></div>
+            </div>
+            <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_image.jpg" alt="Generated Mask" />
         `,
         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
 import numpy as np
@@ -158,27 +68,22 @@ axs[0].set_title('Left Center Circle')
 axs[1].imshow(right_crop)
 axs[1].set_title('Right Center Circle')
 plt.show()`,
-        hasExecution: true,
-        // hasResult: true,
         hasImage: true
-      },
-      {
+    },
+    {
         title: "Turn 3",
         content: `
           The crops show the left and right center circles clearly. Now, to objectively determine which center circle is larger, let's measure their sizes.<br>
           <b>Plan for Measurement:</b> - The circles have a distinctive orange color, so we can use color thresholding to create a mask for the orange region. - Count the number of pixels in the mask to estimate the area of each center circle.<br>
           Let's proceed to: 1. Create a mask for the orange color in each crop. 2. Count the number of orange pixels (area) for each center circle. 3. Print and compare the results.
-          <div class="code-block">
-            <div class="code-content" data-typing="true"></div>
-          </div>
-          <div class="code-execution" data-execution="3">
-            <div class="execution-spinner"></div>
-            <span class="execution-text">Executing code...</span>
-          </div>
-          <div class="code-result" data-result="3">
-            <span class="result-label">Output:</span>Left Center Circle Area (pixels): 3591
-Right Center Circle Area (pixels): 34999</div>
-          <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_mask.jpg" alt="Generated Mask" />
+            <div class="demo-code-block">
+                <div class="demo-code-content" data-typing="true"></div>
+            </div>
+            <div style="background: #f3f9ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <b>Output:</b><br>
+                Left Center Circle Area: 3,591 pixels<br>
+                Right Center Circle Area: 34,999 pixels
+            </div>
         `,
         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
 # Define a function to mask the orange color (approximate RGB: [230, 81, 22])
@@ -207,23 +112,157 @@ axs[0].set_title('Left Orange Mask')
 axs[1].imshow(right_mask, cmap='gray')
 axs[1].set_title('Right Orange Mask')
 plt.show()`,
-        hasExecution: true,
-        hasResult: true,
-        hasImage: true
-      },
-      {
+        hasImage: false
+    },
+    {
         title: "Turn 4",
         content: `
-          <div class="reflection">
-            From the pixel count results: - Left Center Circle Area: 3,591 pixels - Right Center Circle Area: 34,999 pixels<br>
-            The right center circle is <b>much larger</b> than the left center circle.<br>
-            <b>Final Answer:</b> \\boxed{'The right center circle is larger.'}
-            <span class="right">✔ Correct</span>
-          </div>
-        `,
-        hasExecution: false
-      }
-    ];
+            <div style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); color: #2c5f2d; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                From the pixel count results:<br>
+                • Left Center Circle Area: 3,591 pixels<br>
+                • Right Center Circle Area: 34,999 pixels<br><br>
+                <b>Final Answer:</b> The right center circle is larger.
+                <span style="color: #27ae60; font-weight: 700; margin-left: 12px; display: inline-flex; align-items: center; gap: 5px;">✔ Correct</span>
+            </div>
+        `
+    }
+];
+
+
+// // Right column reasoning process with code content stored separately
+// const demoRightSteps = [
+//   {
+//     title: "Turn 1",
+//     content: `
+//       Let's start by planning the steps necessary to answer the question: "Which Center Circle is Larger?"<br>
+//       <b>Step-by-step Plan:</b> 1. Identify and isolate the two center circles in the image. 2. Measure and compare their sizes (e.g., radius, area, or bounding box). 3. Confirm visually and numerically which one is larger. 4. Provide the final answer in the required format.<br>
+//       <b>Reflection:</b> The image shows two sets of circles, each with a center circle surrounded by other circles. The question is a classic example of the Ebbinghaus illusion, where the perceived size of the center circles may be affected by their surrounding circles. We need to measure the actual pixel size of each center circle to answer objectively.<br>
+//       <b>Next Step:</b> Let's display the image and visually identify the approximate locations of the two center circles. This will help us plan how to crop or mask them for measurement.
+//       <div class="code-block">
+//         <div class="code-content" data-typing="true"></div>
+//       </div>
+//       <div class="code-execution" data-execution="1">
+//         <div class="execution-spinner"></div>
+//         <span class="execution-text">Executing code...</span>
+//       </div>
+//       <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/spot.jpg" alt="Generated Mask" />
+//     `,
+//     codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
+// import matplotlib.pyplot as plt
+
+// # Display the image to visually locate the center circles
+// plt.imshow(image_clue_0)
+// plt.title("Original Image - Identify Center Circles")
+// plt.axis('on')
+// plt.show()`,
+//         hasExecution: true,
+//         // hasResult: true,
+//         hasImage: true
+//       },
+//       {
+//         title: "Turn 2",
+//         content: `
+//           From the displayed image, the two center circles are easily identifiable: - The left center circle is small and located around (x ≈ 140, y ≈ 220). - The right center circle is large and located around (x ≈ 540, y ≈ 230).<br>
+//           <b>Next Steps:</b> 1. Crop square regions around both center circles for analysis. 2. Use matplotlib to display these cropped regions to confirm the crops. 3. Analyze and compare the sizes (diameter/area) of the two center circles.<br>
+//           Let's proceed to crop and display both center circles for further analysis.
+//           <div class="code-block">
+//             <div class="code-content" data-typing="true"></div>
+//           </div>
+//           <div class="code-execution" data-execution="2">
+//             <div class="execution-spinner"></div>
+//             <span class="execution-text">Executing code...</span>
+//           </div>
+//           <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_image.jpg" alt="Generated Mask" />
+//         `,
+//         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
+// import numpy as np
+
+// # Convert image to numpy array for cropping
+// img_np = np.array(image_clue_0)
+
+// # Approximate bounding box for left center circle (small)
+// left_center_x, left_center_y = 143, 223
+// left_radius = 40  # generous crop
+// left_crop = img_np[left_center_y-50:left_center_y+50, left_center_x-50:left_center_x+50, :]
+
+// # Approximate bounding box for right center circle (large)
+// right_center_x, right_center_y = 540, 230
+// right_radius = 110  # generous crop
+// right_crop = img_np[right_center_y-120:right_center_y+120, right_center_x-120:right_center_x+120, :]
+
+// # Show the crops
+// fig, axs = plt.subplots(1, 2, figsize=(8, 4))
+// axs[0].imshow(left_crop)
+// axs[0].set_title('Left Center Circle')
+// axs[1].imshow(right_crop)
+// axs[1].set_title('Right Center Circle')
+// plt.show()`,
+//         hasExecution: true,
+//         // hasResult: true,
+//         hasImage: true
+//       },
+//       {
+//         title: "Turn 3",
+//         content: `
+//           The crops show the left and right center circles clearly. Now, to objectively determine which center circle is larger, let's measure their sizes.<br>
+//           <b>Plan for Measurement:</b> - The circles have a distinctive orange color, so we can use color thresholding to create a mask for the orange region. - Count the number of pixels in the mask to estimate the area of each center circle.<br>
+//           Let's proceed to: 1. Create a mask for the orange color in each crop. 2. Count the number of orange pixels (area) for each center circle. 3. Print and compare the results.
+//           <div class="code-block">
+//             <div class="code-content" data-typing="true"></div>
+//           </div>
+//           <div class="code-execution" data-execution="3">
+//             <div class="execution-spinner"></div>
+//             <span class="execution-text">Executing code...</span>
+//           </div>
+//           <div class="code-result" data-result="3">
+//             <span class="result-label">Output:</span>Left Center Circle Area (pixels): 3591
+// Right Center Circle Area (pixels): 34999</div>
+//           <img class="mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_mask.jpg" alt="Generated Mask" />
+//         `,
+//         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
+// # Define a function to mask the orange color (approximate RGB: [230, 81, 22])
+// def mask_orange(img):
+//     # Orange in RGB is around [230, 81, 22]
+//     lower = np.array([200, 50, 0])
+//     upper = np.array([255, 120, 60])
+//     mask = np.all((img >= lower) & (img <= upper), axis=-1)
+//     return mask
+
+// # Mask and count orange area for left center circle
+// left_mask = mask_orange(left_crop)
+// left_area = np.sum(left_mask)
+
+// # Mask and count orange area for right center circle
+// right_mask = mask_orange(right_crop)
+// right_area = np.sum(right_mask)
+
+// print("Left Center Circle Area (pixels):", left_area)
+// print("Right Center Circle Area (pixels):", right_area)
+
+// # Visualize the masks
+// fig, axs = plt.subplots(1, 2, figsize=(8, 4))
+// axs[0].imshow(left_mask, cmap='gray')
+// axs[0].set_title('Left Orange Mask')
+// axs[1].imshow(right_mask, cmap='gray')
+// axs[1].set_title('Right Orange Mask')
+// plt.show()`,
+//         hasExecution: true,
+//         hasResult: true,
+//         hasImage: true
+//       },
+//       {
+//         title: "Turn 4",
+//         content: `
+//           <div class="reflection">
+//             From the pixel count results: - Left Center Circle Area: 3,591 pixels - Right Center Circle Area: 34,999 pixels<br>
+//             The right center circle is <b>much larger</b> than the left center circle.<br>
+//             <b>Final Answer:</b> \\boxed{'The right center circle is larger.'}
+//             <span class="right">✔ Correct</span>
+//           </div>
+//         `,
+//         hasExecution: false
+//       }
+//     ];
 
 let demoCurrentStep = { left: -1, right: -1 };
 let demoIsPaused = false;
