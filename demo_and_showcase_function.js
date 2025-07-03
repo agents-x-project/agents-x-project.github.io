@@ -79,6 +79,7 @@ plt.show()`,
             <div class="demo-code-block">
                 <div class="demo-code-content" data-typing="true"></div>
             </div>
+            <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_mask.jpg" alt="Generated Mask" />
             <div style="background: #f3f9ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
                 <b>Output:</b><br>
                 Left Center Circle Area: 3,591 pixels<br>
@@ -112,7 +113,7 @@ axs[0].set_title('Left Orange Mask')
 axs[1].imshow(right_mask, cmap='gray')
 axs[1].set_title('Right Orange Mask')
 plt.show()`,
-        hasImage: false
+        hasImage: true
     },
     {
         title: "Turn 4",
