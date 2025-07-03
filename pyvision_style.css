@@ -862,7 +862,7 @@ footer {
     overflow-y: auto;
 }
 
-.demo-code-block::before {
+/* .demo-code-block::before {
   content: '● ● ●';
   position: absolute;
   top: 12px;
@@ -870,7 +870,7 @@ footer {
   color: #666;
   font-size: 12px;
   letter-spacing: 3px;
-}
+} */
 
 .demo-code-content {
   margin-top: 10px;
