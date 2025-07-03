@@ -91,7 +91,7 @@ const demoLeftSteps = [
 
 
 // Right column reasoning process with code content stored separately
-const demorightSteps = [
+const demoRightSteps = [
   {
     title: "Turn 1",
     content: `
