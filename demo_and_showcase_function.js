@@ -402,11 +402,11 @@ function showCodeResult(element, callback) {
 
 function createDemoStepCard(step, isLeft, index, onComplete) {
   const div = document.createElement('div');
-  div.className = `step-card ${isLeft ? 'left' : ''}`;
+  div.className = `demo-step-card ${isLeft ? 'left' : ''}`;
   
   const titleHtml = isLeft ? 
-    `<div class="step-title">${step.title}</div>` :
-    `<div class="step-title"><span class="demo-step-number">${index + 1}</span>${step.title}</div>`;
+    `<div class="demo-step-title">${step.title}</div>` :
+    `<div class="demo-step-title"><span class="demo-step-number">${index + 1}</span>${step.title}</div>`;
   
   div.innerHTML = titleHtml + `<div class="demo-step-content">${step.content}</div>`;
   
