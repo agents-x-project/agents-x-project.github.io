@@ -400,7 +400,7 @@ function showCodeResult(element, callback) {
   }, 300);
 }
 
-function DemocreateStepCard(step, isLeft, index, onComplete) {
+function createDemoStepCard(step, isLeft, index, onComplete) {
   const div = document.createElement('div');
   div.className = `step-card ${isLeft ? 'left' : ''}`;
   
@@ -431,7 +431,7 @@ function DemocreateStepCard(step, isLeft, index, onComplete) {
     if (codeBlock && step.codeContent) {
       // Start typing after card is visible
       setTimeout(() => {
-        demotypewriterEffect(codeBlock, step.codeContent, () => {
+        demoTypewriterEffect(codeBlock, step.codeContent, () => {
           // After typing is complete, show execution
           const executionEl = div.querySelector('[data-execution]');
           if (executionEl && step.hasExecution) {
