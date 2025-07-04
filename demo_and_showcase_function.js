@@ -22,6 +22,10 @@ const demoRightSteps = [
             <div class="demo-code-block">
                 <div class="demo-code-content" data-typing="true"></div>
             </div>
+          <div class="demo-code-execution" data-execution="1">
+            <div class="demo-execution-spinner"></div>
+            <span class="demo-execution-text">Executing code...</span>
+          </div>
             <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/spot.jpg" alt="Generated Mask" />
         `,
         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
@@ -303,52 +307,182 @@ function demoTypewriterEffect(element, text, callback) {
     typeChar();
 }
 
-function createDemoStepCard(step, isLeft, index, onComplete) {
-    const div = document.createElement('div');
-    div.className = `demo-step-card ${isLeft ? 'left' : ''}`;
+// function createDemoStepCard(step, isLeft, index, onComplete) {
+//     const div = document.createElement('div');
+//     div.className = `demo-step-card ${isLeft ? 'left' : ''}`;
     
-    const titleHtml = isLeft ? 
-        `<div class="demo-step-title">${step.title}</div>` :
-        `<div class="demo-step-title"><span class="demo-step-number">${index + 1}</span>${step.title}</div>`;
+//     const titleHtml = isLeft ? 
+//         `<div class="demo-step-title">${step.title}</div>` :
+//         `<div class="demo-step-title"><span class="demo-step-number">${index + 1}</span>${step.title}</div>`;
     
-    div.innerHTML = titleHtml + `<div class="demo-step-content">${step.content}</div>`;
+//     div.innerHTML = titleHtml + `<div class="demo-step-content">${step.content}</div>`;
     
-    const col = document.getElementById(isLeft ? 'demo-steps-col-left' : 'demo-steps-col-right');
-    col.appendChild(div);
+//     const col = document.getElementById(isLeft ? 'demo-steps-col-left' : 'demo-steps-col-right');
+//     col.appendChild(div);
     
+//     setTimeout(() => {
+//         div.classList.add('visible');
+        
+//         if (isLeft || (!step.codeContent && !step.hasImage)) {
+//             setTimeout(() => {
+//                 if (onComplete) onComplete();
+//             }, 800);
+//             return;
+//         }
+        
+//         const codeBlock = div.querySelector('[data-typing="true"]');
+//         if (codeBlock && step.codeContent) {
+//             setTimeout(() => {
+//                 demoTypewriterEffect(codeBlock, step.codeContent, () => {
+//                     const maskImg = div.querySelector('.demo-mask-image');
+//                     if (maskImg && step.hasImage) {
+//                         setTimeout(() => {
+//                             maskImg.classList.add('visible');
+//                             setTimeout(() => {
+//                                 if (onComplete) onComplete();
+//                             }, 600);
+//                         }, 300);
+//                     } else {
+//                         if (onComplete) onComplete();
+//                     }
+//                 });
+//             }, 500);
+//         } else {
+//             setTimeout(() => {
+//                 if (onComplete) onComplete();
+//             }, 1000);
+//         }
+//     }, 50);
+// }
+
+function showCodeExecution(element, callback) {
+  if (isPaused) {
+    pendingNextStep = () => showCodeExecution(element, callback);
+    return;
+  }
+  
+  setTimeout(() => {
+    element.classList.add('visible');
+    
+    // Show execution for 2 seconds, then complete
+    const executionTimer = setTimeout(() => {
+      if (isPaused) {
+        pendingNextStep = () => {
+          element.innerHTML = '<span class="demo-execution-complete">Execution complete</span>';
+          setTimeout(() => {
+            if (callback) callback();
+          }, 500);
+        };
+        return;
+      }
+      
+      element.innerHTML = '<span class="demo-execution-complete">Execution complete</span>';
+      
+      // Call callback after completion
+      setTimeout(() => {
+        if (callback) callback();
+      }, 500);
+    }, 2000);
+  }, 100);
+}
+
+function showCodeResult(element, callback) {
+  if (isPaused) {
+    pendingNextStep = () => showCodeResult(element, callback);
+    return;
+  }
+  
+  setTimeout(() => {
+    element.classList.add('visible');
     setTimeout(() => {
-        div.classList.add('visible');
-        
-        if (isLeft || (!step.codeContent && !step.hasImage)) {
-            setTimeout(() => {
-                if (onComplete) onComplete();
-            }, 800);
-            return;
-        }
-        
-        const codeBlock = div.querySelector('[data-typing="true"]');
-        if (codeBlock && step.codeContent) {
-            setTimeout(() => {
-                demoTypewriterEffect(codeBlock, step.codeContent, () => {
-                    const maskImg = div.querySelector('.demo-mask-image');
-                    if (maskImg && step.hasImage) {
-                        setTimeout(() => {
-                            maskImg.classList.add('visible');
-                            setTimeout(() => {
-                                if (onComplete) onComplete();
-                            }, 600);
-                        }, 300);
-                    } else {
+      if (callback) callback();
+    }, 800);
+  }, 300);
+}
+
+function DemocreateStepCard(step, isLeft, index, onComplete) {
+  const div = document.createElement('div');
+  div.className = `step-card ${isLeft ? 'left' : ''}`;
+  
+  const titleHtml = isLeft ? 
+    `<div class="step-title">${step.title}</div>` :
+    `<div class="step-title"><span class="demo-step-number">${index + 1}</span>${step.title}</div>`;
+  
+  div.innerHTML = titleHtml + `<div class="demo-step-content">${step.content}</div>`;
+  
+  // Add to appropriate column
+  const col = document.getElementById(isLeft ? 'demo-steps-col-left' : 'demo-steps-col-right');
+  col.appendChild(div);
+  
+  // Trigger animation
+  setTimeout(() => {
+    div.classList.add('visible');
+    
+    // For left column or steps without code, complete immediately
+    if (isLeft || (!step.codeContent && !step.hasExecution)) {
+      setTimeout(() => {
+        if (onComplete) onComplete();
+      }, 1000); // Wait for card animation to complete
+      return;
+    }
+    
+    // Handle code blocks with proper sequencing
+    const codeBlock = div.querySelector('[data-typing="true"]');
+    if (codeBlock && step.codeContent) {
+      // Start typing after card is visible
+      setTimeout(() => {
+        typewriterEffect(codeBlock, step.codeContent, () => {
+          // After typing is complete, show execution
+          const executionEl = div.querySelector('[data-execution]');
+          if (executionEl && step.hasExecution) {
+            showCodeExecution(executionEl, () => {
+              // Show result after execution completes
+              const resultEl = div.querySelector('[data-result]');
+              if (resultEl && step.hasResult) {
+                showCodeResult(resultEl, () => {
+                  // Show mask image after result
+                  const maskImg = div.querySelector('.demo-mask-image');
+                  if (maskImg && step.hasImage) {
+                    setTimeout(() => {
+                      maskImg.classList.add('visible');
+                      // Wait for image animation then complete
+                      setTimeout(() => {
                         if (onComplete) onComplete();
-                    }
+                      }, 600);
+                    }, 300);
+                  } else {
+                    // No image, complete now
+                    if (onComplete) onComplete();
+                  }
                 });
-            }, 500);
-        } else {
-            setTimeout(() => {
-                if (onComplete) onComplete();
-            }, 1000);
-        }
-    }, 50);
+              } else {
+                // No result, check for image
+                const maskImg = div.querySelector('.demo-mask-image');
+                if (maskImg && step.hasImage) {
+                  setTimeout(() => {
+                    maskImg.classList.add('visible');
+                    setTimeout(() => {
+                      if (onComplete) onComplete();
+                    }, 600);
+                  }, 300);
+                } else {
+                  if (onComplete) onComplete();
+                }
+              }
+            });
+          } else {
+            // No execution, complete now
+            if (onComplete) onComplete();
+          }
+        });
+      }, 500);
+    } else {
+      // No code content, check for direct completion
+      setTimeout(() => {
+        if (onComplete) onComplete();
+      }, 1000);
+    }
+  }, 50);
 }
 
 function playDemoNextStep() {
