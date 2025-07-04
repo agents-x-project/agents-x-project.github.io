@@ -703,7 +703,7 @@ footer {
 }
 
 .demo-container {
-    max-width: 800px;
+    max-width: 600px;
     max-height: 600px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -714,7 +714,7 @@ footer {
 }
 
 .demo-scroll-wrapper {
-    min-width: 800px;
+    min-width: 600px;
 }
 
 /* Demo specific styles */
