@@ -431,7 +431,7 @@ function DemocreateStepCard(step, isLeft, index, onComplete) {
     if (codeBlock && step.codeContent) {
       // Start typing after card is visible
       setTimeout(() => {
-        typewriterEffect(codeBlock, step.codeContent, () => {
+        demotypewriterEffect(codeBlock, step.codeContent, () => {
           // After typing is complete, show execution
           const executionEl = div.querySelector('[data-execution]');
           if (executionEl && step.hasExecution) {
