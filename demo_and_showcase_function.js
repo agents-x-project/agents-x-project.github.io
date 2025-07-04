@@ -97,11 +97,6 @@ plt.show()`,
             <span class="demo-result-label">Output:</span>Left Center Circle Area (pixels): 3591
 Right Center Circle Area (pixels): 34999</div>
             <img class="demo-mask-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/cropped_mask.jpg" alt="Generated Mask" />
-            // <div style="background: #f3f9ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
-            //     <b>Output:</b><br>
-            //     Left Center Circle Area: 3,591 pixels<br>
-            //     Right Center Circle Area: 34,999 pixels
-            // </div>
         `,
         codeContent: `<span style="color:#a9dc76;"># Coding ...</span>
 # Define a function to mask the orange color (approximate RGB: [230, 81, 22])
