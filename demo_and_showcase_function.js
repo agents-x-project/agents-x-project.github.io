@@ -371,8 +371,8 @@ function demoTypewriterEffect(element, text, callback) {
 // }
 
 function showCodeExecution(element, callback) {
-  if (isPaused) {
-    pendingNextStep = () => showCodeExecution(element, callback);
+  if (demoIsPaused) {
+    demoPendingNextStep = () => showCodeExecution(element, callback);
     return;
   }
   
@@ -381,8 +381,8 @@ function showCodeExecution(element, callback) {
     
     // Show execution for 2 seconds, then complete
     const executionTimer = setTimeout(() => {
-      if (isPaused) {
-        pendingNextStep = () => {
+      if (demoIsPaused) {
+        demoPendingNextStep = () => {
           element.innerHTML = '<span class="demo-execution-complete">Execution complete</span>';
           setTimeout(() => {
             if (callback) callback();
@@ -402,8 +402,8 @@ function showCodeExecution(element, callback) {
 }
 
 function showCodeResult(element, callback) {
-  if (isPaused) {
-    pendingNextStep = () => showCodeResult(element, callback);
+  if (demoIsPaused) {
+    demoPendingNextStep = () => showCodeResult(element, callback);
     return;
   }
   
