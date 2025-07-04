@@ -236,7 +236,7 @@ body {
 /* Navigation links for sections */
 .section-nav {
     position: fixed;
-    left: calc(50% - 500px); /* 靠近内容区，540=800/2+140，内容最大宽800px，nav宽约140px */
+    left: calc(50% - 600px); /* 靠近内容区，540=800/2+140，内容最大宽800px，nav宽约140px */
     top: 50%;
     transform: translateY(-50%);
     display: flex;
