@@ -36,7 +36,8 @@ plt.imshow(image_clue_0)
 plt.title("Original Image - Identify Center Circles")
 plt.axis('on')
 plt.show()`,
-        hasImage: true
+        hasImage: true,
+        hasExecution: true
     },
     {
         title: "Turn 2",
@@ -72,7 +73,8 @@ axs[0].set_title('Left Center Circle')
 axs[1].imshow(right_crop)
 axs[1].set_title('Right Center Circle')
 plt.show()`,
-        hasImage: true
+        hasImage: true,
+        hasExecution: true
     },
     {
         title: "Turn 3",
@@ -117,7 +119,8 @@ axs[0].set_title('Left Orange Mask')
 axs[1].imshow(right_mask, cmap='gray')
 axs[1].set_title('Right Orange Mask')
 plt.show()`,
-        hasImage: true
+        hasImage: true,
+        hasExecution: true
     },
     {
         title: "Turn 4",
