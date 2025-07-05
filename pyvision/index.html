@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyVision - Agents-X</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="pyvision_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-nav">
+        <div class="container" style="justify-content: flex-start; display: flex;">
+            <a href="index.html" class="home-link">
+                <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                    <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
+                    <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header">
+                <div class="date-tag">
+                    <span class="date">7th July, 2025</span>
+                    <span class="tag">Released</span>
+                </div>
+                <h1 class="article-title">PyVision: Agentic Vision with Dynamic Tooling</h1>
+                <p class="article-abstract">
+                    This study investigates the effectiveness of Python code as a visual primitive for image manipulation and reasoning. We demonstrate that GPT-4.1 can be directly prompted to generate code for image modifications, offering a novel approach to addressing complex Visual Question Answering (VQA) challenges. Our findings reveal GPT-4.1's remarkable capability to perform human-like image editing operations, particularly in single-image VQA scenarios. These operations encompass precise cropping, the addition of visual elements (including geometric shapes and textual annotations), and sophisticated image stylization through parameterized processing functions. Furthermore, in multi-image VQA contexts, the model demonstrates advanced reasoning capabilities, successfully generating code for complex operations such as subtracting two images in visual comparison tasks. We evaluate the pipeline in various vqa benchmarks and show its strong zero-shot performance.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/Agents-X/python-visual-primitive" class="project-link github">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="https://huggingface.co/Agents-X/python-visual-model" class="project-link huggingface">
+                        <i class="fas fa-rocket"></i> Model
+                    </a>
+                    <a href="https://arxiv.org/abs/2306.12345" class="project-link arxiv">
+                        <i class="fas fa-file-alt"></i> Report
+                    </a>
+                </div>
+                
+                <!-- authors -->
+                <div class="authors-section">
+                    <div class="authors-meta">
+                        <div class="authors-title" style="text-align:left;">AUTHORS</div>
+                        <div class="authors-list" style="text-align:left;">
+                            <span class="author">Shitian Zhao<sup>1,*‡</sup></span>, 
+                            <span class="author">Haoquan Zhang<sup>1,3,*</sup></span>, 
+                            <span class="author">Shaoheng Lin<sup>1,*</sup></span>, <br>
+                            <span class="author">Ming Li<sup>1,*</sup></span>, 
+                            <span class="author">Qilong Wu<sup>4,*</sup></span>, 
+                            <span class="author">Kaipeng Zhang<sup>1,†</sup></span>, 
+                            <span class="author">Chen Wei<sup>2,†</sup></span>
+                        </div>
+                        <div class="author-note">‡ Project Lead;&nbsp;&nbsp;* Joint First Author;&nbsp;&nbsp;† Corresponding Author</div>
+                    </div>
+                    <div class="authors-right">
+                        <div class="affiliations-title">AFFILIATIONS</div>
+                        <div class="affiliations-list">
+                            <sup>1</sup>Shanghai AI Lab,&nbsp; <br>
+                            <sup>2</sup>Rice University,&nbsp; <br>
+                            <sup>3</sup>CUHK,&nbsp;
+                            <sup>4</sup>NUS
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--             <div>
+                <canvas id="VstarBench"></canvas>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+<!--             <h3 style="text-align: center; margin-bottom: 20px;">Evaluation on V* Bench</h3>
+            <script>
+            const ctx = document.getElementById('VstarBench');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: [
+                    'gpt-4o', 
+                    'gpt-4.1', 
+                    'gpt-4.1+tool (auto)', 
+                    'gpt-4.1+tool (high)', 
+                    'gpt-4.1+tool+imginfo',
+                    'o3'
+                ],
+                datasets: [{
+                    label: 'Acc - %',
+                    data: [
+                    55.5,    // gemini 2.5-pro-exp-03-25
+                    55.0,   // gpt-4.1
+                    70.2,   // gpt-4.1+tool (auto)
+                    69.6,   // gpt-4.1+tool (high)
+                    74.4,   // gpt-4.1+tool+imginfo
+                    95.5    // o3
+                    ],
+                    backgroundColor: [
+                    '#222',      // black
+                    '#888',      // gray
+                    '#ffb6b6',   // light red
+                    '#ff8c8c',   // medium red
+                    '#ff6b6b',   // red
+                    '#ff4d4d'    // dark red
+                    ],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                // indexAxis 默认为 'x'，即纵向柱状图
+                scales: {
+                    y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Accuracy (%)'
+                    }
+                    },
+                    x: {
+                    ticks: {
+                        font: {
+                        size: 14
+                        }
+                    }
+                    }
+                },
+                plugins: {
+                    legend: {
+                    display: false
+                    },
+                    tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                        // 显示百分号
+                        return context.parsed.y + '%';
+                        }
+                    }
+                    }
+                }
+                }
+            });
+            </script>
+ -->
+            <!-- New Interactive Demo Section -->
+            <div class="demo-section" id="interactive-demo">
+                <div class="demo-header">
+                    <h2 class="demo-title">GPT-4.1 vs. PyVision: Which Center Circle is Larger?</h2>
+<!--                     <p class="demo-subtitle">Compare GPT-4.1 vs. PyVision Visual Reasoning</p> -->
+                </div>
+                
+                <div class="demo-container">
+                    <div class="demo-scroll-wrapper">
+                        <div class="demo-image-section">
+                            <div class="demo-image-container">
+                                <img id="demo-main-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/ebbinhause.png" alt="Ebbinghaus Illusion Circles" />
+                            </div>
+                            <div class="demo-image-caption">Disguised Ebbinghaus Illusion Diagram</div>
+                        </div>
+                        
+                        <div class="demo-dual-steps-section" id="demo-dual-steps-section">
+                            <div class="demo-steps-col" id="demo-steps-col-left">
+                                <div class="demo-steps-header left">
+                                    <h3 class="demo-steps-title">GPT-4.1</h3>
+                                </div>
+                            </div>
+                            <div class="demo-steps-col" id="demo-steps-col-right">
+                                <div class="demo-steps-header">
+                                    <h3 class="demo-steps-title">PyVision</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-controls">
+                            <button class="demo-control-btn" id="demo-restart-btn">Restart</button>
+                            <button class="demo-control-btn" id="demo-pause-btn">Pause</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="section-nav">
+                <a href="#introduction" class="section-link active">Introduction</a>
+                <a href="#method" class="section-link">Method</a>
+                <a href="#results" class="section-link">Results</a>
+                <a href="#visual-puzzle" class="section-link">→ Visual Puzzles</a>
+                <a href="#visual-search" class="section-link">→ Visual Search</a>
+                <a href="#remote-sensing" class="section-link">→ Remote Sensing</a>
+                <a href="#medical" class="section-link">→ Medical</a>
+                <a href="#science" class="section-link">→ Science</a>
+                <a href="#more" class="section-link">→ More</a>
+                <a href="#conclusion" class="section-link">Conclusion</a>
+                <a href="#bibtex" class="section-link">Bibtex</a>
+            </nav>
+
+            <div class="article-content">
+                <h2 id="introduction">Introduction</h2>
+                <p>
+                    This approach enables a new axis for test-time compute scaling that seamlessly
+                    blends visual and textual reasoning, as reflected in their state-of-the-art
+                    performance across multimodal benchmarks, marking a significant step toward
+                    more natural, multimodal-capable AI systems.
+                </p>
+                
+                <!-- Rest of the content remains the same... -->
+                <h2 id="method">Method</h2>
+                <p>
+                    Thinking with images allows you to interact with AI more easily. You can ask questions by taking
+                    a photo without worrying about the positioning of objects—whether the text is upside down or 
+                    there are multiple physics problems in one photo. Even if objects aren't obvious at first glance,
+                    visual reasoning allows the model to zoom in to see more clearly.
+                </p>
+                
+                <p class="note">All examples were completed with Agents-X visual model.</p>
+                
+                <h2 id="results">Results</h2>
+                <p>
+                    Our latest visual reasoning models work in tandem with other tools like Python data analysis,
+                    web search, and image generation to creatively and effectively solve various tasks,
+                    from educational questions to complex scientific challenges.
+                </p>
+                
+                <!-- Dynamic category sections will be inserted here -->
+                <div id="category-sections"></div>
+                
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    We are continuing to enhance our visual models with improved reasoning capabilities and
+                    broader domain knowledge. Future versions will demonstrate even more sophisticated
+                    understanding of complex visual inputs and better integration with programming tools.
+                </p>
+
+                <h2 id="bibtex">Bibtex</h2>
+                <div class="bibtex-block">
+                    <pre class="bibtex-pre">@article{zhao2025pyvision,
+  title={PyVision: Agentic Vision with Dynamic Tooling.},
+  author={Zhao, Shitian and zhang, Haoquan and Lin, Shaoheng and Li, Ming and Wu, Qilong and Zhang, Kaipeng and Wei, Chen},
+  url={https://agents-x.space/python-visual-primitive.html},
+  year={2025},
+}</pre>
+                </div>
+
+<!--                 <h2 id="references">References</h2>
+                <p>
+                    [1] 
+                </p> -->
+            </div>
+        </article>
+    </main>
+
+<!--     <d-appendix>
+        <h3>BibTeX</h3>
+        <p class="bibtex">
+            @inproceedings{yang2024virl,<br>
+            &nbsp;&nbsp;title={{V-IRL: Grounding Virtual Intelligence in Real Life}},<br>
+            &nbsp;&nbsp;author={Yang, Jihan and Ding, Runyu and Brown, Ellis and Qi, Xiaojuan and Xie, Saining},<br>
+            &nbsp;&nbsp;year={2024},<br>
+            &nbsp;&nbsp;booktitle={European conference on computer vision},<br>
+            }
+        </p>
+
+        <d-footnote-list></d-footnote-list>
+        <d-citation-list></d-citation-list>
+    </d-appendix> -->
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Agents-X. All rights reserved.</p>
+                <p>Webpage designed by <a href="https://haoquanzhang.github.io" style="text-decoration: underline;">Haoquan Zhang</a> and <a href="https://github.com/sh-Lin" style="text-decoration: underline;">Shaoheng Lin</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="demo_and_showcase_function.js"></script>
+    
+    <!-- Add highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</body>
+</html>
