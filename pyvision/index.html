@@ -194,6 +194,7 @@
                 <a href="#introduction" class="section-link active">Introduction</a>
                 <a href="#method" class="section-link">Method</a>
                 <a href="#results" class="section-link">Results</a>
+                <a href="#cases" class="section-link">Cases</a>
                 <a href="#visual-puzzle" class="section-link">→ Visual Puzzles</a>
                 <a href="#visual-search" class="section-link">→ Visual Search</a>
                 <a href="#remote-sensing" class="section-link">→ Remote Sensing</a>
@@ -215,21 +216,124 @@
                 
                 <!-- Rest of the content remains the same... -->
                 <h2 id="method">Method</h2>
+                <img src="img/method-zst.drawio-2.pdf" alt="PyVision Method" style="width: 100%; height: auto;margin-bottom: 20px;">
                 <p>
-                    Thinking with images allows you to interact with AI more easily. You can ask questions by taking
-                    a photo without worrying about the positioning of objects—whether the text is upside down or 
-                    there are multiple physics problems in one photo. Even if objects aren't obvious at first glance,
-                    visual reasoning allows the model to zoom in to see more clearly.
+                    PyVision, an interactive and multi-turn framework capable of dynamic tool generation, designed for multi-modal reasoning. In an inference session, PyVision has <b>n</b> interaction turns with the Python interpreter. <b>code_block_i</b> and <b>mm_clue_i</b> refer to the generated code by the MLLM and the executed output by the Python interpreter in the <b>i<sup>th</sup></b> turn, <b>i=0,1,...,n</b>.
                 </p>
-                
-                <p class="note">All examples were completed with Agents-X visual model.</p>
-                
+
                 <h2 id="results">Results</h2>
-                <p>
-                    Our latest visual reasoning models work in tandem with other tools like Python data analysis,
-                    web search, and image generation to creatively and effectively solve various tasks,
-                    from educational questions to complex scientific challenges.
-                </p>
+                <!-- INSERT_YOUR_CODE -->
+                <div style="width: 100%; margin-bottom: 32px;">
+                    <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+                        <canvas id="barChart1" style="width:100%;"></canvas>
+                    </div>
+                </div>
+                <div style="width: 100%; margin-bottom: 32px;">
+                    <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+                        <canvas id="barChart2" style="width:100%;"></canvas>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                // Data
+                const categories = [
+                    "MMMU",
+                    "MathVista",
+                    "VLMsAreBlind-mini",
+                    "V*",
+                    "MathVision-mini",
+                    "VisualPuzzles"
+                ];
+                // GPT-4.1
+                const gpt41 = [71.9, 69.9, 67.1, 68.1, 46.4, 44.9];
+                const pyvision_gpt41 = [74.3, 71.7, 69.7, 75.9, 48.7, 47.4];
+                // Claude
+                const claude = [74.4, 71.4, 48.1, 56.5, 48.0, 42.7];
+                const pyvision_claude = [74.6, 76.2, 79.2, 56.8, 51.3, 51.0];
+
+                // Bar Chart 1: GPT-4.1 vs PyVision-GPT-4.1
+                new Chart(document.getElementById('barChart1'), {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [
+                            {
+                                label: 'GPT-4.1',
+                                data: gpt41,
+                                backgroundColor: 'rgba(144, 238, 144, 0.7)'
+                            },
+                            {
+                                label: 'PyVision-GPT-4.1',
+                                data: pyvision_gpt41,
+                                backgroundColor: 'rgba(0, 128, 128, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: {
+                                display: true,
+                                text: 'Performance of GPT-4.1 vs PyVision-GPT-4.1',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 90,
+                                title: { display: true, text: 'Accuracy (%)' }
+                            }
+                        }
+                    }
+                });
+
+                // Bar Chart 2: Claude-4.0-Sonnet vs PyVision-claude
+                new Chart(document.getElementById('barChart2'), {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [
+                            {
+                                label: 'Claude-4.0-Sonnet',
+                                data: claude,
+                                backgroundColor: 'rgba(255, 165, 0, 0.7)'
+                            },
+                            {
+                                label: 'PyVision-Claude',
+                                data: pyvision_claude,
+                                backgroundColor: 'rgba(139, 0, 0, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: {
+                                display: true,
+                                text: 'Performance of Claude-4.0-Sonnet vs PyVision-Claude',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 90,
+                                title: { display: true, text: 'Accuracy (%)' }
+                            }
+                        }
+                    }
+                });
+                </script>
+                
+                <h2 id="cases">Cases</h2>
+                <p class="note">All examples were generated by PyVision-GPT-4.1.</p>
                 
                 <!-- Dynamic category sections will be inserted here -->
                 <div id="category-sections"></div>
@@ -246,7 +350,7 @@
                     <pre class="bibtex-pre">@article{zhao2025pyvision,
   title={PyVision: Agentic Vision with Dynamic Tooling.},
   author={Zhao, Shitian and zhang, Haoquan and Lin, Shaoheng and Li, Ming and Wu, Qilong and Zhang, Kaipeng and Wei, Chen},
-  url={https://agents-x.space/python-visual-primitive.html},
+  url={https://agents-x.space/pyvision/},
   year={2025},
 }</pre>
                 </div>
