@@ -348,10 +348,6 @@ body {
         text-align: left;
         min-width: 0;
     }
-    canvas {
-        min-height: 280px !important;
-        height: 280px !important;
-    }
 }
 
 /* 页脚样式 */
@@ -1181,9 +1177,5 @@ footer {
     /* 调整推理代码的padding */
     .reasoning-code {
         padding: 10px;
-    }
-    canvas {
-        min-height: 320px !important;
-        height: 320px !important;
     }
 }
