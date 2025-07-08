@@ -1012,8 +1012,46 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    /* 为整个页面添加左右padding */
+    .article-container {
+        padding: 0 20px;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+    
+    /* 调整标题大小 */
+    .article-title {
+        font-size: 28px;
+        padding: 0 10px;
+    }
+    
+    /* 调整摘要的padding */
+    .article-abstract {
+        padding: 15px;
+        margin: 0 10px 30px;
+    }
+    
+    /* 调整项目链接的间距 */
+    .project-links {
+        padding: 0 10px;
+    }
+    
+    /* 调整作者部分的padding */
+    .authors-section {
+        padding: 0 15px;
+    }
+    
+    /* 调整内容区域的padding */
+    .article-content {
+        padding: 0 15px;
+    }
+    
+    /* 调整demo部分的padding */
     .demo-scroll-wrapper {
         min-width: auto;
+        padding: 0 15px;
     }
     
     .demo-dual-steps-section {
@@ -1023,5 +1061,115 @@ footer {
     
     .demo-container {
         padding: 20px 15px;
+    }
+    
+    /* 调整按钮组的padding */
+    .feature-buttons {
+        padding: 0 10px;
+    }
+    
+    /* 调整类别部分的padding */
+    .category-section {
+        padding: 0 10px;
+    }
+    
+    /* 调整推理过程的padding */
+    .reasoning-process {
+        padding: 0 10px;
+    }
+    
+    /* 调整导航的padding */
+    .section-nav {
+        padding: 0 15px;
+    }
+    
+    /* 调整footer的padding */
+    footer .container {
+        padding: 0 20px;
+    }
+}
+
+/* 针对更小屏幕的额外调整 */
+@media (max-width: 480px) {
+    /* 增加更小的padding */
+    .article-container {
+        padding: 0 15px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* 进一步调整标题大小 */
+    .article-title {
+        font-size: 24px;
+        padding: 0 5px;
+    }
+    
+    /* 调整摘要的padding */
+    .article-abstract {
+        padding: 12px;
+        margin: 0 5px 25px;
+    }
+    
+    /* 调整项目链接的间距 */
+    .project-links {
+        padding: 0 5px;
+        gap: 8px;
+    }
+    
+    /* 调整作者部分的padding */
+    .authors-section {
+        padding: 0 10px;
+    }
+    
+    /* 调整内容区域的padding */
+    .article-content {
+        padding: 0 10px;
+    }
+    
+    /* 调整demo部分的padding */
+    .demo-scroll-wrapper {
+        padding: 0 10px;
+    }
+    
+    .demo-container {
+        padding: 15px 10px;
+    }
+    
+    /* 调整按钮组的padding */
+    .feature-buttons {
+        padding: 0 5px;
+    }
+    
+    /* 调整类别部分的padding */
+    .category-section {
+        padding: 0 5px;
+    }
+    
+    /* 调整推理过程的padding */
+    .reasoning-process {
+        padding: 0 5px;
+    }
+    
+    /* 调整导航的padding */
+    .section-nav {
+        padding: 0 10px;
+    }
+    
+    /* 调整footer的padding */
+    footer .container {
+        padding: 0 15px;
+    }
+    
+    /* 调整代码块的padding */
+    .demo-code-block {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    /* 调整推理代码的padding */
+    .reasoning-code {
+        padding: 10px;
     }
 }
