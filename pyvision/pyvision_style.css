@@ -1093,6 +1093,11 @@ footer {
     footer .container {
         padding: 0 20px;
     }
+    
+    canvas {
+        min-height: 380px !important;
+        height: 380px !important;
+    }
 }
 
 /* 针对更小屏幕的额外调整 */
@@ -1178,4 +1183,14 @@ footer {
     .reasoning-code {
         padding: 10px;
     }
+    
+    canvas {
+        min-height: 340px !important;
+        height: 340px !important;
+    }
+}
+
+canvas {
+    min-height: 420px !important;
+    height: 420px !important;
 }
