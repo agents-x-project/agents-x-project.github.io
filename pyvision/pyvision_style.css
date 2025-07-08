@@ -348,6 +348,10 @@ body {
         text-align: left;
         min-width: 0;
     }
+    canvas {
+        min-height: 280px !important;
+        height: 280px !important;
+    }
 }
 
 /* 页脚样式 */
@@ -1078,9 +1082,15 @@ footer {
         padding: 0 10px;
     }
     
-    /* 调整导航的padding */
+    /* 在中等屏幕上调整导航栏 */
     .section-nav {
         padding: 0 15px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .section-nav::-webkit-scrollbar {
+        display: none;
     }
     
     /* 调整footer的padding */
@@ -1152,9 +1162,9 @@ footer {
         padding: 0 5px;
     }
     
-    /* 调整导航的padding */
+    /* 在小屏幕上隐藏导航栏 */
     .section-nav {
-        padding: 0 10px;
+        display: none;
     }
     
     /* 调整footer的padding */
@@ -1171,5 +1181,9 @@ footer {
     /* 调整推理代码的padding */
     .reasoning-code {
         padding: 10px;
+    }
+    canvas {
+        min-height: 320px !important;
+        height: 320px !important;
     }
 }
