@@ -207,37 +207,42 @@
 
             <div class="article-content">
                 <h2 id="introduction">Introduction</h2>
-                <p>
-The agentic AI paradigm is here. We've seen large language models (LLMs) evolve from pure text generators into capable agents that can plan, reason, and call external tools. But the real frontier isn't just using tools—it's inventing them. The ability to dynamically generate code tailored to a specific task is a foundational step toward more general intelligence. <br>
-
-This idea of composing computational modules has roots in computer vision, particularly in early neuro-symbolic work like Neural Module Networks. These models were great for transparency, producing inspectable outputs for each reasoning step. However, they were often constrained by predefined toolsets and single-turn execution, limiting their flexibility.<br>
-
-With the powerful coding and reasoning capabilities of modern Multimodal Large Language Models (MLLMs), we can finally break free from those constraints.<br>
-
-PyVision: An Interactive Framework for Dynamic Tool Generation<br>
-To explore this, we present PyVision, an interactive framework where an MLLM can autonomously generate, execute, and iteratively refine Python code in response to multimodal queries. We built PyVision on Python's rich library ecosystem and engineered a robust runtime environment to support a seamless, multi-turn dialogue between the MLLM (we used GPT-4.1 and Claude-4.0-Sonnet) and a Python interpreter.<br>
-
-This setup moves beyond simple function calling. The MLLM isn't picking from a static list of APIs; it's writing bespoke scripts from scratch to solve the visual task at hand.<br>
-
-A Taxonomy of On-the-Fly Tooling<br>
-To understand what the model was building, we analyzed the generated code and developed a taxonomy of its self-created tools. They fall into four main categories:<br>
-
-Basic Image Processing: Cropping, resizing, rotating, color conversion.<br>
-Advanced Image Processing: Filtering, edge detection, feature extraction, contrast enhancement.<br>
-Visual Prompting & Sketching: Drawing bounding boxes, masks, heatmaps, or creating simplified diagrams to aid reasoning.<br>
-Numerical & Statistical Analysis: Counting objects, calculating properties (area, centroids), and performing statistical tests.<br>
-We observed that the pattern of tool generation adapts intelligently to the task. Perception-heavy benchmarks elicited more image processing operations, while math and logic puzzles triggered more visual sketching and numerical analysis.<br>
-
-Amplifying SOTA Models: The Results<br>
-PyVision consistently improves the performance of the strong backend models it's paired with. The results speak for themselves:<br>
-
-+7.8% on V* with PyVision-GPT-4.1<br>
-+8.3% on Visual Puzzles<br>
-A massive +31.1% on VLMsAreBlind-mini, where PyVision-Claude-4.0-Sonnet jumped from a 48.1% to a 79.2% score.<br>
-Our analysis suggests that \model acts as an amplifier for the base model's inherent strengths. When paired with the perceptually strong GPT-4.1, it saw the biggest gains on perception tasks. With Claude-4.0-Sonnet, known for strong reasoning, it excelled at abstract challenges. Dynamic tooling doesn't overwrite a model's capabilities; it unlocks them.<br>
-
-Ultimately, equipping MLLMs with the ability to invent their own computational tools on the fly marks a significant shift. It's a move toward more versatile, autonomous, and genuinely adaptive systems that can tackle the complexity of real-world visual reasoning.<br>
-                </p>
+                
+            <p>The agentic AI paradigm is here. We've seen large language models (LLMs) evolve from pure text generators into capable agents that can plan, reason, and call external tools. But the real frontier isn't just <em>using</em> tools—it's <em>inventing</em> them. The ability to dynamically generate code tailored to a specific task is a foundational step toward more general intelligence.</p>
+    
+            <p>This idea of composing computational modules has roots in computer vision, particularly in early neuro-symbolic work like Neural Module Networks. These models were great for transparency, producing inspectable outputs for each reasoning step. However, they were often constrained by predefined toolsets and single-turn execution, limiting their flexibility.</p>
+    
+            <p>With the powerful coding and reasoning capabilities of modern Multimodal Large Language Models (MLLMs), we can finally break free from those constraints.</p>
+    
+            <h3>PyVision: An Interactive Framework for Dynamic Tool Generation</h3>
+    
+            <p>To explore this, we present <strong>PyVision</strong>, an interactive framework where an MLLM can autonomously generate, execute, and iteratively refine Python code in response to multimodal queries. We built <strong>PyVision</strong> on Python's rich library ecosystem and engineered a robust runtime environment to support a seamless, multi-turn dialogue between the MLLM (we used GPT-4.1 and Claude-4.0-Sonnet) and a Python interpreter.</p>
+    
+            <p>This setup moves beyond simple function calling. The MLLM isn't picking from a static list of APIs; it's writing bespoke scripts from scratch to solve the visual task at hand.</p>
+    
+            <h3>A Taxonomy of On-the-Fly Tooling</h3>
+    
+            <p>To understand <em>what</em> the model was building, we analyzed the generated code and developed a taxonomy of its self-created tools. They fall into four main categories:</p>
+            <ol>
+                <li><strong>Basic Image Processing:</strong> Cropping, resizing, rotating, color conversion.</li>
+                <li><strong>Advanced Image Processing:</strong> Filtering, edge detection, feature extraction, contrast enhancement.</li>
+                <li><strong>Visual Prompting & Sketching:</strong> Drawing bounding boxes, masks, heatmaps, or creating simplified diagrams to aid reasoning.</li>
+                <li><strong>Numerical & Statistical Analysis:</strong> Counting objects, calculating properties (area, centroids), and performing statistical tests.</li>
+            </ol>
+            <p>We observed that the pattern of tool generation adapts intelligently to the task. Perception-heavy benchmarks elicited more image processing operations, while math and logic puzzles triggered more visual sketching and numerical analysis.</p>
+    
+            <h3>Amplifying SOTA Models: The Results</h3>
+    
+            <p><strong>\model</strong> consistently improves the performance of the strong backend models it's paired with. The results speak for themselves:</p>
+            <ul>
+                <li>A <strong>+7.8%</strong> boost on V* with <strong>PyVision-GPT-4.1</strong>.</li>
+                <li>An <strong>+8.3%</strong> gain on Visual Puzzles.</li>
+                <li>A massive <strong>+31.1%</strong> leap on VLMsAreBlind-mini, where <strong>PyVision-Claude-4.0-Sonnet</strong> jumped from a 48.1% to a 79.2% score.</li>
+            </ul>
+    
+            <p>Our analysis suggests that <strong>PyVision</strong> acts as an <em>amplifier</em> for the base model's inherent strengths. When paired with the perceptually strong GPT-4.1, it saw the biggest gains on perception tasks. With Claude-4.0-Sonnet, known for strong reasoning, it excelled at abstract challenges. Dynamic tooling doesn't overwrite a model's capabilities; it unlocks them.</p>
+    
+            <p>Ultimately, equipping MLLMs with the ability to invent their own computational tools on the fly marks a significant shift. It's a move toward more versatile, autonomous, and genuinely adaptive systems that can tackle the complexity of real-world visual reasoning.</p>
                 
                 <!-- Rest of the content remains the same... -->
                 <h2 id="method">Method</h2>
