@@ -1,61 +1,49 @@
 {
     "Visual Search": [
         {
-            "show_name": "Following Single-colored Paths",
+            "show_name": "sample 1",
             "file_dir": "assets/Visual-Search/Following-single-colored-paths"
         },
         {
-            "show_name": "Overlapping Shapes",
+            "show_name": "sample 2",
             "file_dir": "assets/Visual-Search/Counting-shapes"
         },
         {
-            "show_name": "Nested Squares",
+            "show_name": "sample 3",
             "file_dir": "assets/Visual-Search/Nested-squares"
         },
         {
-            "show_name": "Line Intersections",
+            "show_name": "sample 4",
             "file_dir": "assets/Visual-Search/Line-intersections"
         },
         {
-            "show_name": "Grid Counting",
+            "show_name": "sample 5",
             "file_dir": "assets/Visual-Search/export_20250530_163058"
         },
         {
-            "show_name": "Circled Letter",
+            "show_name": "sample 6",
             "file_dir": "assets/Visual-Search/export_20250530_163258"
         },
         {
-            "show_name": "Touching Circles",
+            "show_name": "sample 7",
             "file_dir": "assets/Visual-Search/export_20250530_163454"
         },
         {
-            "show_name": "Ebbinghaus Illusion - Size of Circles",
+            "show_name": "sample 8",
             "file_dir": "assets/Visual-Search/export_20250604_160933"
         },
         {
-            "show_name": "Ebbinghaus Illusion - Length of Arrows",
+            "show_name": "sample 9",
             "file_dir": "assets/Visual-Search/export_20250530_164740"
         },
         {
-            "show_name": "Prependicular Lines",
+            "show_name": "sample 10",
             "file_dir": "assets/Visual-Search/export_20250530_165200"
-        },
-        {
-            "show_name": "Dots Counting - 1",
-            "file_dir": "assets/Visual-Search/export_20250530_165341"
-        },
-        {
-            "show_name": "Dots Counting - 2",
-            "file_dir": "assets/Visual-Search/export_20250530_165450"
-        },
-        {
-            "show_name": "Disguised Ebbinghaus Illusion",
-            "file_dir": "assets/Visual-Search/export_20250605_100759"
         }
     ],
     "Multimodal Reasoning": [
         {
-            "show_name": "Straw Hat Market",
+            "show_name": "sample 1",
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_182535"
         },
         {
@@ -81,11 +69,19 @@
         {
             "show_name": "sample 8",
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
+        },
+        {
+            "show_name": "sample 9",
+            "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
+        },
+        {
+            "show_name": "sample 10",
+            "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
         }
     ],
     "Agentic Reasoning": [
         {
-            "show_name": "Estimate Area",
+            "show_name": "sample 1",
             "file_dir": "assets/Agentic-Reasoning/Estimate-area"
         },
         {
@@ -123,15 +119,11 @@
         {
             "show_name": "sample 10",
             "file_dir": "assets/Agentic-Reasoning/export_20250530_180006"
-        },
-        {
-            "show_name": "sample 11",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_180146"
         }
     ],
     "Spatial Reasoning": [
         {
-            "show_name": "Eye Axis",
+            "show_name": "sample 1",
             "file_dir": "assets/Spatial-Reasoning/export_20250530_171234"
         },
         {
@@ -169,26 +161,6 @@
         {
             "show_name": "sample 10",
             "file_dir": "assets/Spatial-Reasoning/export_20250530_175124"
-        },
-        {
-            "show_name": "sample 11",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175153"
-        },
-        {
-            "show_name": "sample 12",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175248"
-        },
-        {
-            "show_name": "sample 13",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175335"
-        },
-        {
-            "show_name": "sample 14",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175452"
-        },
-        {
-            "show_name": "sample 15",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175526"
         }
     ]
 }
