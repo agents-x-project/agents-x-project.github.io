@@ -1,5 +1,5 @@
 {
-    "Visual Search": [
+    "Visual Search (Image Task)": [
         {
             "show_name": "sample 1",
             "file_dir": "assets/Visual-Search/Following-single-colored-paths"
@@ -41,7 +41,7 @@
             "file_dir": "assets/Visual-Search/export_20250530_165200"
         }
     ],
-    "Multimodal Reasoning": [
+    "Multimodal Reasoning (Image Task)": [
         {
             "show_name": "sample 1",
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_182535"
@@ -79,7 +79,7 @@
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
         }
     ],
-    "Agentic Reasoning": [
+    "Agentic Reasoning (Image Task)": [
         {
             "show_name": "sample 1",
             "file_dir": "assets/Agentic-Reasoning/Estimate-area"
@@ -121,7 +121,7 @@
             "file_dir": "assets/Agentic-Reasoning/export_20250530_180006"
         }
     ],
-    "Spatial Reasoning": [
+    "Spatial Reasoning (Video Task)": [
         {
             "show_name": "sample 1",
             "file_dir": "assets/Spatial-Reasoning/export_20250530_171234"
