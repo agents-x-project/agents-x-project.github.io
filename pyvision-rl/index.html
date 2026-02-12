@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyVision - Agents-X</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="pyvision_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-nav">
+        <div class="container" style="justify-content: flex-start; display: flex;">
+            <a href="../index.html" class="home-link">
+                <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                    <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
+                    <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header">
+                <div class="date-tag">
+                    <span class="date">11 July, 2025</span>
+                    <span class="tag">Released</span>
+                </div>
+                <h1 class="article-title">PyVision: Agentic Vision with Dynamic Tooling</h1>
+<!--                 <p class="article-abstract">
+                    This study investigates the effectiveness of Python code as a visual primitive for image manipulation and reasoning. We demonstrate that GPT-4.1 can be directly prompted to generate code for image modifications, offering a novel approach to addressing complex Visual Question Answering (VQA) challenges. Our findings reveal GPT-4.1's remarkable capability to perform human-like image editing operations, particularly in single-image VQA scenarios. These operations encompass precise cropping, the addition of visual elements (including geometric shapes and textual annotations), and sophisticated image stylization through parameterized processing functions. Furthermore, in multi-image VQA contexts, the model demonstrates advanced reasoning capabilities, successfully generating code for complex operations such as subtracting two images in visual comparison tasks. We evaluate the pipeline in various vqa benchmarks and show its strong zero-shot performance.
+                </p> -->
+                <div class="project-links">
+                    <a href="https://github.com/agents-x-project/PyVision" class="project-link github">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="https://huggingface.co/spaces/Agents-X/PyVision" class="project-link huggingface">
+                        <i class="fas fa-rocket"></i> Demo
+<!--                         <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em"> Demo -->
+                    </a>
+                    <a href="https://arxiv.org/abs/2507.07998" class="project-link arxiv">
+                        <i class="ai ai-arxiv"></i> Report
+<!--                         <i class="fas fa-file-alt"></i> Report -->
+                    </a>
+                </div>
+                
+                <!-- authors -->
+                <div class="authors-section">
+                    <div class="authors-meta">
+                        <div class="authors-title" style="text-align:left;padding-top: 10px;">AUTHORS</div>
+                        <div class="authors-list" style="text-align:left;">
+                            <span class="author"><a href="https://zhaoshitian.github.io/" target="_blank">Shitian Zhao</a><sup>1,*‡</sup></span>, 
+                            <span class="author"><a href="https://haoquanzhang.github.io/" target="_blank">Haoquan Zhang</a><sup>1,3,*</sup></span>, 
+                            <span class="author"><a href="https://scholar.google.com/citations?user=3K36E7cAAAAJ" target="_blank">Shaoheng Lin</a><sup>1,*</sup></span>,
+                            <span class="author"><a href="https://scholar.google.com/citations?user=M4ojgE4AAAAJ&hl=en" target="_blank">Ming Li</a><sup>1,*</sup></span>, 
+                            <span class="author"><a href="https://jerrywu-code.github.io/" target="_blank">Qilong Wu</a><sup>4,*</sup></span>, 
+                            <span class="author"><a href="https://kpzhang93.github.io/" target="_blank">Kaipeng Zhang</a><sup>1,5,†</sup></span>, 
+                            <span class="author"><a href="https://weichen582.github.io/" target="_blank">Chen Wei</a><sup>2,†</sup></span>
+                        </div>
+                        <div class="author-note">‡ Project Lead;&nbsp;&nbsp;* Joint First Author;&nbsp;&nbsp;† Corresponding Author</div>
+                    </div>
+                    <div class="authors-right">
+                        <div class="affiliations-title">AFFILIATIONS</div>
+                        <div class="affiliations-list">
+                            <sup>1</sup>Shanghai AI Lab,&nbsp; <br>
+                            <sup>2</sup>Rice University,&nbsp; <br>
+                            <sup>3</sup>CUHK,&nbsp;
+                            <sup>4</sup>NUS,&nbsp;
+                            <sup>5</sup>SII
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--             <div>
+                <canvas id="VstarBench"></canvas>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+<!--             <h3 style="text-align: center; margin-bottom: 20px;">Evaluation on V* Bench</h3>
+            <script>
+            const ctx = document.getElementById('VstarBench');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: [
+                    'gpt-4o', 
+                    'gpt-4.1', 
+                    'gpt-4.1+tool (auto)', 
+                    'gpt-4.1+tool (high)', 
+                    'gpt-4.1+tool+imginfo',
+                    'o3'
+                ],
+                datasets: [{
+                    label: 'Acc - %',
+                    data: [
+                    55.5,    // gemini 2.5-pro-exp-03-25
+                    55.0,   // gpt-4.1
+                    70.2,   // gpt-4.1+tool (auto)
+                    69.6,   // gpt-4.1+tool (high)
+                    74.4,   // gpt-4.1+tool+imginfo
+                    95.5    // o3
+                    ],
+                    backgroundColor: [
+                    '#222',      // black
+                    '#888',      // gray
+                    '#ffb6b6',   // light red
+                    '#ff8c8c',   // medium red
+                    '#ff6b6b',   // red
+                    '#ff4d4d'    // dark red
+                    ],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                // indexAxis 默认为 'x'，即纵向柱状图
+                scales: {
+                    y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Accuracy (%)'
+                    }
+                    },
+                    x: {
+                    ticks: {
+                        font: {
+                        size: 14
+                        }
+                    }
+                    }
+                },
+                plugins: {
+                    legend: {
+                    display: false
+                    },
+                    tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                        // 显示百分号
+                        return context.parsed.y + '%';
+                        }
+                    }
+                    }
+                }
+                }
+            });
+            </script>
+ -->
+            <!-- New Interactive Demo Section -->
+            <div class="demo-section" id="interactive-demo">
+                <div class="demo-header">
+                    <h2 class="demo-title">GPT-4.1 vs. PyVision: Which Center Circle is Larger?</h2>
+<!--                     <p class="demo-subtitle">Compare GPT-4.1 vs. PyVision Visual Reasoning</p> -->
+                </div>
+                
+                <div class="demo-container">
+                    <div class="demo-scroll-wrapper">
+                        <div class="demo-image-section">
+                            <div class="demo-image-container">
+                                <img id="demo-main-image" src="https://huggingface.co/datasets/Agents-X/Assets/resolve/main/ebbinhause.png" alt="Ebbinghaus Illusion Circles" />
+                            </div>
+                            <div class="demo-image-caption">Disguised Ebbinghaus Illusion Diagram</div>
+                        </div>
+                        
+                        <div class="demo-dual-steps-section" id="demo-dual-steps-section">
+                            <div class="demo-steps-col" id="demo-steps-col-left">
+                                <div class="demo-steps-header left">
+                                    <h3 class="demo-steps-title">GPT-4.1</h3>
+                                </div>
+                            </div>
+                            <div class="demo-steps-col" id="demo-steps-col-right">
+                                <div class="demo-steps-header">
+                                    <h3 class="demo-steps-title">PyVision</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-controls">
+                            <button class="demo-control-btn" id="demo-restart-btn">Restart</button>
+                            <button class="demo-control-btn" id="demo-pause-btn">Pause</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="section-nav">
+                <a href="#introduction" class="section-link active">Introduction</a>
+                <a href="#method" class="section-link">Method</a>
+                <a href="#results" class="section-link">Results</a>
+                <a href="#cases" class="section-link">Cases</a>
+                <a href="#visual-puzzle" class="section-link">→ Visual Puzzles</a>
+                <a href="#visual-search" class="section-link">→ Visual Search</a>
+                <a href="#remote-sensing" class="section-link">→ Remote Sensing</a>
+                <a href="#medical" class="section-link">→ Medical</a>
+                <a href="#science" class="section-link">→ Science</a>
+                <a href="#more" class="section-link">→ More</a>
+                <a href="#conclusion" class="section-link">Conclusion</a>
+                <a href="#bibtex" class="section-link">Bibtex</a>
+            </nav>
+
+            <div class="article-content">
+                <h2 id="introduction">Introduction</h2>
+                
+            <p>The agentic AI paradigm is here. We've seen large language models (LLMs) evolve from pure text generators into capable agents that can plan, reason, and call external tools. But the real frontier isn't just <em>using</em> tools—it's <em>inventing</em> them. The ability to dynamically generate code tailored to a specific task is a foundational step toward more general intelligence.</p>
+    
+            <p>This idea of composing tools has roots in computer vision, particularly in early neuro-symbolic work like Neural Module Networks. These models were great for transparency, producing inspectable outputs for each reasoning step. However, they were often constrained by predefined toolsets and single-turn execution, limiting their flexibility.</p>
+    
+            <p>With the powerful coding and reasoning capabilities of modern Multimodal Large Language Models (MLLMs), we can finally break free from those constraints.</p>
+    
+            <h3>PyVision: An Agentic Framework for Dynamic Tooling</h3>
+    
+            <p>To explore this, we present <strong>PyVision</strong>, an interactive framework where an MLLM can autonomously generate, execute, and iteratively refine Python code in response to multimodal queries. We built PyVision on Python's rich library ecosystem and engineered a robust runtime environment to support a seamless, multi-turn dialogue between the MLLM (we used GPT-4.1 and Claude-4.0-Sonnet) and a Python interpreter.</p>
+    
+            <p>This setup moves beyond simple function calling. The MLLM isn't picking from a static list of APIs; it's writing bespoke scripts from scratch to solve the visual task at hand.</p>
+    
+<!--             <h3>A Taxonomy of On-the-Fly Tooling</h3>
+    
+            <p>To understand <em>what</em> the model was building, we analyzed the generated code and developed a taxonomy of its self-created tools. They fall into four main categories:</p>
+            <ul>
+                <li>- Basic Image Processing: Cropping, resizing, rotating, color conversion.</li>
+                <li>- Advanced Image Processing: Filtering, edge detection, feature extraction, contrast enhancement.</li>
+                <li>- Visual Prompting & Sketching: Drawing bounding boxes, masks, heatmaps, or creating simplified diagrams to aid reasoning.</li>
+                <li>- Numerical & Statistical Analysis: Counting objects, calculating properties (area, centroids), and performing statistical tests.</li>
+            </ul>
+            <p>We observed that the pattern of tool generation adapts intelligently to the task. Perception-heavy benchmarks elicited more image processing operations, while math and logic puzzles triggered more visual sketching and numerical analysis.</p>
+    
+            <h3>Amplifying SOTA Models: The Results</h3>
+    
+            <p>PyVision consistently improves the performance of the strong backend models it's paired with. The results speak for themselves:</p>
+            <ul>
+                <li>- A +7.8% boost on V* with PyVision-GPT-4.1.</li>
+                <li>- An +8.3% gain on Visual Puzzles.</li>
+                <li>- A massive +31.1% leap on VLMsAreBlind-mini, where PyVision-Claude-4.0-Sonnet jumped from a 48.1% to a 79.2% score.</li>
+            </ul>
+    
+            <p>Our analysis suggests that PyVision acts as an <em>amplifier</em> for the base model's inherent strengths. When paired with the perceptually strong GPT-4.1, it saw the biggest gains on perception tasks. With Claude-4.0-Sonnet, known for strong reasoning, it excelled at abstract challenges. Dynamic tooling doesn't overwrite a model's capabilities; it unlocks them.</p>
+    
+            <p>Ultimately, equipping MLLMs with the ability to invent their own computational tools on the fly marks a significant shift. It's a move toward more versatile, autonomous, and genuinely adaptive systems that can tackle the complexity of real-world visual reasoning.</p> -->
+                
+                <!-- Rest of the content remains the same... -->
+                <h2 id="method">Method</h2>
+                <img src="img/method-zst.drawio.svg" alt="PyVision Method" style="width: 100%; height: auto;margin-bottom: 20px;">
+                <p>
+                    PyVision, an interactive and multi-turn framework capable of dynamic tool generation, designed for multi-modal reasoning. In an inference session, PyVision has <b>n+1</b> interaction turns with the Python interpreter. <b>code_block_i</b> and <b>mm_clue_i</b> refer to the generated code by the MLLM and the executed output by the Python interpreter in the <b>i<sup>th</sup></b> turn, <b>i=0,1,...,n</b>.
+                </p>
+
+                <h2 id="results">Results</h2>
+                <!-- INSERT_YOUR_CODE -->
+                <div style="width: 100%; margin-bottom: 32px;">
+                    <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+                        <canvas id="barChart1" style="width:100%;" height="420"></canvas>
+                    </div>
+                </div>
+                <div style="width: 100%; margin-bottom: 32px;">
+                    <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+                        <canvas id="barChart2" style="width:100%;" height="420"></canvas>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                // Data
+                const categories = [
+                    "MMMU",
+                    "MathVista",
+                    "VLMsAreBlind-mini",
+                    "V*",
+                    "MathVision-mini",
+                    "VisualPuzzles"
+                ];
+                // GPT-4.1
+                const gpt41 = [71.9, 69.9, 67.1, 68.1, 46.4, 44.9];
+                const pyvision_gpt41 = [74.3, 71.7, 69.7, 75.9, 48.7, 47.4];
+                // Claude
+                const claude = [74.4, 71.4, 48.1, 56.5, 48.0, 42.7];
+                const pyvision_claude = [74.6, 76.2, 79.2, 56.8, 51.3, 51.0];
+
+                // Bar Chart 1: GPT-4.1 vs PyVision-GPT-4.1
+                new Chart(document.getElementById('barChart1'), {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [
+                            {
+                                label: 'GPT-4.1',
+                                data: gpt41,
+                                backgroundColor: 'rgba(144, 238, 144, 0.7)'
+                            },
+                            {
+                                label: 'PyVision-GPT-4.1',
+                                data: pyvision_gpt41,
+                                backgroundColor: 'rgba(0, 128, 128, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: {
+                                display: true,
+                                text: 'Performance of GPT-4.1 vs PyVision-GPT-4.1',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 90,
+                                title: { display: true, text: 'Accuracy (%)' }
+                            }
+                        }
+                    }
+                });
+
+                // Bar Chart 2: Claude-4.0-Sonnet vs PyVision-claude
+                new Chart(document.getElementById('barChart2'), {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [
+                            {
+                                label: 'Claude-4.0-Sonnet',
+                                data: claude,
+                                backgroundColor: 'rgba(255, 165, 0, 0.7)'
+                            },
+                            {
+                                label: 'PyVision-Claude',
+                                data: pyvision_claude,
+                                backgroundColor: 'rgba(139, 0, 0, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: {
+                                display: true,
+                                text: 'Performance of Claude-4.0-Sonnet vs PyVision-Claude',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 90,
+                                title: { display: true, text: 'Accuracy (%)' }
+                            }
+                        }
+                    }
+                });
+                </script>
+                
+                <h2 id="cases">Cases</h2>
+                <p class="note">All examples were generated by PyVision-GPT-4.1. There are mistakes in some cases, but we mainly want to share the interesting reasoning trajectories.</p>
+                
+                <!-- Dynamic category sections will be inserted here -->
+                <div id="category-sections"></div>
+                
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    We present PyVision, equipping MLLMs with the ability to invent their own computational tools on the fly, marking a significant shift. It's a move toward more versatile, autonomous, and genuinely adaptive systems that can tackle the complexity of real-world visual reasoning.
+                </p>
+
+                <h2 id="bibtex">Bibtex</h2>
+                <div class="bibtex-block">
+                    <pre class="bibtex-pre">@article{zhao2025pyvision,
+  title={PyVision: Agentic Vision with Dynamic Tooling.},
+  author={Zhao, Shitian and Zhang, Haoquan and Lin, Shaoheng and Li, Ming and Wu, Qilong and Zhang, Kaipeng and Wei, Chen},
+  url={https://agents-x.space/pyvision/},
+  year={2025},
+}</pre>
+                </div>
+
+<!--                 <h2 id="references">References</h2>
+                <p>
+                    [1] 
+                </p> -->
+            </div>
+        </article>
+    </main>
+
+<!--     <d-appendix>
+        <h3>BibTeX</h3>
+        <p class="bibtex">
+            @inproceedings{yang2024virl,<br>
+            &nbsp;&nbsp;title={{V-IRL: Grounding Virtual Intelligence in Real Life}},<br>
+            &nbsp;&nbsp;author={Yang, Jihan and Ding, Runyu and Brown, Ellis and Qi, Xiaojuan and Xie, Saining},<br>
+            &nbsp;&nbsp;year={2024},<br>
+            &nbsp;&nbsp;booktitle={European conference on computer vision},<br>
+            }
+        </p>
+
+        <d-footnote-list></d-footnote-list>
+        <d-citation-list></d-citation-list>
+    </d-appendix> -->
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Agents-X. All rights reserved.</p>
+                <p>Webpage designed by <a href="https://haoquanzhang.github.io" style="text-decoration: underline;">Haoquan Zhang</a> and <a href="https://github.com/sh-Lin" style="text-decoration: underline;">Shaoheng Lin</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="demo_and_showcase_function.js"></script>
+    
+    <!-- Add highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</body>
+</html>
