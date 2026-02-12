@@ -32,7 +32,7 @@
                     <span class="date">11 July, 2025</span>
                     <span class="tag">Released</span>
                 </div>
-                <h1 class="article-title">PyVision-RL: Forging Open Agentic Vision Models via RL.</h1>
+                <h1 class="article-title">PyVision-RL: Forging Open Agentic Vision Models via RL</h1>
 <!--                 <p class="article-abstract">
                     This study investigates the effectiveness of Python code as a visual primitive for image manipulation and reasoning. We demonstrate that GPT-4.1 can be directly prompted to generate code for image modifications, offering a novel approach to addressing complex Visual Question Answering (VQA) challenges. Our findings reveal GPT-4.1's remarkable capability to perform human-like image editing operations, particularly in single-image VQA scenarios. These operations encompass precise cropping, the addition of visual elements (including geometric shapes and textual annotations), and sophisticated image stylization through parameterized processing functions. Furthermore, in multi-image VQA contexts, the model demonstrates advanced reasoning capabilities, successfully generating code for complex operations such as subtracting two images in visual comparison tasks. We evaluate the pipeline in various vqa benchmarks and show its strong zero-shot performance.
                 </p> -->
@@ -77,97 +77,16 @@
                     </div>
                 </div>
             </div>
-
-<!--             <div>
-                <canvas id="VstarBench"></canvas>
-            </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-
-<!--             <h3 style="text-align: center; margin-bottom: 20px;">Evaluation on V* Bench</h3>
-            <script>
-            const ctx = document.getElementById('VstarBench');
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                labels: [
-                    'gpt-4o', 
-                    'gpt-4.1', 
-                    'gpt-4.1+tool (auto)', 
-                    'gpt-4.1+tool (high)', 
-                    'gpt-4.1+tool+imginfo',
-                    'o3'
-                ],
-                datasets: [{
-                    label: 'Acc - %',
-                    data: [
-                    55.5,    // gemini 2.5-pro-exp-03-25
-                    55.0,   // gpt-4.1
-                    70.2,   // gpt-4.1+tool (auto)
-                    69.6,   // gpt-4.1+tool (high)
-                    74.4,   // gpt-4.1+tool+imginfo
-                    95.5    // o3
-                    ],
-                    backgroundColor: [
-                    '#222',      // black
-                    '#888',      // gray
-                    '#ffb6b6',   // light red
-                    '#ff8c8c',   // medium red
-                    '#ff6b6b',   // red
-                    '#ff4d4d'    // dark red
-                    ],
-                    borderWidth: 1
-                }]
-                },
-                options: {
-                // indexAxis 默认为 'x'，即纵向柱状图
-                scales: {
-                    y: {
-                    beginAtZero: true,
-                    max: 100,
-                    title: {
-                        display: true,
-                        text: 'Accuracy (%)'
-                    }
-                    },
-                    x: {
-                    ticks: {
-                        font: {
-                        size: 14
-                        }
-                    }
-                    }
-                },
-                plugins: {
-                    legend: {
-                    display: false
-                    },
-                    tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                        // 显示百分号
-                        return context.parsed.y + '%';
-                        }
-                    }
-                    }
-                }
-                }
-            });
-            </script>
- -->
             
             <nav class="section-nav">
                 <a href="#introduction" class="section-link active">Introduction</a>
                 <a href="#method" class="section-link">Method</a>
                 <a href="#results" class="section-link">Results</a>
                 <a href="#cases" class="section-link">Cases</a>
-                <a href="#visual-puzzle" class="section-link">→ Visual Puzzles</a>
                 <a href="#visual-search" class="section-link">→ Visual Search</a>
-                <a href="#remote-sensing" class="section-link">→ Remote Sensing</a>
-                <a href="#medical" class="section-link">→ Medical</a>
-                <a href="#science" class="section-link">→ Science</a>
-                <a href="#more" class="section-link">→ More</a>
+                <a href="#multimodal-reasoning" class="section-link">→ Multimodal Reasoning</a>
+                <a href="#agentic-reasoning" class="section-link">→ Agentic Reasoning</a>
+                <a href="#spatial-reasoning" class="section-link">→ Spatial Reasoning</a>
                 <a href="#conclusion" class="section-link">Conclusion</a>
                 <a href="#bibtex" class="section-link">Bibtex</a>
             </nav>
@@ -343,7 +262,7 @@
                 <h2 id="bibtex">Bibtex</h2>
                 <div class="bibtex-block">
                     <pre class="bibtex-pre">@article{zhao2025pyvision,
-  title={PyVision: Agentic Vision with Dynamic Tooling.},
+  title={PyVision-RL: Forging Open Agentic Vision Models via RL},
   author={Zhao, Shitian and Zhang, Haoquan and Lin, Shaoheng and Li, Ming and Wu, Qilong and Zhang, Kaipeng and Wei, Chen},
   url={https://agents-x.space/pyvision/},
   year={2025},

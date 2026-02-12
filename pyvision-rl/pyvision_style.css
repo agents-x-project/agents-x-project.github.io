@@ -267,12 +267,10 @@ body {
 }
 
 /* Subsection navigation styling */
-.section-link[href^="#visual-puzzle"],
+.section-link[href^="#multimodal-reasoning"],
 .section-link[href^="#visual-search"],
-.section-link[href^="#remote-sensing"],
-.section-link[href^="#medical"],
-.section-link[href^="#science"],
-.section-link[href^="#more"] {
+.section-link[href^="#agentic-reasoning"],
+.section-link[href^="#spatial-reasoning"] {
     font-size: 12px;
     padding-left: 20px;
     color: #888;
