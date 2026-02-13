@@ -134,8 +134,17 @@
                 <!-- Rest of the content remains the same... -->
                 <h2 id="method">Agent Scaffold</h2>
                 <img src="img/pv-rl.drawio.svg" alt="PyVision Method" style="width: 100%; height: auto;margin-bottom: 20px;">
-                <p>
+                <!-- <p>
                     PyVision, an interactive and multi-turn framework capable of dynamic tool generation, designed for multi-modal reasoning. In an inference session, PyVision has <b>n+1</b> interaction turns with the Python interpreter. <b>code_block_i</b> and <b>mm_clue_i</b> refer to the generated code by the MLLM and the executed output by the Python interpreter in the <b>i<sup>th</sup></b> turn, <b>i=0,1,...,n</b>.
+                </p> -->
+                <p>
+We design two agentic scaffolds for image and video understanding under a unified framework of dynamic tooling with Python.
+For <b>PyVision-Image</b>, both the system prompt and image hints are injected into the MLLM context, and the images are also loaded into the Python runtime.
+For <b>PyVision-Video</b>, only the system prompt is injected into the MLLM context, while the video is loaded exclusively into the runtime environment.
+Given a query, the model interleaves reasoning with executable code blocks (code_block_0) to process multimodal inputs.
+Execution results (mm_clue_0), including textual outputs and rendered images, are appended to the context and fed back to the model.
+This interaction loop repeats until a final answer is produced.
+By restricting video inputs first to the runtime, PyVision-Video enables on-demand context construction, where the agent selectively samples and plots task-relevant frames during reasoning, substantially improving visual token efficiency.
                 </p>
 
                 <h2 id="results">Results</h2>
