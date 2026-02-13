@@ -184,12 +184,12 @@ By restricting video inputs first to the runtime, PyVision-Video enables on-dema
                         labels: categories,
                         datasets: [
                             {
-                                label: 'GPT-4.1',
+                                label: 'Qwen2.5-VL-7B',
                                 data: gpt41,
                                 backgroundColor: 'rgba(144, 238, 144, 0.7)'
                             },
                             {
-                                label: 'PyVision-GPT-4.1',
+                                label: 'PyVision-Image',
                                 data: pyvision_gpt41,
                                 backgroundColor: 'rgba(0, 128, 128, 0.7)'
                             }
@@ -201,7 +201,7 @@ By restricting video inputs first to the runtime, PyVision-Video enables on-dema
                             legend: { position: 'top' },
                             title: {
                                 display: true,
-                                text: 'Performance of GPT-4.1 vs PyVision-GPT-4.1',
+                                text: 'Performance of Qwen2.5-VL-7B vs PyVision-Image',
                                 font: {
                                     size: 20
                                 }
@@ -224,12 +224,12 @@ By restricting video inputs first to the runtime, PyVision-Video enables on-dema
                         labels: categories,
                         datasets: [
                             {
-                                label: 'Claude-4.0-Sonnet',
+                                label: 'Qwen2.5-VL-7B',
                                 data: claude,
                                 backgroundColor: 'rgba(255, 165, 0, 0.7)'
                             },
                             {
-                                label: 'PyVision-Claude',
+                                label: 'PyVision-Video',
                                 data: pyvision_claude,
                                 backgroundColor: 'rgba(139, 0, 0, 0.7)'
                             }
@@ -241,7 +241,7 @@ By restricting video inputs first to the runtime, PyVision-Video enables on-dema
                             legend: { position: 'top' },
                             title: {
                                 display: true,
-                                text: 'Performance of Claude-4.0-Sonnet vs PyVision-Claude',
+                                text: 'Performance of Qwen2.5-VL-7B vs PyVision-Video',
                                 font: {
                                     size: 20
                                 }
