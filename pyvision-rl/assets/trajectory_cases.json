@@ -55,6 +55,10 @@
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_184715"
         },
         {
+            "show_name": "sample 4",
+            "file_dir": "assets/Multimodal-Reasoning/export_20250530_184715"
+        },
+        {
             "show_name": "sample 5",
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_190937"
         },
@@ -82,7 +86,7 @@
     "Agentic Reasoning (Image Task)": [
         {
             "show_name": "sample 1",
-            "file_dir": "assets/Agentic-Reasoning/Estimate-area"
+            "file_dir": "assets/Agentic-Reasoning/export_20260212_181202"
         },
         {
             "show_name": "sample 2",
