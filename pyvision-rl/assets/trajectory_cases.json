@@ -19,26 +19,6 @@
         {
             "show_name": "sample 5",
             "file_dir": "assets/Visual-Search/export_20250530_163058"
-        },
-        {
-            "show_name": "sample 6",
-            "file_dir": "assets/Visual-Search/export_20250530_163258"
-        },
-        {
-            "show_name": "sample 7",
-            "file_dir": "assets/Visual-Search/export_20250530_163454"
-        },
-        {
-            "show_name": "sample 8",
-            "file_dir": "assets/Visual-Search/export_20250604_160933"
-        },
-        {
-            "show_name": "sample 9",
-            "file_dir": "assets/Visual-Search/export_20250530_164740"
-        },
-        {
-            "show_name": "sample 10",
-            "file_dir": "assets/Visual-Search/export_20250530_165200"
         }
     ],
     "Multimodal Reasoning (Image Task)": [
@@ -61,26 +41,6 @@
         {
             "show_name": "sample 5",
             "file_dir": "assets/Multimodal-Reasoning/export_20250530_190937"
-        },
-        {
-            "show_name": "sample 6",
-            "file_dir": "assets/Multimodal-Reasoning/export_20250530_192208"
-        },
-        {
-            "show_name": "sample 7",
-            "file_dir": "assets/Multimodal-Reasoning/export_20250530_192857"
-        },
-        {
-            "show_name": "sample 8",
-            "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
-        },
-        {
-            "show_name": "sample 9",
-            "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
-        },
-        {
-            "show_name": "sample 10",
-            "file_dir": "assets/Multimodal-Reasoning/export_20250530_193401"
         }
     ],
     "Agentic Reasoning (Image Task)": [
@@ -103,26 +63,6 @@
         {
             "show_name": "sample 5",
             "file_dir": "assets/Agentic-Reasoning/export_20250530_175858"
-        },
-        {
-            "show_name": "sample 6",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_175902"
-        },
-        {
-            "show_name": "sample 7",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_175921"
-        },
-        {
-            "show_name": "sample 8",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_175936"
-        },
-        {
-            "show_name": "sample 9",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_175956"
-        },
-        {
-            "show_name": "sample 10",
-            "file_dir": "assets/Agentic-Reasoning/export_20250530_180006"
         }
     ],
     "Spatial Reasoning (Video Task)": [
@@ -145,26 +85,6 @@
         {
             "show_name": "sample 5",
             "file_dir": "assets/Spatial-Reasoning/export_20250530_174412"
-        },
-        {
-            "show_name": "sample 6",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_174544"
-        },
-        {
-            "show_name": "sample 7",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_174822"
-        },
-        {
-            "show_name": "sample 8",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175003"
-        },
-        {
-            "show_name": "sample 9",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175043"
-        },
-        {
-            "show_name": "sample 10",
-            "file_dir": "assets/Spatial-Reasoning/export_20250530_175124"
         }
     ]
 }
