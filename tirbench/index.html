@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIR-Bench - Agents-X</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="tirbench_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-nav">
+        <div class="container" style="justify-content: flex-start; display: flex;">
+            <a href="../index.html" class="home-link">
+                <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+                    <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
+                    <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <section class="teaser-section">
+        <div class="teaser-inner">
+            <div class="teaser-grid">
+                <div class="teaser-task color">
+                    <div class="task-default"><span class="task-name">Color</span><span class="task-count">100</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Color</div>
+                        <div class="case-question">Q: What is the dominant object color under clutter?</div>
+                        <div class="case-answer">A: Deep blue</div>
+                        <div class="case-media"><img src="case/color.png" alt="Color task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task lowlight">
+                    <div class="task-default"><span class="task-name">Low-Light</span><span class="task-count">50</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Low-Light</div>
+                        <div class="case-question">Q: Enhance the image and identify the hidden sign text.</div>
+                        <div class="case-answer">A: EXIT</div>
+                        <div class="case-media"><img src="case/lowlight-2.png" alt="Low-light task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task instrument">
+                    <div class="task-default"><span class="task-name">Instrument</span><span class="task-count">80</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Instrument Reading</div>
+                        <div class="case-question">Q: What is the stopwatch second reading?</div>
+                        <div class="case-answer">A: 5</div>
+                        <div class="case-media"><img src="case/instrument.png" alt="Instrument reading case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task jigsaw">
+                    <div class="task-default"><span class="task-name">Jigsaw</span><span class="task-count">120</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Jigsaw</div>
+                        <div class="case-question">Q: Which piece should be placed in the center slot?</div>
+                        <div class="case-answer">A: Piece C</div>
+                        <div class="case-media"><img src="case/jigsaw.png" alt="Jigsaw task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task math">
+                    <div class="task-default"><span class="task-name">Math</span><span class="task-count">120</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Math</div>
+                        <div class="case-question">Q: How many triangles are in the figure?</div>
+                        <div class="case-answer">A: 12</div>
+                        <div class="case-media"><img src="case/math.png" alt="Math task case example"></div>
+                    </div>
+                </div>
+
+                <div class="teaser-task maze">
+                    <div class="task-default"><span class="task-name">Maze</span><span class="task-count">120</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Maze</div>
+                        <div class="case-question">Q: What is the shortest path length from S to E?</div>
+                        <div class="case-answer">A: 17</div>
+                        <div class="case-media"><img src="case/maze.png" alt="Maze task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task rotated-ocr">
+                    <div class="task-default"><span class="task-name">Rotated OCR</span><span class="task-count">60</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Rotated OCR</div>
+                        <div class="case-question">Q: Rotate and read the highlighted word.</div>
+                        <div class="case-answer">A: Falcon</div>
+                        <div class="case-media"><img src="case/rotateocr.png" alt="Rotated OCR task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task proportion">
+                    <div class="task-default"><span class="task-name">Proportion</span><span class="task-count">120</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Proportion</div>
+                        <div class="case-question">Q: What is the red:blue area ratio?</div>
+                        <div class="case-answer">A: 3:2</div>
+                        <div class="case-media"><img src="case/proportion.png" alt="Proportion task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task rotation">
+                    <div class="task-default"><span class="task-name">Rotation</span><span class="task-count">75</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Rotation</div>
+                        <div class="case-question">Q: How many degrees to align the object upright?</div>
+                        <div class="case-answer">A: 90 deg</div>
+                        <div class="case-media"><img src="case/rotation.png" alt="Rotation task case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task spot-diff">
+                    <div class="task-default"><span class="task-name">Spot Diff.</span><span class="task-count">100</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Spot the Difference</div>
+                        <div class="case-question">Q: How many visual differences exist?</div>
+                        <div class="case-answer">A: 6</div>
+                        <div class="case-media"><img src="case/sprtthediff.png" alt="Spot the difference case example"></div>
+                    </div>
+                </div>
+
+                <div class="teaser-task symbolic">
+                    <div class="task-default"><span class="task-name">Symbolic Reasoning</span><span class="task-count">50</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Symbolic Reasoning</div>
+                        <div class="case-question">Q: Which symbol completes the sequence?</div>
+                        <div class="case-answer">A: Triangle</div>
+                        <div class="case-media"><img src="case/symbolic.png" alt="Symbolic reasoning case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task visual-search">
+                    <div class="task-default"><span class="task-name">Visual Search</span><span class="task-count">120</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Visual Search</div>
+                        <div class="case-question">Q: Locate the target object and return coordinates.</div>
+                        <div class="case-answer">A: (328, 214)</div>
+                        <div class="case-media"><img src="case/visual.png" alt="Visual search case example"></div>
+                    </div>
+                </div>
+                <div class="teaser-task word-search">
+                    <div class="task-default"><span class="task-name">Word Search</span><span class="task-count">100</span></div>
+                    <div class="task-case">
+                        <div class="case-title">Word Search</div>
+                        <div class="case-question">Q: Is the word "VECTOR" present in the grid?</div>
+                        <div class="case-answer">A: Yes</div>
+                        <div class="case-media"><img src="case/wordsearch.png" alt="Word search case example"></div>
+                    </div>
+                </div>
+
+                <div class="teaser-summary">
+                    <div class="summary-title">TIR Bench</div>
+                    <div class="summary-fulltitle">A Comprehensive Benchmark for<br>Agentic Thinking-with-Images Reasoning</div>
+                    <div class="summary-subtitle">Total: 1215</div>
+                </div>
+            </div>
+
+            <a class="scroll-cue" href="#content-start">Scroll to details <span aria-hidden="true">↓</span></a>
+        </div>
+    </section>
+
+    <main id="content-start" class="article-container">
+        <article>
+            <div class="article-header">
+                <div class="date-tag">
+                    <span class="date">Nov. 2025</span>
+                    <span class="tag">Initialized</span>
+                </div>
+                <h1 class="article-title">TIR-Bench: A Comprehensive Benchmark for Agentic Thinking-with-Images Reasoning</h1>
+                <p class="article-subtitle">
+                    A broad benchmark suite for evaluating tool-using visual agents across diverse VQA tasks.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/agents-x-project/TIR-Bench" class="project-link github" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="https://huggingface.co/datasets/Agents-X/TIR-Bench" class="project-link huggingface" target="_blank">
+                        <i class="fas fa-database"></i> Dataset
+                    </a>
+                    <a href="https://arxiv.org/pdf/2511.01833" class="project-link paper" target="_blank">
+                        <i class="fas fa-file-alt"></i> Paper
+                    </a>
+                </div>
+
+                <div class="authors-section">
+                    <div class="authors-left">
+                        <div class="authors-title">AUTHORS</div>
+                        <div class="authors-list">
+                            Ming Li<sup>1,*</sup>, Jike Zhong<sup>2,*</sup>, Shitian Zhao<sup>1,*</sup>, Haoquan Zhang<sup>1,4,*</sup>, Shaoheng Lin<sup>1,*</sup>, Yuxiang Lai<sup>3,*</sup>, Chen Wei<sup>5</sup>, Konstantinos Psounis<sup>2</sup>, Kaipeng Zhang<sup>1,†</sup>
+                        </div>
+                        <div class="author-note">
+                            * Core Contributors;&nbsp;&nbsp;† Corresponding Author
+                        </div>
+                    </div>
+                    <div class="authors-right">
+                        <div class="authors-title">AFFILIATIONS</div>
+                        <div class="affiliations-list">
+                            <div><sup>1</sup> Shanghai AI Laboratory</div>
+                            <div><sup>2</sup> University of Southern California</div>
+                            <div><sup>3</sup> Emory University</div>
+                            <div><sup>4</sup> Chinese University of Hong Kong</div>
+                            <div><sup>5</sup> Rice University</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <h2>Leaderboard</h2>
+                <p>
+                    We benchmark 22 MLLMs across open-source, proprietary, and tool-using settings. You can interactively rank models by metric and group below.
+                </p>
+                <section class="leaderboard-panel" aria-label="TIR-Bench leaderboard">
+                    <div class="leaderboard-controls">
+                        <label class="lb-control">
+                            Metric
+                            <select id="lb-metric">
+                                <option value="all">All</option>
+                                <option value="color">Color</option>
+                                <option value="pro">Proportion (Pro.)</option>
+                                <option value="ocr">OCR</option>
+                                <option value="sr">Symbolic Reasoning (SR)</option>
+                                <option value="maze">Maze</option>
+                                <option value="math">Math</option>
+                                <option value="ws">Word Search (WS)</option>
+                                <option value="llvqa">Low-Light VQA (LL-VQA)</option>
+                                <option value="ir">Instrument Reasoning (IR)</option>
+                                <option value="sd">Spot Difference (SD)</option>
+                                <option value="jg">Jigsaw Game (JG)</option>
+                                <option value="vs">Visual Search (VS)</option>
+                                <option value="rg">Rotation Game (RG)</option>
+                            </select>
+                        </label>
+                        <label class="lb-control">
+                            Model Group
+                            <select id="lb-group">
+                                <option value="all">All Groups</option>
+                                <option value="open-source">Open-Source MLLMs</option>
+                                <option value="proprietary">Proprietary MLLMs</option>
+                                <option value="tool-using">Tool-Using MLLMs</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="lb-note">
+                        Table 2 task abbreviations: SR = Symbolic Reasoning, WS = Word Search, LL-VQA = Low-Light VQA, IR = Instrument Reasoning, SD = Spot Difference, JG = Jigsaw Game, VS = Visual Search, RG = Rotation Game, Pro. = Proportion VQA.
+                    </div>
+
+                    <div class="leaderboard-highlights" id="lb-highlights"></div>
+
+                    <div class="leaderboard-list-wrap">
+                        <div class="leaderboard-list-header">
+                            <span>Rank</span>
+                            <span>Model</span>
+                            <span>Group</span>
+                            <span>Score</span>
+                        </div>
+                        <div class="leaderboard-list" id="lb-list"></div>
+                    </div>
+                </section>
+
+                <h2>BibTeX</h2>
+                <section class="bibtex-panel" aria-label="TIR-Bench citation">
+                    <div class="bibtex-head">
+                        <span class="bibtex-title">Citation</span>
+                        <button type="button" class="bibtex-copy-btn" id="bibtex-copy-btn">Copy</button>
+                    </div>
+                    <pre class="bibtex-code" id="bibtex-code">@article{li2025tir,
+  title={TIR-Bench: A Comprehensive Benchmark for Agentic Thinking-with-Images Reasoning},
+  author={Li, Ming and Zhong, Jike and Zhao, Shitian and Zhang, Haoquan and Lin, Shaoheng and Lai, Yuxiang and Wei, Chen and Psounis, Konstantinos and Zhang, Kaipeng},
+  journal={arXiv preprint arXiv:2511.01833},
+  year={2025}
+}</pre>
+                </section>
+            </div>
+        </article>
+    </main>
+    <script>
+        (function () {
+            const modelData = [
+                { model: "Random Guess", group: "baseline", all: 13.5, color: 28.0, pro: 6.7, ocr: null, sr: 14.0, maze: 13.3, math: 15.8, ws: 0.0, llvqa: 4.0, ir: 8.8, sd: 22.6, jg: 5.8, vs: 22.5, rg: 16.0 },
+                { model: "Llava-1.6-M-7B", group: "open-source", all: 11.3, color: 27.0, pro: 7.5, ocr: 3.3, sr: 16.0, maze: 4.2, math: 16.7, ws: 0.0, llvqa: 14.0, ir: 6.3, sd: 18.0, jg: 0.0, vs: 22.5, rg: 12.0 },
+                { model: "Llava-1.6-V-7B", group: "open-source", all: 11.5, color: 27.0, pro: 10.8, ocr: 0.0, sr: 10.0, maze: 15.0, math: 12.5, ws: 1.0, llvqa: 8.0, ir: 7.5, sd: 12.2, jg: 0.0, vs: 24.2, rg: 13.3 },
+                { model: "Llava-1.6-34B", group: "open-source", all: 13.0, color: 31.0, pro: 6.7, ocr: 1.7, sr: 20.0, maze: 15.8, math: 18.3, ws: 0.0, llvqa: 16.0, ir: 16.3, sd: 11.9, jg: 0.0, vs: 21.7, rg: 10.7 },
+                { model: "Llava-Next-72B", group: "open-source", all: 11.2, color: 20.0, pro: 15.8, ocr: 3.3, sr: 8.0, maze: 10.8, math: 15.0, ws: 0.0, llvqa: 10.0, ir: 11.3, sd: 16.3, jg: 0.0, vs: 23.3, rg: 12.0 },
+                { model: "Qwen2.5-VL-3B", group: "open-source", all: 17.7, color: 27.0, pro: 20.0, ocr: 31.7, sr: 12.0, maze: 21.7, math: 20.8, ws: 0.0, llvqa: 12.0, ir: 13.8, sd: 29.7, jg: 0.0, vs: 26.7, rg: 12.0 },
+                { model: "Qwen2.5-VL-7B", group: "open-source", all: 16.0, color: 21.0, pro: 10.8, ocr: 48.3, sr: 14.0, maze: 15.0, math: 24.2, ws: 0.0, llvqa: 22.0, ir: 11.3, sd: 24.4, jg: 0.0, vs: 21.7, rg: 9.3 },
+                { model: "Qwen2.5-VL-32B", group: "open-source", all: 18.7, color: 26.0, pro: 19.2, ocr: 25.0, sr: 10.0, maze: 18.3, math: 23.3, ws: 2.0, llvqa: 14.0, ir: 15.0, sd: 13.1, jg: 5.4, vs: 48.3, rg: 13.3 },
+                { model: "Qwen2.5-VL-72B", group: "open-source", all: 19.7, color: 37.0, pro: 15.0, ocr: 33.3, sr: 24.0, maze: 35.0, math: 22.5, ws: 3.0, llvqa: 32.0, ir: 12.5, sd: 14.1, jg: 0.0, vs: 25.8, rg: 12.0 },
+                { model: "InternVL3-8B", group: "open-source", all: 16.9, color: 23.0, pro: 11.7, ocr: 0.0, sr: 6.0, maze: 33.3, math: 21.7, ws: 2.0, llvqa: 22.0, ir: 8.8, sd: 16.6, jg: 4.5, vs: 36.7, rg: 17.3 },
+                { model: "InternVL3-38B", group: "open-source", all: 19.1, color: 24.0, pro: 10.8, ocr: 3.3, sr: 26.0, maze: 23.3, math: 29.2, ws: 8.0, llvqa: 28.0, ir: 13.8, sd: 14.6, jg: 5.1, vs: 44.2, rg: 13.3 },
+                { model: "InternVL3-78B", group: "open-source", all: 21.4, color: 25.0, pro: 21.7, ocr: 3.3, sr: 24.0, maze: 32.5, math: 23.3, ws: 8.0, llvqa: 28.0, ir: 16.3, sd: 18.9, jg: 5.8, vs: 39.2, rg: 26.7 },
+                { model: "GPT-4.1", group: "proprietary", all: 18.8, color: 36.0, pro: 7.5, ocr: 11.7, sr: 12.0, maze: 17.5, math: 25.0, ws: 4.0, llvqa: 24.0, ir: 11.3, sd: 30.9, jg: 5.1, vs: 34.2, rg: 22.7 },
+                { model: "GPT-4o", group: "proprietary", all: 17.3, color: 26.0, pro: 22.5, ocr: 10.0, sr: 10.0, maze: 20.0, math: 15.8, ws: 0.0, llvqa: 26.0, ir: 7.5, sd: 19.4, jg: 6.2, vs: 35.0, rg: 20.0 },
+                { model: "Gemini-2.5-Flash", group: "proprietary", all: 25.2, color: 34.0, pro: 20.0, ocr: 30.0, sr: 26.0, maze: 17.5, math: 30.8, ws: 10.0, llvqa: 42.0, ir: 13.8, sd: 18.5, jg: 8.0, vs: 55.8, rg: 29.3 },
+                { model: "Gemini-2.5-Pro", group: "proprietary", all: 28.9, color: 44.0, pro: 21.7, ocr: 25.0, sr: 34.0, maze: 24.2, math: 30.8, ws: 12.0, llvqa: 42.0, ir: 20.0, sd: 28.5, jg: 10.4, vs: 58.3, rg: 30.7 },
+                { model: "Grok-4", group: "proprietary", all: 22.5, color: 35.0, pro: 53.3, ocr: 6.7, sr: 20.0, maze: 25.8, math: 19.2, ws: 2.0, llvqa: 22.0, ir: 12.5, sd: 27.0, jg: 10.0, vs: 25.8, rg: 18.7 },
+                { model: "o4-mini", group: "proprietary", all: 21.2, color: 39.0, pro: 17.5, ocr: 8.3, sr: 12.0, maze: 13.3, math: 21.7, ws: 5.0, llvqa: 30.0, ir: 18.8, sd: 33.0, jg: 8.0, vs: 39.2, rg: 26.7 },
+                { model: "o3", group: "proprietary", all: 26.9, color: 36.0, pro: 34.2, ocr: 8.3, sr: 34.0, maze: 29.2, math: 24.2, ws: 4.0, llvqa: 28.0, ir: 17.5, sd: 37.2, jg: 10.8, vs: 47.5, rg: 33.3 },
+                { model: "DeepEyes", group: "tool-using", all: 17.3, color: 22.0, pro: 6.7, ocr: 41.7, sr: 19.9, maze: 16.7, math: 20.0, ws: 1.0, llvqa: 16.0, ir: 3.8, sd: 19.9, jg: 3.9, vs: 50.8, rg: 12.0 },
+                { model: "PyVision", group: "tool-using", all: 31.8, color: 53.0, pro: 26.7, ocr: 63.3, sr: 54.0, maze: 15.8, math: 25.8, ws: 10.0, llvqa: 32.0, ir: 17.5, sd: 36.4, jg: 7.6, vs: 55.0, rg: 46.7 },
+                { model: "o4-mini-TU", group: "tool-using", all: 37.5, color: 53.0, pro: 21.7, ocr: 53.3, sr: 58.0, maze: 34.2, math: 31.7, ws: 55.0, llvqa: 44.0, ir: 13.8, sd: 38.9, jg: 11.8, vs: 47.5, rg: 52.0 },
+                { model: "o3-TU", group: "tool-using", all: 46.0, color: 55.0, pro: 31.7, ocr: 53.3, sr: 66.0, maze: 42.5, math: 50.0, ws: 64.0, llvqa: 42.0, ir: 21.3, sd: 41.0, jg: 16.4, vs: 57.5, rg: 77.3 }
+            ];
+
+            const metricSelect = document.getElementById("lb-metric");
+            const groupSelect = document.getElementById("lb-group");
+            const listContainer = document.getElementById("lb-list");
+            const highlightsContainer = document.getElementById("lb-highlights");
+            const bibtexCopyBtn = document.getElementById("bibtex-copy-btn");
+            const bibtexCode = document.getElementById("bibtex-code");
+            const metricLabels = {
+                all: "All",
+                color: "Color",
+                pro: "Pro.",
+                ocr: "OCR",
+                sr: "SR",
+                maze: "Maze",
+                math: "Math",
+                ws: "WS",
+                llvqa: "LL-VQA",
+                ir: "IR",
+                sd: "SD",
+                jg: "JG",
+                vs: "VS",
+                rg: "RG"
+            };
+
+            function groupLabel(group) {
+                if (group === "baseline") return "Baseline";
+                if (group === "open-source") return "Open";
+                if (group === "proprietary") return "Proprietary";
+                return "Tool-Using";
+            }
+
+            function render() {
+                const metric = metricSelect.value;
+                const group = groupSelect.value;
+                const filtered = modelData
+                    .filter((item) => group === "all" || item.group === group)
+                    .sort((a, b) => {
+                        const aVal = typeof a[metric] === "number" ? a[metric] : -Infinity;
+                        const bVal = typeof b[metric] === "number" ? b[metric] : -Infinity;
+                        return bVal - aVal;
+                    });
+
+                if (!filtered.length) {
+                    listContainer.innerHTML = "";
+                    highlightsContainer.innerHTML = "";
+                    return;
+                }
+
+                const validScores = filtered
+                    .map((item) => item[metric])
+                    .filter((value) => typeof value === "number");
+                const maxScore = validScores.length ? validScores[0] : 1;
+                listContainer.innerHTML = filtered.map((item, idx) => {
+                    const score = item[metric];
+                    const hasScore = typeof score === "number";
+                    const barWidth = hasScore ? Math.max((score / maxScore) * 100, 6) : 0;
+                    return `
+                        <div class="leaderboard-row">
+                            <div class="lb-rank">#${idx + 1}</div>
+                            <div class="lb-model">${item.model}</div>
+                            <div class="lb-group-tag">${groupLabel(item.group)}</div>
+                            <div class="lb-score-wrap">
+                                <span class="lb-score">${hasScore ? score.toFixed(1) : "N/A"}</span>
+                                <span class="lb-score-bar"><span style="width:${barWidth}%"></span></span>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+
+                const top3 = filtered.filter((item) => typeof item[metric] === "number").slice(0, 3);
+                const medals = ["fa-trophy", "fa-medal", "fa-award"];
+                const labels = ["#1 Leader", "#2 Strong", "#3 Challenger"];
+                highlightsContainer.innerHTML = top3.map((item, idx) => `
+                    <div class="lb-highlight-card">
+                        <div class="lb-highlight-top">
+                            <i class="fas ${medals[idx]}" aria-hidden="true"></i>
+                            <span>${labels[idx]}</span>
+                        </div>
+                        <div class="lb-highlight-model">${item.model}</div>
+                        <div class="lb-highlight-meta">${groupLabel(item.group)} · ${metricLabels[metric]} ${item[metric].toFixed(1)}</div>
+                    </div>
+                `).join("");
+            }
+
+            metricSelect.addEventListener("change", render);
+            groupSelect.addEventListener("change", render);
+            render();
+
+            bibtexCopyBtn.addEventListener("click", async function () {
+                const text = bibtexCode.textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    bibtexCopyBtn.textContent = "Copied";
+                    setTimeout(function () {
+                        bibtexCopyBtn.textContent = "Copy";
+                    }, 1200);
+                } catch (error) {
+                    bibtexCopyBtn.textContent = "Failed";
+                    setTimeout(function () {
+                        bibtexCopyBtn.textContent = "Copy";
+                    }, 1200);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
