@@ -12,18 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header class="header-nav">
-        <div class="container" style="justify-content: flex-start; display: flex;">
-            <a href="../index.html" class="home-link">
-                <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
-                    <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
-                    <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
-                </svg>
-                Back to Home
-            </a>
-        </div>
-    </header>
+    <a href="../index.html" class="home-link home-link-floating" aria-label="Back to Home">
+        <svg viewBox="0 0 188.09 78.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,45.67v-12.65L50.59,0v16.56L14.9,39.09v.53l35.69,22.53v16.56L0,45.67Z" fill="#b3b3b3"/>
+            <path d="M83.68,37.22L68,0h19.78l5.69,15.69c1.16,3.2,2.68,8.7,4.06,12.95h.53c2.77-4.17,6.15-10.07,8.18-12.92L117.88,0h19.62l-32,39.88,16.96,38.82h-19.65l-6.53-17.04c-1.09-2.86-2.85-8.34-4.17-12.21h-.53c-2.82,4.29-6.01,9.18-8.4,12.42l-12.87,16.83h-19.72l33.09-41.48Z" fill="#000000"/>
+            <path d="M137.5,62.14l35.69-22.53v-.53l-35.69-22.52V0l50.59,33.02v12.65l-50.59,33.02v-16.56Z" fill="#b3b3b3"/>
+        </svg>
+        <span>Home</span>
+    </a>
 
     <section class="teaser-section">
         <div class="teaser-inner">
@@ -32,8 +28,8 @@
                     <div class="task-default"><span class="task-name">Color</span><span class="task-count">100</span></div>
                     <div class="task-case">
                         <div class="case-title">Color</div>
-                        <div class="case-question">Q: What is the dominant object color under clutter?</div>
-                        <div class="case-answer">A: Deep blue</div>
+                        <div class="case-question">Q: What is the number in the center of this image? Select from the following choices.</div>
+                        <div class="case-answer">Answer: D. 87</div>
                         <div class="case-media"><img src="case/color.png" alt="Color task case example"></div>
                     </div>
                 </div>
@@ -41,17 +37,17 @@
                     <div class="task-default"><span class="task-name">Low-Light</span><span class="task-count">50</span></div>
                     <div class="task-case">
                         <div class="case-title">Low-Light</div>
-                        <div class="case-question">Q: Enhance the image and identify the hidden sign text.</div>
-                        <div class="case-answer">A: EXIT</div>
+                        <div class="case-question">Q: How many ducks are in the image?</div>
+                        <div class="case-answer">Answer: 3</div>
                         <div class="case-media"><img src="case/lowlight-2.png" alt="Low-light task case example"></div>
                     </div>
                 </div>
                 <div class="teaser-task instrument">
-                    <div class="task-default"><span class="task-name">Instrument</span><span class="task-count">80</span></div>
+                    <div class="task-default"><span class="task-name">Instrument Reading</span><span class="task-count">80</span></div>
                     <div class="task-case">
                         <div class="case-title">Instrument Reading</div>
-                        <div class="case-question">Q: What is the stopwatch second reading?</div>
-                        <div class="case-answer">A: 5</div>
+                        <div class="case-question">Q: What is the stopwatch second reading in the image? Provide an integer.</div>
+                        <div class="case-answer">Answer: 5</div>
                         <div class="case-media"><img src="case/instrument.png" alt="Instrument reading case example"></div>
                     </div>
                 </div>
@@ -59,8 +55,8 @@
                     <div class="task-default"><span class="task-name">Jigsaw</span><span class="task-count">120</span></div>
                     <div class="task-case">
                         <div class="case-title">Jigsaw</div>
-                        <div class="case-question">Q: Which piece should be placed in the center slot?</div>
-                        <div class="case-answer">A: Piece C</div>
+                        <div class="case-question">Q: Determine the correct arrangement to restore the original image.</div>
+                        <div class="case-answer">Answer: 7,5,1,2,4,9,3,8,6</div>
                         <div class="case-media"><img src="case/jigsaw.png" alt="Jigsaw task case example"></div>
                     </div>
                 </div>
@@ -68,8 +64,8 @@
                     <div class="task-default"><span class="task-name">Math</span><span class="task-count">120</span></div>
                     <div class="task-case">
                         <div class="case-title">Math</div>
-                        <div class="case-question">Q: How many triangles are in the figure?</div>
-                        <div class="case-answer">A: 12</div>
+                        <div class="case-question">Q: Which arch is the longest?<br>A. AB&nbsp;&nbsp;B. BC&nbsp;&nbsp;C. CD<br>D. DE&nbsp;&nbsp;E. EG&nbsp;&nbsp;F. GA</div>
+                        <div class="case-answer">Answer: E. EG</div>
                         <div class="case-media"><img src="case/math.png" alt="Math task case example"></div>
                     </div>
                 </div>
@@ -78,8 +74,8 @@
                     <div class="task-default"><span class="task-name">Maze</span><span class="task-count">120</span></div>
                     <div class="task-case">
                         <div class="case-title">Maze</div>
-                        <div class="case-question">Q: What is the shortest path length from S to E?</div>
-                        <div class="case-answer">A: 17</div>
+                        <div class="case-question">Q: Please complete a maze game starting from the red ball to the green ball.</div>
+                        <div class="case-answer">Answer: B. DDRRU...RRR</div>
                         <div class="case-media"><img src="case/maze.png" alt="Maze task case example"></div>
                     </div>
                 </div>
@@ -87,8 +83,8 @@
                     <div class="task-default"><span class="task-name">Rotated OCR</span><span class="task-count">60</span></div>
                     <div class="task-case">
                         <div class="case-title">Rotated OCR</div>
-                        <div class="case-question">Q: Rotate and read the highlighted word.</div>
-                        <div class="case-answer">A: Falcon</div>
+                        <div class="case-question">Q: What is written in the image?</div>
+                        <div class="case-answer">Answer: jump</div>
                         <div class="case-media"><img src="case/rotateocr.png" alt="Rotated OCR task case example"></div>
                     </div>
                 </div>
@@ -96,8 +92,8 @@
                     <div class="task-default"><span class="task-name">Proportion</span><span class="task-count">120</span></div>
                     <div class="task-case">
                         <div class="case-title">Proportion</div>
-                        <div class="case-question">Q: What is the red:blue area ratio?</div>
-                        <div class="case-answer">A: 3:2</div>
+                        <div class="case-question">Q: Which of the following values is the closest to the proportion of the image occupied by chair in blue bottom right corner?</div>
+                        <div class="case-answer">Answer: F. 7%</div>
                         <div class="case-media"><img src="case/proportion.png" alt="Proportion task case example"></div>
                     </div>
                 </div>
@@ -105,8 +101,8 @@
                     <div class="task-default"><span class="task-name">Rotation</span><span class="task-count">75</span></div>
                     <div class="task-case">
                         <div class="case-title">Rotation</div>
-                        <div class="case-question">Q: How many degrees to align the object upright?</div>
-                        <div class="case-answer">A: 90 deg</div>
+                        <div class="case-question">Q: How many degrees should you rotate this image CLOCKWISE to restore it to its original orientation?</div>
+                        <div class="case-answer">Answer: F. 330&deg;</div>
                         <div class="case-media"><img src="case/rotation.png" alt="Rotation task case example"></div>
                     </div>
                 </div>
@@ -114,8 +110,8 @@
                     <div class="task-default"><span class="task-name">Spot Diff.</span><span class="task-count">100</span></div>
                     <div class="task-case">
                         <div class="case-title">Spot the Difference</div>
-                        <div class="case-question">Q: How many visual differences exist?</div>
-                        <div class="case-answer">A: 6</div>
+                        <div class="case-question">Q: Output the list of patch indices where the two images differ.</div>
+                        <div class="case-answer">Answer: 1,2,6,7,9,15,16,20</div>
                         <div class="case-media"><img src="case/sprtthediff.png" alt="Spot the difference case example"></div>
                     </div>
                 </div>
@@ -124,8 +120,8 @@
                     <div class="task-default"><span class="task-name">Symbolic Reasoning</span><span class="task-count">50</span></div>
                     <div class="task-case">
                         <div class="case-title">Symbolic Reasoning</div>
-                        <div class="case-question">Q: Which symbol completes the sequence?</div>
-                        <div class="case-answer">A: Triangle</div>
+                        <div class="case-question">Q: How many edges are there in this polygon?</div>
+                        <div class="case-answer">Answer: E. 16</div>
                         <div class="case-media"><img src="case/symbolic.png" alt="Symbolic reasoning case example"></div>
                     </div>
                 </div>
@@ -133,8 +129,8 @@
                     <div class="task-default"><span class="task-name">Visual Search</span><span class="task-count">120</span></div>
                     <div class="task-case">
                         <div class="case-title">Visual Search</div>
-                        <div class="case-question">Q: Locate the target object and return coordinates.</div>
-                        <div class="case-answer">A: (328, 214)</div>
+                        <div class="case-question">Q: Is a brown sheep present to the left of the central white horse?</div>
+                        <div class="case-answer">Answer: B. No</div>
                         <div class="case-media"><img src="case/visual.png" alt="Visual search case example"></div>
                     </div>
                 </div>
@@ -142,8 +138,8 @@
                     <div class="task-default"><span class="task-name">Word Search</span><span class="task-count">100</span></div>
                     <div class="task-case">
                         <div class="case-title">Word Search</div>
-                        <div class="case-question">Q: Is the word "VECTOR" present in the grid?</div>
-                        <div class="case-answer">A: Yes</div>
+                        <div class="case-question">Q: In the figure, in which row and column does the number 8 appear?</div>
+                        <div class="case-answer">Answer: [17, 1]</div>
                         <div class="case-media"><img src="case/wordsearch.png" alt="Word search case example"></div>
                     </div>
                 </div>

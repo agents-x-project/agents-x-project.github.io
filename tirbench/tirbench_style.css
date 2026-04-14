@@ -49,8 +49,41 @@ body {
     margin-right: 8px;
 }
 
+.home-link-floating {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1100;
+    width: 46px;
+    height: 46px;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.home-link-floating svg {
+    width: 24px;
+    height: 14px;
+    margin-right: 0;
+}
+
+.home-link-floating span {
+    display: none;
+}
+
+.home-link-floating:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
 .teaser-section {
-    min-height: calc(100vh - 82px);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,7 +154,7 @@ body {
     inset: 10px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     font-size: 14px;
     line-height: 1.4;
     opacity: 0;
@@ -130,12 +163,7 @@ body {
 }
 
 .case-title {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.1;
-    border-bottom: 1px solid #303030;
-    padding-bottom: 4px;
+    display: none;
 }
 
 .case-question {
@@ -153,6 +181,7 @@ body {
 
 .case-media {
     margin-top: 6px;
+    width: 100%;
     border: 1px solid #4d4d4d;
     background: rgba(255, 255, 255, 0.55);
     aspect-ratio: 1 / 1;
@@ -212,9 +241,9 @@ body {
     margin-top: 10px;
     max-width: 500px;
     font-family: "Times New Roman", Times, serif;
-    font-size: clamp(16px, 1.35vw, 23px);
+    font-size: clamp(24px, 1.35vw, 23px);
     line-height: 1.2;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .summary-subtitle {
@@ -611,43 +640,140 @@ body {
 }
 
 @media (max-width: 768px) {
+    .home-link-floating {
+        top: 12px;
+        left: 12px;
+        width: 42px;
+        height: 42px;
+    }
+
     .teaser-section {
         min-height: auto;
-        padding-top: 22px;
+        padding: 70px 14px 18px;
+    }
+
+    .teaser-inner {
+        width: 100%;
     }
 
     .teaser-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
     }
 
     .teaser-summary {
-        grid-column: 1 / 3;
-        min-height: 120px;
+        grid-column: span 2;
+        min-height: 200px;
+        padding: 10px;
     }
 
-    .teaser-task:hover .task-default {
-        opacity: 1;
+    .teaser-task,
+    .teaser-summary {
+        min-height: 200px;
+        padding: 10px;
     }
 
-    .teaser-task:hover .task-case {
-        opacity: 0;
-        transform: translateY(6px);
+    .task-name {
+        font-size: 28px;
+        line-height: 0.92;
+    }
+
+    .task-name::after {
+        content: "Tap to reveal case";
+        margin-top: 5px;
+        font-size: 9px;
+    }
+
+    .task-count {
+        font-size: 22px;
+    }
+
+    .summary-title {
+        font-size: 42px;
+        line-height: 0.9;
+    }
+
+    .summary-fulltitle {
+        margin-top: 6px;
+        max-width: none;
+        font-size: 20px;
+        line-height: 1.12;
+    }
+
+    .summary-subtitle {
+        margin-top: auto;
+        font-size: 26px;
+    }
+
+    .scroll-cue {
+        margin-top: 10px;
+        font-size: 13px;
+    }
+
+    .article-container {
+        margin: 0 auto 56px;
+        padding: 0 14px;
+    }
+
+    .article-header {
+        margin-bottom: 28px;
+        padding-top: 28px;
+    }
+
+    .date-tag {
+        gap: 8px;
+        margin-bottom: 12px;
     }
 
     .article-title {
-        font-size: 30px;
+        font-size: 28px;
     }
 
     .article-subtitle {
-        font-size: 16px;
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+
+    .project-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .project-link {
+        width: auto;
+        justify-content: center;
+        padding: 10px 8px;
+        font-size: 12px;
+        min-width: 0;
+    }
+
+    .project-link i {
+        margin-right: 6px;
     }
 
     .article-content {
         font-size: 16px;
     }
 
+    .article-content h2 {
+        font-size: 24px;
+        margin: 28px 0 12px;
+    }
+
     .leaderboard-panel {
         padding: 12px;
+        margin-bottom: 18px;
+    }
+
+    .leaderboard-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .lb-control {
+        width: 100%;
     }
 
     .lb-control select {
@@ -656,6 +782,7 @@ body {
 
     .leaderboard-highlights {
         grid-template-columns: 1fr;
+        gap: 8px;
     }
 
     .bibtex-code {
@@ -692,5 +819,71 @@ body {
     .authors-list,
     .affiliations-list {
         font-size: 15px;
+    }
+}
+
+@media (max-width: 560px) {
+    .teaser-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .teaser-summary {
+        grid-column: span 2;
+        min-height: 180px;
+    }
+
+    .teaser-task,
+    .teaser-summary {
+        min-height: 190px;
+    }
+
+    .task-default {
+        min-height: 120px;
+    }
+
+    .summary-title {
+        font-size: 22px;
+    }
+
+    .summary-fulltitle {
+        font-size: 13px;
+    }
+
+    .summary-subtitle {
+        font-size: 24px;
+    }
+
+    .project-links {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .project-link {
+        padding: 9px 6px;
+        font-size: 11px;
+    }
+
+    .authors-list,
+    .affiliations-list,
+    .author-note {
+        font-size: 14px;
+    }
+
+    .leaderboard-row {
+        padding: 10px;
+    }
+
+    .bibtex-head {
+        padding: 10px;
+    }
+
+    .bibtex-copy-btn {
+        padding: 0 10px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .task-name::after {
+        content: "Tap and hold to inspect case";
     }
 }
