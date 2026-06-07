@@ -292,10 +292,12 @@
                 { model: "Grok-4", group: "proprietary", all: 22.5, color: 35.0, pro: 53.3, ocr: 6.7, sr: 20.0, maze: 25.8, math: 19.2, ws: 2.0, llvqa: 22.0, ir: 12.5, sd: 27.0, jg: 10.0, vs: 25.8, rg: 18.7 },
                 { model: "o4-mini", group: "proprietary", all: 21.2, color: 39.0, pro: 17.5, ocr: 8.3, sr: 12.0, maze: 13.3, math: 21.7, ws: 5.0, llvqa: 30.0, ir: 18.8, sd: 33.0, jg: 8.0, vs: 39.2, rg: 26.7 },
                 { model: "o3", group: "proprietary", all: 26.9, color: 36.0, pro: 34.2, ocr: 8.3, sr: 34.0, maze: 29.2, math: 24.2, ws: 4.0, llvqa: 28.0, ir: 17.5, sd: 37.2, jg: 10.8, vs: 47.5, rg: 33.3 },
+                { model: "Qwen 3.6 Plus", group: "proprietary", all: 43.7, color: null, pro: null, ocr: null, sr: null, maze: null, math: null, ws: null, llvqa: null, ir: null, sd: null, jg: null, vs: null, rg: null },
                 { model: "DeepEyes", group: "tool-using", all: 17.3, color: 22.0, pro: 6.7, ocr: 41.7, sr: 19.9, maze: 16.7, math: 20.0, ws: 1.0, llvqa: 16.0, ir: 3.8, sd: 19.9, jg: 3.9, vs: 50.8, rg: 12.0 },
                 { model: "PyVision", group: "tool-using", all: 31.8, color: 53.0, pro: 26.7, ocr: 63.3, sr: 54.0, maze: 15.8, math: 25.8, ws: 10.0, llvqa: 32.0, ir: 17.5, sd: 36.4, jg: 7.6, vs: 55.0, rg: 46.7 },
                 { model: "o4-mini-TU", group: "tool-using", all: 37.5, color: 53.0, pro: 21.7, ocr: 53.3, sr: 58.0, maze: 34.2, math: 31.7, ws: 55.0, llvqa: 44.0, ir: 13.8, sd: 38.9, jg: 11.8, vs: 47.5, rg: 52.0 },
-                { model: "o3-TU", group: "tool-using", all: 46.0, color: 55.0, pro: 31.7, ocr: 53.3, sr: 66.0, maze: 42.5, math: 50.0, ws: 64.0, llvqa: 42.0, ir: 21.3, sd: 41.0, jg: 16.4, vs: 57.5, rg: 77.3 }
+                { model: "o3-TU", group: "tool-using", all: 46.0, color: 55.0, pro: 31.7, ocr: 53.3, sr: 66.0, maze: 42.5, math: 50.0, ws: 64.0, llvqa: 42.0, ir: 21.3, sd: 41.0, jg: 16.4, vs: 57.5, rg: 77.3 },
+                { model: "Qwen 3.6 Plus-TU", group: "tool-using", all: 61.6, color: null, pro: null, ocr: null, sr: null, maze: null, math: null, ws: null, llvqa: null, ir: null, sd: null, jg: null, vs: null, rg: null }
             ];
 
             const metricSelect = document.getElementById("lb-metric");
@@ -324,7 +326,7 @@
             function groupLabel(group) {
                 if (group === "baseline") return "Baseline";
                 if (group === "open-source") return "Open";
-                if (group === "proprietary") return "Proprietary";
+                if (group === "proprietary") return "Frontier";
                 return "Tool-Using";
             }
 

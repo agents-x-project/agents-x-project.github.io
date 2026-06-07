@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIR-Bench Horizontal Bar Plot</title>
+    <style>
+        :root {
+            --bg: #f3f6f5;
+            --card: #ffffff;
+            --track: #dbe0ee;
+            --text: #26424a;
+            --score: #2f354a;
+            --open-start: #6d8fd8;
+            --open-end: #4e70bc;
+            --frontier-start: #f3ad52;
+            --frontier-end: #ef8d2e;
+            --tool-start: #65c86c;
+            --tool-end: #4ba552;
+            --human-start: #78aadf;
+            --human-end: #59c8b2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 28px 16px 40px;
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid #e1e6ee;
+            border-radius: 16px;
+            padding: 20px 18px;
+            box-shadow: 0 6px 20px rgba(20, 40, 70, 0.06);
+        }
+
+        .title {
+            margin: 0 0 6px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+        }
+
+        .sub {
+            margin: 0 0 14px;
+            color: #5f7280;
+            font-size: 14px;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot-open { background: linear-gradient(90deg, var(--open-start), var(--open-end)); }
+        .dot-frontier { background: linear-gradient(90deg, var(--frontier-start), var(--frontier-end)); }
+        .dot-tool { background: linear-gradient(90deg, var(--tool-start), var(--tool-end)); }
+        .dot-human { background: linear-gradient(90deg, var(--human-start), var(--human-end)); }
+
+        .rows {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 64px;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .track {
+            width: 100%;
+            height: 36px;
+            border-radius: 999px;
+            background: var(--track);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            border-radius: 999px;
+            min-width: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            overflow: hidden;
+        }
+
+        .bar-label {
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 800;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+        }
+
+        .score {
+            text-align: right;
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 900;
+            color: var(--score);
+            letter-spacing: -0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr 56px;
+                gap: 10px;
+            }
+
+            .track {
+                height: 28px;
+            }
+
+            .bar {
+                padding-right: 8px;
+            }
+
+            .bar-label {
+                font-size: 12px;
+            }
+
+            .score {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="card">
+        <h1 class="title">Model Performance on TIR-Bench</h1>
+        <p class="sub">Sorted by overall score (All), highest to lowest.</p>
+        <div class="legend">
+            <span class="legend-item"><i class="dot dot-human"></i>Human</span>
+            <span class="legend-item"><i class="dot dot-open"></i>Open-Source</span>
+            <span class="legend-item"><i class="dot dot-frontier"></i>Frontier</span>
+            <span class="legend-item"><i class="dot dot-tool"></i>Tool-Using</span>
+        </div>
+        <div class="rows" id="rows"></div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const models = [
+            { model: "Human", group: "human", all: 99.0 },
+            { model: "Qwen 3.6 Plus-TU", group: "tool-using", all: 61.6 },
+            { model: "o3-TU", group: "tool-using", all: 46.0 },
+            { model: "Qwen 3.6 Plus", group: "proprietary", all: 43.7 },
+            { model: "o4-mini-TU", group: "tool-using", all: 37.5 },
+            { model: "PyVision", group: "tool-using", all: 31.8 },
+            { model: "Gemini-2.5-Pro", group: "proprietary", all: 28.9 },
+            { model: "o3", group: "proprietary", all: 26.9 },
+            { model: "Gemini-2.5-Flash", group: "proprietary", all: 25.2 },
+            { model: "Grok-4", group: "proprietary", all: 22.5 },
+            { model: "InternVL3-78B", group: "open-source", all: 21.4 },
+            { model: "o4-mini", group: "proprietary", all: 21.2 },
+            { model: "Qwen2.5-VL-72B", group: "open-source", all: 19.7 },
+            { model: "InternVL3-38B", group: "open-source", all: 19.1 },
+            { model: "GPT-4.1", group: "proprietary", all: 18.8 },
+            { model: "Qwen2.5-VL-32B", group: "open-source", all: 18.7 },
+            { model: "Qwen2.5-VL-3B", group: "open-source", all: 17.7 },
+            { model: "DeepEyes", group: "tool-using", all: 17.3 },
+            { model: "GPT-4o", group: "proprietary", all: 17.3 },
+            { model: "InternVL3-8B", group: "open-source", all: 16.9 }
+        ];
+
+        const rows = document.getElementById("rows");
+        const maxScore = Math.max(...models.map((m) => m.all), 1);
+        const sorted = models.slice().sort((a, b) => b.all - a.all);
+
+        function barGradient(group) {
+            if (group === "human") return "linear-gradient(90deg, var(--human-start), var(--human-end))";
+            if (group === "tool-using") return "linear-gradient(90deg, var(--tool-start), var(--tool-end))";
+            if (group === "proprietary") return "linear-gradient(90deg, var(--frontier-start), var(--frontier-end))";
+            return "linear-gradient(90deg, var(--open-start), var(--open-end))";
+        }
+
+        rows.innerHTML = sorted.map((item) => {
+            const width = (item.all / maxScore) * 100;
+            return `
+                <div class="row">
+                    <div class="track">
+                        <div class="bar" style="width:${width}%; background:${barGradient(item.group)};">
+                            <span class="bar-label">${item.model}</span>
+                        </div>
+                    </div>
+                    <div class="score">${item.all.toFixed(1)}</div>
+                </div>
+            `;
+        }).join("");
+    })();
+</script>
+</body>
+</html>

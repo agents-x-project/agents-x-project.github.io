@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyVision Results - Side by Side</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 32px 20px;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #222222;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(420px, 1fr));
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .chart-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 14px 14px 10px;
+            background: #fff;
+            min-height: 500px;
+        }
+
+        .chart-wrap {
+            width: 100%;
+            height: 460px;
+        }
+
+        @media (max-width: 1100px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .chart-card {
+                min-height: 420px;
+            }
+
+            .chart-wrap {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PyVision Benchmark Results</h1>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-wrap">
+                    <canvas id="barChart1"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-wrap">
+                    <canvas id="barChart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Shared benchmark categories.
+        const categories = [
+            "MMMU",
+            "MathVista",
+            "VLMsAreBlind-mini",
+            "V*",
+            "MathVision-mini",
+            "VisualPuzzles"
+        ];
+
+        // GPT-4.1 and PyVision-GPT-4.1 results.
+        const gpt41 = [71.9, 69.9, 67.1, 68.1, 46.4, 44.9];
+        const pyvisionGpt41 = [74.3, 71.7, 69.7, 75.9, 48.7, 47.4];
+
+        // Claude and PyVision-Claude results.
+        const claude = [74.4, 71.4, 48.1, 56.5, 48.0, 42.7];
+        const pyvisionClaude = [74.6, 76.2, 79.2, 56.8, 51.3, 51.0];
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: "top" }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    max: 90,
+                    title: { display: true, text: "Accuracy (%)" }
+                }
+            }
+        };
+
+        // Chart 1: GPT-4.1 vs PyVision-GPT-4.1.
+        new Chart(document.getElementById("barChart1"), {
+            type: "bar",
+            data: {
+                labels: categories,
+                datasets: [
+                    {
+                        label: "GPT-4.1",
+                        data: gpt41,
+                        backgroundColor: "rgba(144, 238, 144, 0.7)"
+                    },
+                    {
+                        label: "PyVision-GPT-4.1",
+                        data: pyvisionGpt41,
+                        backgroundColor: "rgba(0, 128, 128, 0.7)"
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: "Performance of GPT-4.1 vs PyVision-GPT-4.1",
+                        font: { size: 18 }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Claude-4.0-Sonnet vs PyVision-Claude.
+        new Chart(document.getElementById("barChart2"), {
+            type: "bar",
+            data: {
+                labels: categories,
+                datasets: [
+                    {
+                        label: "Claude-4.0-Sonnet",
+                        data: claude,
+                        backgroundColor: "rgba(255, 165, 0, 0.7)"
+                    },
+                    {
+                        label: "PyVision-Claude",
+                        data: pyvisionClaude,
+                        backgroundColor: "rgba(139, 0, 0, 0.7)"
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: "Performance of Claude-4.0-Sonnet vs PyVision-Claude",
+                        font: { size: 18 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
